@@ -1,3 +1,4 @@
+import dea from '../img/icon-deal.png'
 export default function NavBar(){
     return(
         <>
@@ -5,7 +6,7 @@ export default function NavBar(){
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                     <a href="index.html" className="navbar-brand d-flex align-items-center text-center">
                         <div className="icon p-2 me-2">
-                            <img className="img-fluid" src={"/img/icon-deal.png"} alt="Icon"
+                            <img className="img-fluid" src={dea} alt="Icon"
                                  style={{width: "30px", height: "30px"}}/>
                         </div>
                         <h1 className="m-0 text-primary">Makaan</h1>
