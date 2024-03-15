@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    margin: 50px auto;
+}
+
+.panel-heading {
+    text-align: center; /* căn giữa theo chiều ngang */
+}
+
+.panel-heading h3 {
+    margin-top: 20px; /* tạo khoảng cách phía trên */
+    margin-bottom: 20px; /* tạo khoảng cách phía dưới */
+}
+#forgot {
+    min-width: 100px;
+    margin-left: auto;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.form-inline label {
+    padding-left: 10px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.btn-custom.btn-primary {
+    margin-top: 20px;
+    border-radius: 15px;
+}
+
+.panel {
+    min-height: 380px;
+    box-shadow: 20px 20px 80px rgb(218, 218, 218);
+    border-radius: 12px;
+}
+
+.input-field {
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    color: #4343ff;
+}
+
+input[type='text'],
+input[type='password'] {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+}
+
+.fa-eye-slash.btn {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+}
+
+a[target='_blank'] {
+    position: relative;
+    transition: all 0.1s ease-in-out;
+}
+
+.bordert {
+    border-top: 1px solid #aaa;
+    position: relative;
+}
+
+.bordert:after {
+    content: "or connect with";
+    position: absolute;
+    top: -13px;
+    left: 33%;
+    background-color: #fff;
+    padding: 0px 8px;
+}
+.form-inline {
+    display: flex;
+    justify-content: space-between; /* căn các phần tử theo khoảng cách giữa chúng */
+    align-items: center; /* căn các phần tử theo chiều dọc */
+}
+
+.form-inline input[type="checkbox"],
+.form-inline label {
+    margin-right: 10px; /* tạo khoảng cách giữa checkbox và label */
+}
+
+.form-inline a {
+    margin-left: auto; /* đẩy thẻ a về phía bên phải của form */
+}
+.btn-custom.btn-primary {
+    background-color: #00B98E; /* Đổi màu nền */
+    color: #fff; /* Chữ màu trắng */
+    text-align: center; /* Căn giữa nội dung */
+    height: 50px; /* Tăng chiều cao */
+    line-height: 50px; /* Căn giữa theo chiều dọc */
+    padding: 0; /* Loại bỏ padding để điều chỉnh kích thước */
+}
+.form-group {
+    margin-bottom: 15px; /* Khoảng cách giữa các nhóm form */
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+}
+
+.input-field input {
+    flex: 1; /* Phần input chiếm hết phần còn lại của input-field */
+}
+
+.input-field .btn-container {
+    margin-left: 10px; /* Khoảng cách giữa input và button container */
+}
+
+.input-field .btn-container button {
+    /* Thêm CSS cho nút "far fa-eye-slash" ở đây nếu cần */
+}
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+
+.form-inline label {
+    margin-right: 10px; /* Khoảng cách giữa label và checkbox */
+}
+
+.btn-custom.btn-primary {
+    margin-top: 20px; /* Khoảng cách giữa nút đăng nhập và các phần tử khác */
+}
+
+.text-center.pt-4.text-muted {
+    margin-top: 20px; /* Khoảng cách giữa phần nút đăng nhập và phần đăng ký */
+}
+
+@media (max-width: 360px) {
+    #forgot {
+        margin-left: 0;
+        padding-top: 10px;
+    }
+    body {
+        height: 100%;
+    }
+    .container {
+        margin: 30px 0;
+    }
+    .bordert:after {
+        left: 25%;
+    }
+}
+/* Thiết lập style cho nút Close */
+.close-link {
+    background-color: transparent;
+    color: white;
+    text-decoration: none; /* Loại bỏ gạch chân mặc định */
+    padding: 10px; /* Điều chỉnh khoảng cách và kích thước của nút */
+    font-size: 16px; /* Điều chỉnh cỡ chữ */
+}
+
+/* Thiết lập style cho phần tử chứa nút Close */
+.black-bg[data-bs-theme="dark"] {
+    background-color: #343a40;
+    padding: 10px; /* Điều chỉnh padding để tạo khoảng cách xung quanh nút */
+}
