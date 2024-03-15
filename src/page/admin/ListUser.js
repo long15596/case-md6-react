@@ -39,7 +39,7 @@ export default function ListUser() {
     return (
         <>
             <h1>Danh sách người sử dụng</h1>
-            <table className="table">
+            <table className="table table-hover">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -55,7 +55,7 @@ export default function ListUser() {
             <nav>
                 <ul className="pagination">
                     {pageNumbers.map((number) => (
-                        <li key={number} className="page-item">
+                        <li key={number} className="page-item disabled">
                             <a onClick={() => paginate(number)}  className="page-link">
                                 {number}
                             </a>

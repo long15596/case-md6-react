@@ -42,7 +42,7 @@ export default function ListOwner() {
 
             </div>
             <h1>Danh sách chủ nhà</h1>
-            <table className="table">
+            <table className="table table-hover">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -58,7 +58,7 @@ export default function ListOwner() {
             <nav>
                 <ul className="pagination">
                     {pageNumbers.map((number) => (
-                        <li key={number} className="page-item">
+                        <li key={number} className="page-item disabled">
                             <a onClick={() => paginate(number)}  className="page-link">
                                 {number}
                             </a>
