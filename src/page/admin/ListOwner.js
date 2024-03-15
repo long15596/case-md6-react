@@ -35,6 +35,7 @@ export default function ListOwner() {
     for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
         pageNumbers.push(i);
     }
+
     return (
         <>
             <div className="row">
