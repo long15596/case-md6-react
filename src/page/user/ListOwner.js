@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getOwners} from "../../services/admin/adminsServices";
+import {getOwners} from "../../services/user/usersServices";
 
 export default function ListOwner() {
     const dispatch = useDispatch();

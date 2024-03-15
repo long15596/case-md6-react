@@ -1,10 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getOwners, getUsers} from "../../services/admin/adminsServices";
+import {getOwners, getUsers} from "../../services/user/usersServices";
 let initialState = {
     users : [],
     owners :[]
 }
-let adminsSlice = createSlice({
+let usersSlice = createSlice({
     name: 'user',
     initialState,
     extraReducers:builder => {
@@ -17,4 +17,4 @@ let adminsSlice = createSlice({
     }
 
 })
-export default adminsSlice.reducer
+export default usersSlice.reducer

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
-import { NavLink } from 'react-router-dom';
+import {Link, } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 // import { loginUser } from '../services/userService';
@@ -13,8 +13,7 @@ const Login = () => {
     };
 
     const handleLogin = async (values) => {
-        // await dispatch(loginUser(values));
-        // history.push('/home'); // Chuyển hướng sau khi đăng nhập thành công
+
     };
 
     return (
@@ -24,9 +23,9 @@ const Login = () => {
                     <div className="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
                         <div className="panel border bg-white position-relative">
                             <div className="black-bg" data-bs-theme="dark">
-                                <NavLink to="/" className="close-link" aria-label="Close">
+                                <Link to="/" className="close-link" aria-label="Close">
                                     Close
-                                </NavLink>
+                                </Link>
                             </div>
                             <div className="panel-heading">
                                 <h3 className="pt-3 font-weight-bold">Đăng nhập</h3>
@@ -84,9 +83,9 @@ const Login = () => {
                                         </div>
                                         <div className="text-center pt-4 text-muted">
                                             Don't have an account?{' '}
-                                            <NavLink to="/register" style={{ color: '#007BFF' }}>
+                                            <Link to="/register" style={{ color: '#007BFF' }}>
                                                 Sign up
-                                            </NavLink>
+                                            </Link>
                                         </div>
                                     </Form>
                                 </Formik>
