@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
 import './Register.css'
 import {NavLink} from "react-router-dom";
+import {Field, Form, Formik} from "formik";
 const Register = () => {
     const [showRegisterForm, setShowRegisterForm] = useState(false);
-
+    const handleregister = async (values) => {
+        // await dispatch(loginUser(values));
+        // history.push('/home'); // Chuyển hướng sau khi đăng nhập thành công
+    };
     return (
         <div>
             <div className="container">
@@ -29,59 +33,51 @@ const Register = () => {
                                         </a>
                                     </div>
                                 </div>
-                                <form>
-                                    <div className="form-group">
-                                        <div className="input-group">
-                                            <div className="input-group-prepend">
-                                                <span className="input-group-text" style={{ fontSize: '1.5em' }}><i className="fa fa-envelope"></i></span>
-                                            </div>
-                                            <input type="email" className="form-control" name="email" placeholder="Email" required />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <div className="input-group">
-                                            <div className="input-group-prepend">
-                                                <span className="input-group-text" style={{ fontSize: '1.5em' }}><i className="fa fa-lock"></i></span>
-                                            </div>
-                                            <input type="password" className="form-control with-border" name="password" placeholder="Password" required />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <div className="input-group">
-                                            <div className="input-group-prepend">
-                                                <span className="input-group-text" style={{ fontSize: '1.5em' }}><i className="fa fa-lock" ></i></span>
-                                            </div>
-                                            <input type="password" className="form-control" name="password" placeholder="Re-type Password" required />
-                                        </div>
-                                    </div>
-                                    <div className="form-row">
-                                        <div className="col-md-6">
-                                            <div className="form-group">
-                                                <div className="input-group">
-                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text" style={{ fontSize: '1.5em' }}><i className="fa fa-user"></i></span>
-                                                    </div>
-                                                    <input type="text" className="form-control" name="first_name" placeholder="First Name" />
+                                <Formik
+                                    initialValues={{ username: '', password: '' }}
+                                    onSubmit={(values) => handleregister(values)}
+                                >
+                                    <Form>
+                                        <div className="form-group">
+                                            <div className="input-group">
+                                                <div className="input-group-prepend">
+                                                    <span className="input-group-text" style={{ fontSize: '1.5em' }}><i className="fa fa-envelope"></i></span>
                                                 </div>
+                                                <input type="email" className="form-control" name="email" placeholder="Email" required />
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
-                                            <div className="form-group">
-                                                <div className="input-group">
-                                                    <div className="input-group-prepend">
-                                                        <span className="input-group-text" style={{ fontSize: '1.5em' }}><i className="fa fa-user"></i></span>
-                                                    </div>
-                                                    <input type="text" className="form-control" name="last_name" placeholder="Last Name" />
+                                        <div className="form-group">
+                                            <div className="input-group">
+                                                <div className="input-group-prepend">
+                                                    <span className="input-group-text" style={{ fontSize: '1.5em' }}><i className="fa fa-lock"></i></span>
                                                 </div>
+                                                <Field type="password" className="form-control with-border" name="password" placeholder="Password" required />
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="form-group top-10px">
-                                    </div>
-                                    <div className="form-group text-center">
-                                        <button type="submit" className="btn btn-primary">Register</button>
-                                    </div>
-                                </form>
+                                        <div className="form-group">
+                                            <div className="input-group">
+                                                <div className="input-group-prepend">
+                                                    <span className="input-group-text" style={{ fontSize: '1.5em' }}><i className="fa fa-lock" ></i></span>
+                                                </div>
+                                                <Field type="password" className="form-control" name="password" placeholder="Re-type Password" required />
+                                            </div>
+                                        </div>
+                                        <div className="form-group">
+                                            <div className="input-group">
+                                                <div className="input-group-prepend">
+                                                    <span className="input-group-text" style={{ fontSize: '1.5em' }}><i className="fa fa-phone" ></i></span>
+                                                </div>
+                                                <Field type="text" className="form-control" name="password" placeholder="Phone" required />
+                                            </div>
+                                        </div>
+                                        <div className="form-group top-10px">
+                                        </div>
+                                        <div className="form-group text-center">
+                                            <button type="submit" className="btn btn-primary">Register</button>
+                                        </div>
+                                    </Form>
+                                </Formik>
+
                             </div>
                         </div>
                     </div>

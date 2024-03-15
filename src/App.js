@@ -9,24 +9,6 @@ import ListUser from "./page/admin/ListUser";
 import ListOwner from "./page/admin/ListOwner";
 
 function App() {
-  return (
-      <>
-          <div className="container-fluid">
-              <div className="row">
-                  <NavBar></NavBar>
-              </div>
-              <div className="row">
-                  <Routes>
-                      <Route path="login" element={<Login></Login>} />
-                      <Route path="register" element={<Register></Register>} />
-                  </Routes>
-              </div>
-              <div className="row">
-                  <Footer></Footer>
-              </div>
-          </div>
-      </>
-  );
     return (
         <>
             <div className="container-fluid">
@@ -34,11 +16,15 @@ function App() {
                     <NavBar></NavBar>
                 </div>
                 <div className="row">
+                    <Routes>
+                        <Route path="login" element={<Login></Login>}/>
+                        <Route path="register" element={<Register></Register>}/>
+                        <Route path="listUser" element={<ListUser></ListUser>}></Route>
+                    </Routes>
                     <div className="col-3">
 
                     </div>
                     <div className="col-6">
-                        <ListUser></ListUser>
                         {/*<ListOwner></ListOwner>*/}
                     </div>
                     <div className="col-3">

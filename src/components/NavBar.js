@@ -39,7 +39,7 @@ export default function NavBar(){
                             </div>
                             <a href="contact.html" className="nav-item nav-link">Contact</a>
                         </div>
-                        <a href="" className="btn btn-primary px-3 d-none d-lg-flex">Login</a>
+                        <NavLink to="/login" className="btn btn-primary px-3 d-none d-lg-flex">Login</NavLink>
                     </div>
                 </nav>
             </div>
