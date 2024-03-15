@@ -1,0 +1,17 @@
+#name-box {
+    max-width: 600px;
+}
+#item-box {
+    border:1px dashed rgba(0, 185, 142, .3);
+}
+#icon-box {
+    width: 45px;
+    height: 45px;
+}
+#img-box {
+    min-height: 400px;
+    border: 0;
+}
+textarea {
+    height: 150px;
+}

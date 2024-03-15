@@ -1,5 +1,5 @@
-import './style.css'
-import './bootstrap.min.css'
+import './css/style.css'
+import './css/bootstrap.min.css'
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import {Route, Router, Routes} from "react-router-dom";
