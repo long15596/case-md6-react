@@ -1,4 +1,3 @@
-import logo from "../img/icon-deal.png"
 export default function NavBar(){
     return(
         <>
