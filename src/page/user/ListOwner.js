@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../services/admin/adminsServices";
+import {getOwners} from "../../services/user/usersServices";
 
-export default function ListUser() {
+export default function ListOwner() {
     const dispatch = useDispatch();
-    const users = useSelector((state) => state.users.users);
+    const users = useSelector((state) => state.owners.owners);
     const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(5); // Số lượng người dùng trên mỗi trang
-
+    const [usersPerPage] = useState(5);
     useEffect(() => {
-        dispatch(getUsers());
+        dispatch(getOwners());
     }, []);
 
-    // Tính toán index bắt đầu và kết thúc của danh sách người dùng cho trang hiện tại
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
-    // Render danh sách người dùng cho trang hiện tại
     const renderUsers = currentUsers.map((user, index) => (
         <tr key={user.id}>
             <th scope="row">{indexOfFirstUser + index + 1}</th>
@@ -27,10 +24,8 @@ export default function ListUser() {
         </tr>
     ));
 
-    // Logic cho nút chuyển trang
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    // Tính toán số lượng trang
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
         pageNumbers.push(i);
@@ -40,7 +35,7 @@ export default function ListUser() {
         <>
             <div className="row">
                 <div className="col-12">
-                    <h1>Danh sách người sử dụng</h1>
+                    <h1>Danh sách chủ nhà</h1>
                     <table className="table table-hover">
                         <thead>
                         <tr>
