@@ -1,4 +1,8 @@
+import * as PropTypes from "prop-types";
+import {Link, NavLink} from "react-router-dom";
+import dea from '../img/icon-deal.png'
 export default function NavBar(){
+
     return(
         <>
             <div className="container-fluid nav-bar bg-transparent">
@@ -35,7 +39,7 @@ export default function NavBar(){
                             </div>
                             <a href="contact.html" className="nav-item nav-link">Contact</a>
                         </div>
-                        <a href="" className="btn btn-primary px-3 d-none d-lg-flex">Login</a>
+                        <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex">Login</Link>
                     </div>
                 </nav>
             </div>

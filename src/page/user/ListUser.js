@@ -4,7 +4,10 @@ import { getUsers } from "../../services/user/usersServices";
 
 export default function ListUser() {
     const dispatch = useDispatch();
-    const users = useSelector((state) => state.users.users);
+    const users = useSelector((state) => {
+        console.log(state)
+        return state.users.users
+    });
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(5);
 
