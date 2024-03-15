@@ -27,7 +27,7 @@ export default function UserProfile(){
                                                 <div className="icon me-3" id={'icon-box'}>
                                                     <i className="fa fa-map-marker-alt text-primary"></i>
                                                 </div>
-                                                <span>{users[0].address}</span>
+                                                <span>{users.address}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -38,7 +38,7 @@ export default function UserProfile(){
                                                 <div className="icon me-3" id={'icon-box'}>
                                                     <i className="fa fa-envelope-open text-primary"></i>
                                                 </div>
-                                                <span>{users[0].email}</span>
+                                                <span>{users.email}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -49,14 +49,14 @@ export default function UserProfile(){
                                                 <div className="icon me-3" id={'icon-box'}>
                                                     <i className="fa fa-phone-alt text-primary"></i>
                                                 </div>
-                                                <span>{users[0].phone}</span>
+                                                <span>{users.phone}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <img className="position-relative rounded w-100 h-100" src={users[0].avatar} id={`img-box`} alt={`user-avatar`}></img>
+                                <img className="position-relative rounded w-100 h-100" src={users.avatar} id={`img-box`} alt={`user-avatar`}></img>
                             </div>
                             <div className="col-md-6">
                                 <div className="wow fadeInUp" data-wow-delay="0.5s">
@@ -69,7 +69,7 @@ export default function UserProfile(){
                                                         <div className="icon me-3" id={'icon-box'}>
                                                             <i className="fa fa-phone-alt text-primary"></i>
                                                         </div>
-                                                        <span>{users[0].name}</span>
+                                                        <span>{users.name}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -80,7 +80,7 @@ export default function UserProfile(){
                                                         <div className="icon me-3" id={'icon-box'}>
                                                             <i className="fa fa-phone-alt text-primary"></i>
                                                         </div>
-                                                        <span>{users[0].enabled}</span>
+                                                        <span>{users.enabled}</span>
                                                     </div>
                                                 </div>
                                             </div>
