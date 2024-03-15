@@ -35,37 +35,37 @@ export default function ListOwner() {
     for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
         pageNumbers.push(i);
     }
-
     return (
         <>
-            <div className="col">
-
+            <div className="row">
+                <div className="col-12">
+                </div>
+                <h1>Danh sách chủ nhà</h1>
+                <table className="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Họ và tên</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Trạng thái</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {renderUsers}
+                    </tbody>
+                </table>
+                <nav>
+                    <ul className="pagination">
+                        {pageNumbers.map((number) => (
+                            <li key={number} className="page-item disabled">
+                                <a onClick={() => paginate(number)} className="page-link">
+                                    {number}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
             </div>
-            <h1>Danh sách chủ nhà</h1>
-            <table className="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Họ và tên</th>
-                    <th scope="col">Số điện thoại</th>
-                    <th scope="col">Trạng thái</th>
-                </tr>
-                </thead>
-                <tbody>
-                {renderUsers}
-                </tbody>
-            </table>
-            <nav>
-                <ul className="pagination">
-                    {pageNumbers.map((number) => (
-                        <li key={number} className="page-item disabled">
-                            <a onClick={() => paginate(number)}  className="page-link">
-                                {number}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
         </>
     );
 }
