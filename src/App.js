@@ -13,17 +13,10 @@ function App() {
                     <NavBar></NavBar>
                 </div>
                 <div className="row">
-                    <div className="col-3">
-
-                    </div>
-                    <div className="col-6">
+                    <div className="offset-3 col-6">
                         <ListUser></ListUser>
-                        {/*<ListOwner></ListOwner>*/}
+                        <ListOwner></ListOwner>
                     </div>
-                    <div className="col-3">
-
-                    </div>
-
                 </div>
                 <div className="row">
                     <Footer></Footer>
