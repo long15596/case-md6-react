@@ -9,10 +9,14 @@ import Home from "./pages/home/Home";
 import ListUser from "./pages/user/ListUser";
 import ListOwner from "./pages/user/ListOwner";
 import UserProfile from "./pages/user/UserProfile";
-
+import {useSelector} from "react-redux";
 
 
 function App() {
+    let currentUser = useSelector(state => {
+        console.log(state)
+        return state.users.currentUser
+    })
     return (
         <>
             <div className="container-fluid">
@@ -21,21 +25,17 @@ function App() {
                 </div>
                 <div className="row">
                     <Routes>
-                        <Route path={`home`} element={<Home></Home>}></Route>
                         <Route path={`login`} element={<Login></Login>}/>
                         <Route path={"register"} element={<Register></Register>}/>
-                        <Route path="listUser" element={<ListUser></ListUser>}></Route>
-                        <Route path="listOwner" element={<ListOwner></ListOwner>}></Route>
-                        <Route path="userProfile" element={<UserProfile></UserProfile>}></Route>
+                        {currentUser !== null ?
+                            <Route path={`home`} element={<Home></Home>}></Route>
+                            :
+                            <Route path={`login`} element={<Login></Login>}/>
+                        }
+                    <Route path="listUser" element={<ListUser></ListUser>}></Route>
+                    <Route path="listOwner" element={<ListOwner></ListOwner>}></Route>
+                    <Route path="userProfile" element={<UserProfile></UserProfile>}></Route>
                     </Routes>
-                    <div className="col-3">
-
-                    </div>
-                    <div className="col-6">
-                    </div>
-                    <div className="col-3">
-
-                    </div>
                 </div>
                 <div className="row">
                     <Footer></Footer>

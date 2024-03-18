@@ -1,21 +1,23 @@
-import React, {useState} from 'react';
-// import './Login.css';
 import {Link,} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Formik, Form, Field} from 'formik';
-// import { loginUser } from '../services/userService';
+import {login} from "../services/user/usersServices";
+import {useNavigate} from "react-router";
+
 
 const Login = () => {
-    const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
-    const togglePasswordVisibility = () => {
-        setShowPassword(prevState => !prevState);
-    };
-
+    const navigate = useNavigate();
     const handleLogin = async (values) => {
-
+        dispatch(login(values)).then(user => {
+            console.log("abc", user.payload)
+            if (user.payload === undefined) {
+                alert(`sai`)
+            } else {
+                navigate(`/home`)
+            }
+        })
     };
-
     return (
         <>
             <div className="container">
@@ -26,54 +28,60 @@ const Login = () => {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="mb-5">
-                                            <h3>Log in</h3>
+                                            <h3>Đăng Nhập</h3>
                                         </div>
                                     </div>
                                 </div>
-                                <form action="#!">
-                                    <div className="row gy-3 overflow-hidden">
-                                        <div className="col-12">
-                                            <div className="form-floating mb-3">
-                                                <input type="email" className="form-control" name="email" id="email"
-                                                       placeholder="name@example.com" required/>
-                                                <label htmlFor="email" className="form-label">Email</label>
+                                <Formik initialValues={{
+                                    username: '',
+                                    password: ''
+                                }} onSubmit={values => {
+                                    handleLogin(values).then()
+                                }}>
+                                    <Form>
+                                        <div className="row gy-3 overflow-hidden">
+                                            <div className="col-12">
+                                                <div className="form-floating mb-3">
+                                                    <Field type="text" className="form-control" name={`username`}
+                                                           id="email"
+                                                           placeholder="Username" required/>
+                                                    <label htmlFor="email" className="form-label">Username</label>
+                                                </div>
+                                            </div>
+                                            <div className="col-12">
+                                                <div className="form-floating mb-3">
+                                                    <Field type="password" className="form-control" name={`password`}
+                                                           id="password" placeholder="Password" required/>
+                                                    <label htmlFor="password" className="form-label">Password</label>
+                                                </div>
+                                            </div>
+                                            <div className="col-12">
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="checkbox" value=""
+                                                           name="remember_me" id="remember_me"/>
+                                                    <label className="form-check-label text-secondary"
+                                                           htmlFor="remember_me">
+                                                        Keep me logged in
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div className="col-12">
+                                                <div className="d-grid">
+                                                    <button className="btn bsb-btn-2xl btn-primary" type="submit">Đăng
+                                                        nhập
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="col-12">
-                                            <div className="form-floating mb-3">
-                                                <input type="password" className="form-control" name="password"
-                                                       id="password" value="" placeholder="Password" required/>
-                                                <label htmlFor="password" className="form-label">Password</label>
-                                            </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" value=""
-                                                       name="remember_me" id="remember_me"/>
-                                                <label className="form-check-label text-secondary"
-                                                       htmlFor="remember_me">
-                                                    Keep me logged in
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="d-grid">
-                                                <button className="btn bsb-btn-2xl btn-primary" type="submit">Log in
-                                                    now
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </Form>
+                                </Formik>
                                 <div className="row">
                                     <div className="col-12">
                                         <hr className="mt-5 mb-4 border-secondary-subtle"/>
                                         <div
                                             className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                            <Link to={'/register'} className="link-secondary text-decoration-none">Create new
-                                                account</Link>
-                                            <a href="#!" className="link-secondary text-decoration-none">Forgot
-                                                password</a>
+                                            <Link to={'/register'} className="link-secondary text-decoration-none">Tạo tài khoản mới</Link>
+                                            <Link href="#!" className="link-secondary text-decoration-none">Forgot password</Link>
                                         </div>
                                     </div>
                                 </div>

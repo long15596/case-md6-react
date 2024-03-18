@@ -1,8 +1,11 @@
-import * as PropTypes from "prop-types";
-import {Link, NavLink} from "react-router-dom";
-import dea from '../img/icon-deal.png'
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router";
 export default function NavBar(){
-
+    let navigate = useNavigate();
+    let currentUser = useSelector(state => {
+        return state.users.currentUser
+    })
     return(
         <>
             <div className="container-fluid nav-bar bg-transparent">
@@ -12,7 +15,7 @@ export default function NavBar(){
                             <img className="img-fluid" src={``} alt="Icon"
                                  style={{width: "30px", height: "30px"}}/>
                         </div>
-                        <h1 className="m-0 text-primary">Makaan</h1>
+                        <h1 className="m-0 text-primary">UHome</h1>
                     </a>
                     <button type="button" className="navbar-toggler" data-bs-toggle="collapse"
                             data-bs-target="#navbarCollapse">
@@ -39,7 +42,14 @@ export default function NavBar(){
                             </div>
                             <a href="contact.html" className="nav-item nav-link">Contact</a>
                         </div>
-                        <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex">Login</Link>
+                        {currentUser !== null ?
+                            <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex" onClick={() =>{
+                                localStorage.setItem(`currentUser`, null)
+                                navigate(`/login`)
+                            }}>Đăng xuất</Link>
+                            :
+                            <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex">Đăng Nhập</Link>
+                        }
                     </div>
                 </nav>
             </div>
