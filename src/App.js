@@ -19,10 +19,10 @@ function App() {
                 <div className="row">
                     <Routes>
                         <Route path={`home`} element={<Home></Home>}></Route>
-                        <Route path={'login'} element={<Login></Login>}/>
-                        <Route path={"register"} element={<Register></Register>}/>
-                        <Route path={"listUser"} element={<ListUser></ListUser>}></Route>
-                        <Route path={"listOwner"} element={<ListOwner></ListOwner>}></Route>
+                        <Route path="login" element={<Login></Login>}/>
+                        <Route path="register" element={<Register></Register>}/>
+                        <Route path="listUser" element={<ListUser></ListUser>}></Route>
+                        <Route path="listOwner" element={<ListOwner></ListOwner>}></Route>
                     </Routes>
                     <div className="col-3">
 
