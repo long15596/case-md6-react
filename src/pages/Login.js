@@ -12,7 +12,8 @@ const Login = () => {
         dispatch(login(values)).then(user => {
             console.log("abc", user.payload)
             if (user.payload === undefined) {
-                alert(`sai`)
+                // alert(`sai`)
+                document.getElementById(`error-title`).innerHTML = `Sai Username hoặc Password`
             } else {
                 navigate(`/home`)
             }
@@ -46,6 +47,7 @@ const Login = () => {
                                                            id="email"
                                                            placeholder="Username" required/>
                                                     <label htmlFor="email" className="form-label">Username</label>
+                                                    <p id={`error-title`}></p>
                                                 </div>
                                             </div>
                                             <div className="col-12">
