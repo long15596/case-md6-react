@@ -14,7 +14,7 @@ export const getOwners = createAsyncThunk('get/Owners', async () => {
 export const register = createAsyncThunk(
     'user/register',
     async ({values}) => {
-        let res = await customAxios.post(`register/2`);
+        let res = await customAxios.post(`register/2`, values);
         if (res.status === 201) {
             return values
         } else {
