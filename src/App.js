@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import ListUser from "./page/user/ListUser";
 import ListOwner from "./page/user/ListOwner";
 import Home from "./pages/home/Home";
+import UserProfile from "./page/user/UserProfile";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                         <Route path="register" element={<Register></Register>}/>
                         <Route path="listUser" element={<ListUser></ListUser>}></Route>
                         <Route path="listOwner" element={<ListOwner></ListOwner>}></Route>
+                        <Route path="userProfile" element={<UserProfile></UserProfile>}></Route>
                     </Routes>
                     <div className="col-3">
 

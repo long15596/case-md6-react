@@ -137,6 +137,8 @@ export default function UserProfile(){
                         </ul>
                     </div>
                 </div>
+
+
                 <div className="col-md-6">
                     <div className="navbar">
                         <a className="navbar-brand">Lịch sử thuê nhà</a>
