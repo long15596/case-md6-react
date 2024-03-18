@@ -1,7 +1,6 @@
 import {Link, useNavigate,} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
-import {registerUser} from "../services/user/usersServices";
 import {register} from "../services/user/usersServices";
 import React from "react";
 
@@ -14,8 +13,11 @@ export default function Register() {
     })
 
     let handleRegister = (values) => {
-        dispatch(registerUser({values})).then((x) => {
-            if (x.payload.username !== undefined) {
+        dispatch(register({values})).then((x) => {
+            console.log(x)
+            if (x.payload == undefined) {
+                navigate('/register')
+            } else if (x.payload.username !== undefined) {
                 navigate('/login')
             }
             else {
