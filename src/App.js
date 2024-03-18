@@ -5,10 +5,12 @@ import Footer from "./components/Footer";
 import {Route, Routes} from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import ListUser from "./page/user/ListUser";
-import ListOwner from "./page/user/ListOwner";
 import Home from "./pages/home/Home";
-import UserProfile from "./page/user/UserProfile";
+import ListUser from "./pages/user/ListUser";
+import ListOwner from "./pages/user/ListOwner";
+import UserProfile from "./pages/user/UserProfile";
+
+
 
 function App() {
     return (

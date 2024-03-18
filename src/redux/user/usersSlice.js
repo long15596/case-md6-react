@@ -4,7 +4,7 @@ import {getOwners, getUsers, registerUser} from "../../services/user/usersServic
 let initialState = {
     users: [],
     owners: [],
-    error: '',
+    error: ''
 }
 let usersSlice = createSlice({
     name: 'user',
@@ -17,8 +17,9 @@ let usersSlice = createSlice({
             state.owners = action.payload
         });
         builder.addCase(registerUser.fulfilled, (state, action) => {
-            if (action.payload.username == undefined  ) {
+            if (action.payload.username == undefined) {
                 state.error = action.payload
+                // localStorage.setItem("error", JSON.stringify(action.payload))
             } else {
                 state.users.push(action.payload.data)
             }
