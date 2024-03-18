@@ -2,8 +2,8 @@ import './css/style.css'
 import './css/bootstrap.min.css'
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import ListUser from "./page/admin/ListUser";
-import ListOwner from "./page/admin/ListOwner";
+import ListUser from "./pages/admin/ListUser";
+import ListOwner from "./pages/admin/ListOwner";
 
 function App() {
     return (
