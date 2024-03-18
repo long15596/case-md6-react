@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../services/user/usersServices";
-
+import {Link} from "react-router-dom";
 export default function ListUser() {
     const dispatch = useDispatch();
     const users = useSelector((state) => {
@@ -22,7 +22,7 @@ export default function ListUser() {
     const renderUsers = currentUsers.map((user, index) => (
         <tr key={user.id}>
             <th scope="row">{indexOfFirstUser + index + 1}</th>
-            <td>{user.name}</td>
+            <Link to={`/userprofile/${user.id}`}>{user.name}</Link>
             <td>{user.phone}</td>
             <td>{user.enabled ? 'Kích hoạt' : 'Không kích hoạt'}</td>
         </tr>
