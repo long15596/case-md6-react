@@ -1,14 +1,14 @@
 import {Link, useNavigate,} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
-import {registerUser} from "../services/user/usersServices";
+import {register} from "../services/user/usersServices";
 import React from "react";
 
 export default function Register() {
     let dispatch = useDispatch();
     let navigate = useNavigate();
     let handleRegister = async (values) => {
-        await dispatch(registerUser({values}))
+        await dispatch(register({values}))
         // await  navigate("/login")
     }
     let eM = useSelector(state => {

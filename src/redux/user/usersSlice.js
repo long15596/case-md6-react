@@ -1,7 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getOwners, getUsers, registerUser} from "../../services/user/usersServices";
-
+import {getOwners, getUsers, register, login} from "../../services/user/usersServices";
+let localStorageUser = () => {
+    if (JSON.parse(localStorage.getItem(`currentUser`))) {
+        return JSON.parse(localStorage.getItem(`currentUser`))
+    }
+    return {};
+}
 let initialState = {
+    currentUser: localStorageUser,
     users: [],
     owners: [],
     error: '',
@@ -16,8 +22,12 @@ let usersSlice = createSlice({
         builder.addCase(getOwners.fulfilled, (state, action) => {
             state.owners = action.payload
         });
-        builder.addCase(registerUser.fulfilled, (state, action) => {
-            if (action.payload.username == undefined  ) {
+        builder.addCase(login.fulfilled, (state, action) => {
+            state.currentUser = action.payload
+            localStorage.setItem('currentUser', JSON.stringify(action.payload))
+        })
+        builder.addCase(register.fulfilled, (state, action) => {
+            if (action.payload.username === undefined) {
                 state.error = action.payload
             } else {
                 state.users.push(action.payload.data)
