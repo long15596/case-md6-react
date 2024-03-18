@@ -1,9 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
-import adminsReducer from "./admin/adminsSlice";
+import usersReducer from "./user/usersSlice";
 
 export let store = configureStore({
     reducer:{
-        users:adminsReducer,
-        owners: adminsReducer
+        users:usersReducer,
+        owners: usersReducer,
     },
 })
