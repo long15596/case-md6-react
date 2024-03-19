@@ -45,7 +45,6 @@ export default function NavBar(){
                         {currentUser !== null ?
                             <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex" onClick={() =>{
                                 localStorage.setItem(`currentUser`, null)
-                                navigate(`/login`)
                             }}>Đăng xuất</Link>
                             :
                             <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex">Đăng Nhập</Link>
