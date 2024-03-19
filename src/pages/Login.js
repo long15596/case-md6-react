@@ -1,13 +1,25 @@
 import {Link,} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {Formik, Form, Field} from 'formik';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {login} from "../services/user/usersServices";
 import {useNavigate} from "react-router";
-
+import * as Yup from 'yup';
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const validationSchema = Yup.object().shape({
+        username: Yup.string()
+            .required('Username is required')
+            .matches(/^[A-Z][a-zA-Z0-9]*$/, 'Username must start with an uppercase letter')
+            .min(2, 'Username must be at least 2 characters')
+            .max(32, 'Username must not exceed 32 characters'),
+        password: Yup.string()
+            .required('Password is required')
+            .matches(/^[a-zA-Z0-9]*$/, 'Password must contain only alphanumeric characters')
+            .min(6, 'Password must be at least 6 characters')
+            .max(32, 'Password must not exceed 32 characters'),
+    });
     const handleLogin = async (values) => {
         dispatch(login(values)).then(user => {
             console.log("abc", user.payload)
@@ -36,9 +48,11 @@ const Login = () => {
                                 <Formik initialValues={{
                                     username: '',
                                     password: ''
-                                }} onSubmit={values => {
-                                    handleLogin(values).then()
-                                }}>
+                                }}
+                                        validationSchema={validationSchema}
+                                        onSubmit={values => {
+                                            handleLogin(values).then()
+                                        }}>
                                     <Form>
                                         <div className="row gy-3 overflow-hidden">
                                             <div className="col-12">
@@ -47,6 +61,11 @@ const Login = () => {
                                                            id="email"
                                                            placeholder="Username" required/>
                                                     <label htmlFor="email" className="form-label">Username</label>
+                                                    <ErrorMessage
+                                                        name="username"
+                                                        component="div"
+                                                        className="text-danger"
+                                                    />
                                                     <p id={`error-title`}></p>
                                                 </div>
                                             </div>
@@ -55,6 +74,11 @@ const Login = () => {
                                                     <Field type="password" className="form-control" name={`password`}
                                                            id="password" placeholder="Password" required/>
                                                     <label htmlFor="password" className="form-label">Password</label>
+                                                    <ErrorMessage
+                                                        name="password"
+                                                        component="div"
+                                                        className="text-danger"
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="col-12">
@@ -69,7 +93,9 @@ const Login = () => {
                                             </div>
                                             <div className="col-12">
                                                 <div className="d-grid">
-                                                    <button className="btn bsb-btn-2xl btn-primary" type="submit">Login</button>
+                                                    <button className="btn bsb-btn-2xl btn-primary"
+                                                            type="submit">Login
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -80,8 +106,10 @@ const Login = () => {
                                         <hr className="mt-5 mb-4 border-secondary-subtle"/>
                                         <div
                                             className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                            <Link to={'/register'} className="link-secondary text-decoration-none">Register Here</Link>
-                                            <Link href="#!" className="link-secondary text-decoration-none">Forgot password</Link>
+                                            <Link to={'/register'} className="link-secondary text-decoration-none">Register
+                                                Here</Link>
+                                            <Link href="#!" className="link-secondary text-decoration-none">Forgot
+                                                password</Link>
                                         </div>
                                     </div>
                                 </div>
