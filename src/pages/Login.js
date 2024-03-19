@@ -1,5 +1,5 @@
 import {Link,} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {login} from "../services/user/usersServices";
 import {useNavigate} from "react-router";
@@ -24,8 +24,7 @@ const Login = () => {
         dispatch(login(values)).then(user => {
             console.log("abc", user.payload)
             if (user.payload === undefined) {
-                // alert(`sai`)
-                document.getElementById(`error-title`).innerHTML = `Wrong Username or Password`
+                alert(`sai`)
             } else {
                 navigate(`/home`)
             }
@@ -66,7 +65,6 @@ const Login = () => {
                                                         component="div"
                                                         className="text-danger"
                                                     />
-                                                    <p id={`error-title`}></p>
                                                 </div>
                                             </div>
                                             <div className="col-12">
@@ -85,17 +83,12 @@ const Login = () => {
                                                 <div className="form-check">
                                                     <input className="form-check-input" type="checkbox" value=""
                                                            name="remember_me" id="remember_me"/>
-                                                    <label className="form-check-label text-secondary"
-                                                           htmlFor="remember_me">
-                                                        Keep me logged in
-                                                    </label>
+                                                    <label className="form-check-label text-secondary" htmlFor="remember_me">Keep me logged in</label>
                                                 </div>
                                             </div>
                                             <div className="col-12">
                                                 <div className="d-grid">
-                                                    <button className="btn bsb-btn-2xl btn-primary"
-                                                            type="submit">Login
-                                                    </button>
+                                                    <button className="btn bsb-btn-2xl btn-primary" type="submit">Login</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,10 +99,8 @@ const Login = () => {
                                         <hr className="mt-5 mb-4 border-secondary-subtle"/>
                                         <div
                                             className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                            <Link to={'/register'} className="link-secondary text-decoration-none">Register
-                                                Here</Link>
-                                            <Link href="#!" className="link-secondary text-decoration-none">Forgot
-                                                password</Link>
+                                            <Link to={'/register'} className="link-secondary text-decoration-none">Register Here</Link>
+                                            <Link href="#!" className="link-secondary text-decoration-none">Forgot password</Link>
                                         </div>
                                     </div>
                                 </div>

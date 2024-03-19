@@ -43,7 +43,7 @@ export default function NavBar(){
                             </div>
                             <a href="contact.html" className="nav-item nav-link">Contact</a>
                         </div>
-                        {currentUser !== null ?
+                        {currentUser === null ?
                             <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex" onClick={() =>{
                                 localStorage.setItem(`currentUser`, null)
                                 navigate(`/login`)
