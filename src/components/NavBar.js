@@ -7,6 +7,14 @@ export default function NavBar(){
         console.log(`user`,state.users.currentUser)
         return state.users.currentUser
     })
+    const handleLogin = () => {
+        navigate('/login');
+    };
+    const handleLogout = async ()=>{
+      await  localStorage.removeItem('currentUser')
+        navigate('/')
+    }
+
     return(
         <>
             <div className="container-fluid nav-bar bg-transparent">
@@ -43,14 +51,11 @@ export default function NavBar(){
                             </div>
                             <a href="contact.html" className="nav-item nav-link">Contact</a>
                         </div>
-                        {currentUser !== null ?
-                            <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex" onClick={() =>{
-                                localStorage.setItem(`currentUser`, null)
-                                navigate(`/login`)
-                            }}>Logout</Link>
-                            :
-                            <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex">Login</Link>
-                        }
+                        {currentUser === null || currentUser === undefined ? (
+                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
+                        ) : (
+                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogout}>Logout</button>
+                        )}
                     </div>
                 </nav>
             </div>
