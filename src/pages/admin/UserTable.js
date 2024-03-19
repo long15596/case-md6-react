@@ -53,7 +53,7 @@ export default function UserTable() {
                                 <tr onClick={() => {
                                     navigate(`/user/${user.id}`)
                                 }}>
-                                    <td>{index}</td>
+                                    <td>{index + 1}</td>
                                     <td>{user.name}</td>
                                     <td>{user.username}</td>
                                     <td>{user.phone}</td>

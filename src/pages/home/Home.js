@@ -10,12 +10,12 @@ export default function Home() {
                 <div className="row">
                     <NavBar></NavBar>
                 </div>
-                <div className="row">
+                <div className="row ">
                     <Outlet></Outlet>
                 </div>
-                {/*<div className="row">*/}
-                {/*    <Footer></Footer>*/}
-                {/*</div>*/}
+                <div className="row">
+                    <Footer></Footer>
+                </div>
             </div>
         </>
     )
