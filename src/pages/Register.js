@@ -44,8 +44,10 @@ export default function Register() {
     };
 
     return (<>
-            <div className="container">
-                <div>{err}</div>
+            <div className="container pt-5 pb-5">
+                <div>
+                    {err}
+                </div>
                 <div className="row justify-content-center">
                     <div className="col-4">
                         <div className="card border-0 shadow-sm rounded-4">
@@ -173,12 +175,10 @@ export default function Register() {
                                         <hr className="mt-5 mb-4 border-secondary-subtle"/>
                                         <div
                                             className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                            <Link
-                                                to={'/login'}
-                                                className="link-secondary text-decoration-none"
-                                            >
-                                                Login here
-                                            </Link>
+                                            <Link to={'/login'} className="link-secondary text-decoration-none">Login
+                                                here</Link>
+                                            {/*<a href="#!" className="link-secondary text-decoration-none">Forgot*/}
+                                            {/*    password</a>*/}
                                         </div>
                                     </div>
                                 </div>
@@ -187,6 +187,6 @@ export default function Register() {
                     </div>
                 </div>
             </div>
-        </>
-    );
-}
+        </>);
+};
+

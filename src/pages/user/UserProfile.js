@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import React, {useState} from "react";
 export default function UserProfile(){
-
     let {id} = useParams();
     let dispatch = useDispatch()
     let navigate = useNavigate()
@@ -42,12 +41,7 @@ export default function UserProfile(){
                     <div className="card">
                         <div className="card-body">
                             <div className="d-flex flex-column align-items-center text-center">
-                                <img
-                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                    alt="Admin"
-                                    className="rounded-circle"
-                                    width="200"
-                                />
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" width="200"/>
                                 <div className="mt-3">
                                     <h4>John Doe</h4>
                                     <p className="text-secondary mb-1">Full Stack Developer</p>
@@ -66,7 +60,7 @@ export default function UserProfile(){
                                         <line x1="2" y1="12" x2="22" y2="12"></line>
                                         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                                     </svg>
-                                    Website
+                                    Email
                                 </h6>
                                 <span className="text-secondary">https://bootdey.com</span>
                             </li>
