@@ -23,12 +23,13 @@ export const register = createAsyncThunk(
     });
 export const login = createAsyncThunk(
     'user/login',
-    async (values) => {
-        try {
-            const res = await customAxios.post(`login`, values)
+    async ({values}) => {
+        const res = await customAxios.post(`login`, values)
+        if (res.status === 200)
+            return values
+        else {
             return res.data
-        } catch (error){
-            console.log(error)
         }
+
     }
 )

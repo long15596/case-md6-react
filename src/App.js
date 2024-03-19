@@ -14,15 +14,9 @@ import Register from "./pages/Register";
 
 function App() {
     let currentUser = useSelector(state => {
-        console.log(state)
+        console.log(state.users.currentUser)
         return state.users.currentUser
     })
-    if (!currentUser) {
-        return <Home/>;
-    }
-    if (!currentUser.roles || currentUser.roles.length === 0) {
-        return <Home/>;
-    }
     return (
         <>
             <div className="container-fluid">
@@ -31,23 +25,24 @@ function App() {
                 </div>
                 <div className="row">
                     <Routes>
-                        <Route path={`home`} element={<Home></Home>}>
+                        <Route path={``} element={<Home></Home>}>
                             <Route path="listUser" element={<ListUser></ListUser>}></Route>
                             <Route path="listOwner" element={<ListOwner></ListOwner>}></Route>
                             <Route path="userProfile" element={<UserProfile></UserProfile>}></Route>
                         </Route>
                         <Route path={'register'} element={<Register></Register>}></Route>
-                        <Route path={`login`} element={<Login></Login>}/>
-                        {currentUser === undefined || currentUser.roles[0].authority === undefined ?
-                            <Route path={`login`} element={<Login></Login>}/>
-                            : currentUser.roles[0].authority === "ROLE_ADMIN" ?
-                                <Route path={`home`} element={<Home></Home>}></Route>
-                                : currentUser.roles[0].authority === "ROLE_USER" ?
-                                    <Route path={`home`} element={<Home></Home>}></Route>
-                                    : currentUser.roles[0].authority === "ROLE_OWNER" ?
-                                        <Route path={`home`} element={<Home></Home>}></Route>
-                                        :
-                                        <Route path={'login'} element={<Login></Login>}></Route>}
+                        <Route path={`login`} element={<Login></Login>}></Route>
+                        {/*{currentUser === undefined || currentUser.roles[0].authority === undefined ?*/}
+                        {/*    <Route path={`login`} element={<Login></Login>}/>*/}
+                        {/*    : currentUser.roles[0].authority === "ROLE_ADMIN" ?*/}
+                        {/*        <Route path={`home`} element={<Home></Home>}></Route>*/}
+                        {/*        : currentUser.roles[0].authority === "ROLE_USER" ?*/}
+                        {/*            <Route path={`home`} element={<Home></Home>}></Route>*/}
+                        {/*            : currentUser.roles[0].authority === "ROLE_OWNER" ?*/}
+                        {/*                <Route path={`home`} element={<Home></Home>}></Route>*/}
+                        {/*                :*/}
+                        {/*                <Route path={'register'} element={<Register></Register>}></Route>*/}
+                        {/*}*/}
 
                     </Routes>
                 </div>
@@ -56,7 +51,6 @@ function App() {
                 </div>
             </div>
         </>
-
     );
 }
 

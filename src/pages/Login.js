@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import {login} from '../services/user/usersServices';
@@ -23,14 +23,17 @@ const Login = () => {
     });
 
     const handleLogin = async (values) => {
-        dispatch(login(values)).then(user => {
+      await  dispatch(login({values})).then(user => {
             if (user.payload === undefined) {
                 alert('Sai thông tin đăng nhập.');
             } else {
-                navigate('/home');
+                navigate('/');
             }
         });
     };
+    let err = useSelector(state => {
+        console.log(state.users.currentUser)
+    })
 
     return (
         <div className="container">
@@ -41,14 +44,14 @@ const Login = () => {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="mb-5">
-                                        <h3>Đăng Nhập</h3>
+                                        <h3 style={{textAlign:"center"}}>Login</h3>
                                     </div>
                                 </div>
                             </div>
                             <Formik
                                 initialValues={{username: '', password: ''}}
                                 validationSchema={validationSchema}
-                                onSubmit={(values) => handleLogin(values)}
+                                onSubmit={(values) => handleLogin(values).then()}
                             >
                                 <Form>
                                     <div className="row gy-3 overflow-hidden">
@@ -93,9 +96,7 @@ const Login = () => {
                                                 <button
                                                     className="btn bsb-btn-2xl btn-primary"
                                                     type="submit"
-                                                onClick={()=>{
-                                                    navigate('/')
-                                                }} >
+                                                >
                                                     Đăng nhập
                                                 </button>
                                             </div>
