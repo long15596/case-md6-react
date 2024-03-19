@@ -28,7 +28,7 @@ function App() {
                         <Route path={`login`} element={<Login></Login>}/>
                         <Route path={"register"} element={<Register></Register>}/>
                         {currentUser !== null ?
-                            <Route path={`home`} element={<Home></Home>}></Route>
+                            <Route path={``} element={<Home></Home>}></Route>
                             :
                             <Route path={`login`} element={<Login></Login>}/>
                         }

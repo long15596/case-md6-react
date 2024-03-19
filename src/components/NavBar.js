@@ -1,17 +1,18 @@
-import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
+import {logOut} from "../services/user/usersServices";
 export default function NavBar(){
     let navigate = useNavigate();
+    const dispatch = useDispatch();
     let currentUser = useSelector(state => {
-        console.log(`user`,state.users.currentUser)
         return state.users.currentUser
     })
     const handleLogin = () => {
         navigate('/login');
     };
-    const handleLogout = async ()=>{
-      await  localStorage.removeItem('currentUser')
+    const handleLogout =()=>{
+        localStorage.clear();
+        dispatch(logOut())
         navigate('/')
     }
 
@@ -51,11 +52,11 @@ export default function NavBar(){
                             </div>
                             <a href="contact.html" className="nav-item nav-link">Contact</a>
                         </div>
-                        {currentUser === null || currentUser === undefined ? (
+                        {(currentUser === null || currentUser === undefined )?
                             <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
-                        ) : (
+                         :
                             <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogout}>Logout</button>
-                        )}
+                        }
                     </div>
                 </nav>
             </div>
