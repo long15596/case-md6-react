@@ -15,7 +15,7 @@ export default function UserTable() {
     }, [])
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(5);
+    const [usersPerPage] = useState(10);
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
