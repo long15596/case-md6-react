@@ -4,6 +4,7 @@ import {useNavigate} from "react-router";
 export default function NavBar(){
     let navigate = useNavigate();
     let currentUser = useSelector(state => {
+        console.log(`user`,state.users.currentUser)
         return state.users.currentUser
     })
     return(
@@ -46,9 +47,9 @@ export default function NavBar(){
                             <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex" onClick={() =>{
                                 localStorage.setItem(`currentUser`, null)
                                 navigate(`/login`)
-                            }}>Đăng xuất</Link>
+                            }}>Logout</Link>
                             :
-                            <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex">Đăng Nhập</Link>
+                            <Link to="/login" className="btn btn-primary px-3 d-none d-lg-flex">Login</Link>
                         }
                     </div>
                 </nav>

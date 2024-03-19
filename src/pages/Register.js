@@ -26,7 +26,7 @@ export default function Register() {
         })
     }
     return (<>
-            <div className="container">
+            <div className="container pt-5 pb-5">
                 <div>
                     {err}
                 </div>
@@ -102,8 +102,7 @@ export default function Register() {
                                         <hr className="mt-5 mb-4 border-secondary-subtle"/>
                                         <div
                                             className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                            <Link to={'/login'} className="link-secondary text-decoration-none">Login
-                                                here</Link>
+                                            <Link to={'/login'} className="link-secondary text-decoration-none">Login here</Link>
                                             {/*<a href="#!" className="link-secondary text-decoration-none">Forgot*/}
                                             {/*    password</a>*/}
                                         </div>

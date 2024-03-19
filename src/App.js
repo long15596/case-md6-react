@@ -6,10 +6,9 @@ import {Route, Routes} from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/home/Home";
-import ListUser from "./pages/user/ListUser";
-import ListOwner from "./pages/user/ListOwner";
 import UserProfile from "./pages/user/UserProfile";
 import {useSelector} from "react-redux";
+import Admin from "./pages/admin/Admin";
 
 
 function App() {
@@ -32,9 +31,8 @@ function App() {
                             :
                             <Route path={`login`} element={<Login></Login>}/>
                         }
-                    <Route path="listUser" element={<ListUser></ListUser>}></Route>
-                    <Route path="listOwner" element={<ListOwner></ListOwner>}></Route>
-                    <Route path="userProfile" element={<UserProfile></UserProfile>}></Route>
+                        <Route path={`user/:id`} element={<UserProfile></UserProfile>}></Route>
+                        <Route path={`admin`} element={<Admin></Admin>}></Route>
                     </Routes>
                 </div>
                 <div className="row">

@@ -13,7 +13,7 @@ const Login = () => {
             console.log("abc", user.payload)
             if (user.payload === undefined) {
                 // alert(`sai`)
-                document.getElementById(`error-title`).innerHTML = `Sai Username hoặc Password`
+                document.getElementById(`error-title`).innerHTML = `Wrong Username or Password`
             } else {
                 navigate(`/home`)
             }
@@ -21,7 +21,7 @@ const Login = () => {
     };
     return (
         <>
-            <div className="container">
+            <div className="container pt-5 pb-5">
                 <div className="row justify-content-center">
                     <div className="col-4">
                         <div className="card border-0 shadow-sm rounded-4">
@@ -29,7 +29,7 @@ const Login = () => {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="mb-5">
-                                            <h3>Đăng Nhập</h3>
+                                            <h3>Sign In</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -69,9 +69,7 @@ const Login = () => {
                                             </div>
                                             <div className="col-12">
                                                 <div className="d-grid">
-                                                    <button className="btn bsb-btn-2xl btn-primary" type="submit">Đăng
-                                                        nhập
-                                                    </button>
+                                                    <button className="btn bsb-btn-2xl btn-primary" type="submit">Login</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -82,7 +80,7 @@ const Login = () => {
                                         <hr className="mt-5 mb-4 border-secondary-subtle"/>
                                         <div
                                             className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                            <Link to={'/register'} className="link-secondary text-decoration-none">Tạo tài khoản mới</Link>
+                                            <Link to={'/register'} className="link-secondary text-decoration-none">Register Here</Link>
                                             <Link href="#!" className="link-secondary text-decoration-none">Forgot password</Link>
                                         </div>
                                     </div>
