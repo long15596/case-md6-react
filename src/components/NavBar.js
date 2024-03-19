@@ -12,7 +12,7 @@ export default function NavBar(){
     };
     const handleLogout = async ()=>{
       await  localStorage.removeItem('currentUser')
-        navigate('/')
+        navigate('/home')
     }
 
     return(
