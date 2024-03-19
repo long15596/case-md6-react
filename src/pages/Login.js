@@ -22,13 +22,12 @@ const Login = () => {
     });
     const handleLogin = async (values) => {
         dispatch(login(values)).then(user => {
-            console.log(values
-            )
+            console.log(values)
             console.log("abc", user.payload)
             if (user.payload === undefined) {
                 alert(`sai`)
             } else {
-                navigate(`/home`)
+                navigate(`/`)
             }
         })
     };
