@@ -22,6 +22,8 @@ const Login = () => {
     });
     const handleLogin = async (values) => {
         dispatch(login(values)).then(user => {
+            console.log(values
+            )
             console.log("abc", user.payload)
             if (user.payload === undefined) {
                 alert(`sai`)
@@ -40,7 +42,7 @@ const Login = () => {
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="mb-5">
-                                            <h3>Sign In</h3>
+                                            <h3 style={{textAlign:"center"}}>Sign In</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +51,7 @@ const Login = () => {
                                     password: ''
                                 }}
                                         validationSchema={validationSchema}
-                                        onSubmit={values => {
+                                        onSubmit={(values) => {
                                             handleLogin(values).then()
                                         }}>
                                     <Form>

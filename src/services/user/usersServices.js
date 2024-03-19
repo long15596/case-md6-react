@@ -5,6 +5,7 @@ export const getUsers = createAsyncThunk('get/Users', async () => {
     let res = await customAxios.get('admin/users');
     return res.data
 })
+
 export const register = createAsyncThunk(
     'user/register',
     async ({values}) => {
@@ -17,7 +18,7 @@ export const register = createAsyncThunk(
     });
 export const login = createAsyncThunk(
     'user/login',
-    async ({values}) => {
+    async (values) => {
         try {
             const res = await customAxios.post(`login`, values)
             return res.data
@@ -25,5 +26,6 @@ export const login = createAsyncThunk(
             console.log(error)
             throw error
         }
+
     }
 )

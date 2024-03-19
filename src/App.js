@@ -19,11 +19,12 @@ function App() {
     return (
         <>
             <div className="container-fluid">
-                <div className="row">
-                    <NavBar></NavBar>
-                </div>
+                {/*<div className="row">*/}
+                {/*    <NavBar></NavBar>*/}
+                {/*</div>*/}
                 <div className="row">
                     <Routes>
+                        <Route path={''} element={<Home></Home>}></Route>
                         <Route path={`login`} element={<Login></Login>}/>
                         <Route path={"register"} element={<Register></Register>}/>
                         {currentUser !== null ?
@@ -35,9 +36,9 @@ function App() {
                         <Route path={`admin`} element={<Admin></Admin>}></Route>
                     </Routes>
                 </div>
-                <div className="row">
-                    <Footer></Footer>
-                </div>
+                {/*<div className="row">*/}
+                {/*    <Footer></Footer>*/}
+                {/*</div>*/}
             </div>
         </>
     );
