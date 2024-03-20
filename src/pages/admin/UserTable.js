@@ -62,7 +62,6 @@ export default function UserTable() {
                                     <td>{user.phone}</td>
                                     <td>{user.enabled ? "Active" : "Block"}</td>
                                     <td><span>{user.roles[0].name}</span></td>
-                                    {/*<Link to={`user/${user.id}`}>hihi</Link>*/}
                                 </tr>
                             ))}
                             </tbody>
