@@ -1,5 +1,5 @@
 import {Link,} from 'react-router-dom';
-import {useDispatch,} from 'react-redux';
+import {useDispatch, useSelector,} from 'react-redux';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {login} from "../services/user/usersServices";
 import {useNavigate} from "react-router";
@@ -23,18 +23,31 @@ const Login = () => {
             .min(6, 'Password must be at least 6 characters')
             .max(32, 'Password must not exceed 32 characters'),
     });
+    let currentUser = useSelector(state => {
+        console.log(state.users.currentUser !== null)
+        return state.users.currentUser
+    })
     const handleLogin = async (values) => {
-      await  dispatch(login(values)).then(user => {
+        await dispatch(login(values)).then(user => {
             console.log(values);
             console.log("abc", user.payload);
             if (user.payload === undefined) {
                 showError('Wrong Username or Password');
             } else {
-                showSuccess('Login successful');
-                setTimeout(() => {
-                    hideMessage();
-                    navigate(`/`);
-                }, 3000);
+                const userRoles = user.payload.roles.map(role => role.authority);
+                if (userRoles.includes("ROLE_USER")) {
+                    showSuccess('Login successful');
+                    setTimeout(() => {
+                        hideMessage();
+                        navigate(`/`);
+                    }, 3000);
+                } else if (userRoles.includes("ROLE_ADMINN")) {
+                    showSuccess('Login successful');
+                    setTimeout(() => {
+                        hideMessage();
+                        navigate(`/admin`);
+                    }, 3000);
+                }
             }
         })
     };
@@ -74,14 +87,14 @@ const Login = () => {
                             <div className="card-body p-3 p-md-4 p-xl-5">
                                 <div className="row">
                                     <div className="col-12" id={"header"}>
-                                        <div id={"icons"} >
+                                        <div id={"icons"}>
                                             <Link to={'/'}><img src={img} alt=""/></Link>
                                         </div>
                                         <div className="mb-5" id={"signIn"}>
                                             <h3>Sign In</h3>
                                         </div>
                                     </div>
-                                    <hr id={"hr"} />
+                                    <hr id={"hr"}/>
                                 </div>
                                 <Formik initialValues={{
                                     username: '',
@@ -143,7 +156,8 @@ const Login = () => {
                                         <hr className="mt-5 mb-4 border-secondary-subtle"/>
                                         <div
                                             className="d-flex gap-2 gap-md-4 justify-content-center">
-                                            <Link to={'/register'} className="link-secondary text-decoration-none" style={{}}>Register
+                                            <Link to={'/register'} className="link-secondary text-decoration-none"
+                                                  style={{}}>Register
                                                 Here</Link>
                                         </div>
                                     </div>

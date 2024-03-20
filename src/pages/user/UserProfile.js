@@ -11,8 +11,6 @@ export default function UserProfile(){
         console.log(state);
         return state.users.users.filter(user => user.id === id)
     })
-
-    // thay đổi input
     const [isEditing, setIsEditing] = useState(false);
     const [userInfo, setUserInfo] = useState("Kenneth Valdez");
     const handleUserInfoClick = () => {
@@ -26,8 +24,6 @@ export default function UserProfile(){
     const handleInputBlur = () => {
         setIsEditing(false);
     };
-
-    // Phần trang
 
     return(
         <>

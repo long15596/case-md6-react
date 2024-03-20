@@ -1,6 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import {logOut} from "../services/user/usersServices";
+import img from '../img/icon-deal.png'
 export default function NavBar(){
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ export default function NavBar(){
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                     <a href="index.html" className="navbar-brand d-flex align-items-center text-center">
                         <div className="icon p-2 me-2">
-                            <img className="img-fluid" src={``} alt="Icon"
+                            <img className="img-fluid" src={img} alt="Icon"
                                  style={{width: "30px", height: "30px"}}/>
                         </div>
                         <h1 className="m-0 text-primary">UHome</h1>
