@@ -2,7 +2,6 @@ import './UserProfile.css'
 import {useNavigate, useParams} from "react-router";
 import {useSelector} from "react-redux";
 import React from "react";
-
 export default function UserProfile() {
     let {id} = useParams();
 
