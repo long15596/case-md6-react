@@ -1,9 +1,12 @@
 import {Link,} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch,} from 'react-redux';
 import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {login} from "../services/user/usersServices";
 import {useNavigate} from "react-router";
 import * as Yup from 'yup';
+import './login.css'
+import img from '../img/cross.png';
+import React from "react";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -21,30 +24,64 @@ const Login = () => {
             .max(32, 'Password must not exceed 32 characters'),
     });
     const handleLogin = async (values) => {
-        dispatch(login(values)).then(user => {
-            console.log(values)
-            console.log("abc", user.payload)
+      await  dispatch(login(values)).then(user => {
+            console.log(values);
+            console.log("abc", user.payload);
             if (user.payload === undefined) {
-                // alert(`sai`)
-                document.getElementById(`error-title`).innerHTML = `Wrong Username or Password`
+                showError('Wrong Username or Password');
             } else {
-                navigate(`/`)
+                showSuccess('Login successful');
+                setTimeout(() => {
+                    hideMessage();
+                    navigate(`/`);
+                }, 3000);
             }
         })
     };
+    const showError = (errorMessage) => {
+        const errorElement = document.getElementById(`error-title`);
+        errorElement.innerHTML = errorMessage;
+        document.getElementById("background").style.background = 'white';
+        errorElement.style.display = 'block';
+        console.log(errorMessage)
+    };
+    const showSuccess = (successMessage) => {
+        const successElement = document.getElementById(`error-title`);
+        successElement.innerHTML = successMessage;
+        document.getElementById("background").style.background = 'white';
+        successElement.style.display = 'block';
+        console.log(successMessage)
+        setTimeout(() => {
+            hideMessage();
+        }, 3000);
+    };
+
+    const hideMessage = () => {
+        document.getElementById(`error-title`).style.display = 'none';
+        document.getElementById("background").style.display = "none"
+    };
+
     return (
         <>
-            <div className="container pt-5 pb-5">
+            <div id={'background'}>
+                <div id={`error-title`} style={{textAlign: "center"}}></div>
+            </div>
+
+            <div className="container pt-5 pb-5 mt-5">
                 <div className="row justify-content-center">
                     <div className="col-4">
                         <div className="card border-0 shadow-sm rounded-4">
                             <div className="card-body p-3 p-md-4 p-xl-5">
                                 <div className="row">
-                                    <div className="col-12">
-                                        <div className="mb-5">
-                                            <h3 style={{textAlign:"center"}}>Sign In</h3>
+                                    <div className="col-12" id={"header"}>
+                                        <div id={"icons"} >
+                                            <Link to={'/'}><img src={img} alt=""/></Link>
+                                        </div>
+                                        <div className="mb-5" id={"signIn"}>
+                                            <h3>Sign In</h3>
                                         </div>
                                     </div>
+                                    <hr id={"hr"} />
                                 </div>
                                 <Formik initialValues={{
                                     username: '',
@@ -67,7 +104,6 @@ const Login = () => {
                                                         component="div"
                                                         className="text-danger"
                                                     />
-                                                    <p id={`error-title`}></p>
                                                 </div>
                                             </div>
                                             <div className="col-12">
@@ -106,11 +142,9 @@ const Login = () => {
                                     <div className="col-12">
                                         <hr className="mt-5 mb-4 border-secondary-subtle"/>
                                         <div
-                                            className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                            <Link to={'/register'} className="link-secondary text-decoration-none">Register
+                                            className="d-flex gap-2 gap-md-4 justify-content-center">
+                                            <Link to={'/register'} className="link-secondary text-decoration-none" style={{}}>Register
                                                 Here</Link>
-                                            <Link href="#!" className="link-secondary text-decoration-none">Forgot
-                                                password</Link>
                                         </div>
                                     </div>
                                 </div>
