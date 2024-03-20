@@ -45,6 +45,7 @@ export default function UserTable() {
                                 <th scope="col">Name</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Phone</th>
+                                <th scope="col">Address</th>
                                 <th scope="col">Role</th>
                             </tr>
                             </thead>
@@ -57,6 +58,7 @@ export default function UserTable() {
                                     <td>{user.name}</td>
                                     <td>{user.username}</td>
                                     <td>{user.phone}</td>
+                                    <td>{user.address}</td>
                                     <td><span>{user.roles[0].name}</span></td>
                                 </tr>
                             ))}

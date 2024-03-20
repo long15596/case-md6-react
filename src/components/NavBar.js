@@ -1,21 +1,23 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import {logOut} from "../services/user/usersServices";
+import {useState} from "react";
 export default function NavBar(){
     let navigate = useNavigate();
     const dispatch = useDispatch();
+    let[isShowLogin, setShowLogin] = useState(false)
     let currentUser = useSelector(state => {
         return state.users.currentUser
     })
     const handleLogin = () => {
-        navigate('/login');
+        // navigate('/login');
+        setShowLogin(true)
     };
     const handleLogout =()=>{
         localStorage.clear();
         dispatch(logOut())
         navigate('/')
     }
-
     return(
         <>
             <div className="container-fluid nav-bar bg-transparent">

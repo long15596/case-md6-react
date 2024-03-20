@@ -5,17 +5,13 @@ import Footer from "../../components/Footer";
 export default function Admin() {
     return (
         <>
-            <div className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <NavBar></NavBar>
-            </div>
-            <div className="container-fluid">
-                <div className="offset-2 col-10 pt-5">
+            <NavBar></NavBar>
+            <div className="container-fluid pt-2">
+                <div className="offset-2 col-10">
                     <UserTable></UserTable>
                 </div>
             </div>
-            <div className="bg-dark text-white text-center py-3">
-                <Footer></Footer>
-            </div>
+            <Footer></Footer>
         </>
     )
 }

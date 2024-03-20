@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getUsers, register, login, logOut} from "../../services/user/usersServices";
+import {getUsers, register, login, logOut, edit, updateUser} from "../../services/user/usersServices";
 let localStorageUser = () => {
     if (JSON.parse(localStorage.getItem(`currentUser`))) {
         return JSON.parse(localStorage.getItem(`currentUser`))
@@ -25,12 +25,18 @@ let usersSlice = createSlice({
             state.currentUser = action.payload
             console.log(action.payload)
             localStorage.setItem('currentUser', JSON.stringify(action.payload))
-        })
+        });
         builder.addCase(register.fulfilled, (state, action) => {
             if (action.payload.username === undefined) {
                 state.error = action.payload
             } else {
                 state.users.push(action.payload.data)
+            }
+        });
+        builder.addCase(updateUser.fulfilled, (state, action) => {
+            const updatedUserIndex = state.users.findIndex(user => user.id === action.payload.id);
+            if (updatedUserIndex !== -1) {
+                state.users[updatedUserIndex] = action.payload;
             }
         })
     }
