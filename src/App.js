@@ -9,6 +9,7 @@ import Home from "./pages/home/Home";
 import UserProfile from "./pages/user/UserProfile";
 import {useSelector} from "react-redux";
 import Admin from "./pages/admin/Admin";
+import Pagehome from "./pages/Pagehome";
 
 
 function App() {
@@ -19,9 +20,9 @@ function App() {
     return (
         <>
             <div className="container-fluid">
-                {/*<div className="row">*/}
-                {/*    <NavBar></NavBar>*/}
-                {/*</div>*/}
+                <div className="row">
+                    <NavBar></NavBar>
+                </div>
                 <div className="row">
                     <Routes>
                         <Route path={''} element={<Home></Home>}></Route>
@@ -34,11 +35,12 @@ function App() {
                         }
                         <Route path={`user/:id`} element={<UserProfile></UserProfile>}></Route>
                         <Route path={`admin`} element={<Admin></Admin>}></Route>
+                        <Route path={`pagehome`} element={<Pagehome></Pagehome>}></Route>
                     </Routes>
                 </div>
-                {/*<div className="row">*/}
-                {/*    <Footer></Footer>*/}
-                {/*</div>*/}
+                <div className="row">
+                    <Footer></Footer>
+                </div>
             </div>
         </>
     );

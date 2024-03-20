@@ -37,9 +37,9 @@ export default function NavBar(){
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
                                 <div className="dropdown-menu rounded-0 m-0">
-                                    <a href="property-list.html" className="dropdown-item">Property List</a>
-                                    <a href="property-type.html" className="dropdown-item">Property Type</a>
-                                    <a href="property-agent.html" className="dropdown-item">Property Agent</a>
+                                    <a className="dropdown-item">Property List</a>
+                                    <a className="dropdown-item">Property Type</a>
+                                    <a className="dropdown-item">Property Agent</a>
                                 </div>
                             </div>
                             <div className="nav-item dropdown">

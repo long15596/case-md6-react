@@ -13,9 +13,9 @@ export default function Home() {
                 <div className="row">
                     <Outlet></Outlet>
                 </div>
-                {/*<div className="row">*/}
-                {/*    <Footer></Footer>*/}
-                {/*</div>*/}
+                <div className="row">
+                    <Footer></Footer>
+                </div>
             </div>
         </>
     )

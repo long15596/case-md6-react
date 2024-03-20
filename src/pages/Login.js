@@ -110,7 +110,7 @@ const Login = () => {
                                             className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
                                             <Link to={'/register'} className="link-secondary text-decoration-none">Register
                                                 Here</Link>
-                                            <Link href="#!" className="link-secondary text-decoration-none">Forgot
+                                            <Link to={''} className="link-secondary text-decoration-none">Forgot
                                                 password</Link>
                                         </div>
                                     </div>
