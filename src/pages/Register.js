@@ -4,6 +4,8 @@ import {Field, Form, Formik, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
 import {register} from '../services/user/usersServices';
+import img from "../img/cross.png";
+import './login.css'
 
 export default function Register() {
     const dispatch = useDispatch();
@@ -53,11 +55,15 @@ export default function Register() {
                         <div className="card border-0 shadow-sm rounded-4">
                             <div className="card-body p-3 p-md-4 p-xl-5">
                                 <div className="row">
-                                    <div className="col-12">
-                                        <div className="mb-5">
-                                            <h3 style={{textAlign: 'center'}}>Sign Up</h3>
+                                    <div className="col-12" id={"header"}>
+                                        <div id={"icons"} >
+                                            <Link to={'/'}><img src={img} alt=""/></Link>
+                                        </div>
+                                        <div className="mb-5" id={"signIn"}>
+                                            <h3>Register</h3>
                                         </div>
                                     </div>
+                                    <hr id={"hr"} />
                                 </div>
                                 <Formik
                                     initialValues={{

@@ -1,0 +1,19 @@
+#background{
+    height: 50px;
+    width: 160px;
+    margin-left: 858px;
+    border-radius: 29px
+}
+#header{
+    display: flex;
+}
+#icons{
+    width: 100px;
+    height: 100px;
+}
+#signIn{
+    margin-left: 97px;
+}
+#hr{
+  margin-top:-46px
+}

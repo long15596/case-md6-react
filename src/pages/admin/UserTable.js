@@ -45,18 +45,23 @@ export default function UserTable() {
                                 <th scope="col">Name</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Phone</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Enabled</th>
                                 <th scope="col">Role</th>
                             </tr>
                             </thead>
                             <tbody>
                             {currentUsers.map((user, index) => (
                                 <tr onClick={() => {
-                                    navigate(`/user/${user.id}`)
+                                    navigate(`/admin/user/${user.id}`)
+
                                 }}>
-                                    <td>{index}</td>
+                                    <td>{index + 1}</td>
                                     <td>{user.name}</td>
                                     <td>{user.username}</td>
                                     <td>{user.phone}</td>
+                                    <td>{user.address}</td>
+                                    <td>{user.enabled ? "Active" : "Block"}</td>
                                     <td><span>{user.roles[0].name}</span></td>
                                 </tr>
                             ))}

@@ -15,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-function FileUpload() {
+function FileUpload({onUpload}) {
     const [files, setFiles] = useState([]);
     const [progress, setProgress] = useState(0);
     const [fileUrls, setFileUrls] = useState([]);
@@ -26,14 +26,9 @@ function FileUpload() {
         }
     };
     const handleUpload = () => {
-        if (!files) {
-            console.log("Please select a file.");
-            return;
-        }
         files.forEach((file) => {
             const storageRef = ref(storage, `files/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
-            console.log(file)
             uploadTask.on(
                 'state_changed',
                 (snapshot) => {
@@ -45,8 +40,8 @@ function FileUpload() {
                 },
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                        console.log(url);
                         setFileUrls(prevUrls => [...prevUrls, url]);
+                        onUpload(fileUrls)
                     });
                 }
             );
@@ -54,17 +49,13 @@ function FileUpload() {
     };
     return (
         <>
-            <div className="mb-3">
-                <label htmlFor="formFile" className="form-label">Default file input example</label>
-                <input className="form-control" type="file" id="formFile" onChange={handleChange} multiple/>
-                <button onClick={handleUpload}>Upload</button>
-                <div>{progress}% Uploaded</div>
-                {fileUrls.map((url, index) => (
-                    <img src={url} className="img-thumbnail" alt="..." style={{height: '200px', width: '200px'}}/>
-                ))}
+            <div className="input-group">
+                <input type="file" className="form-control" id="inputGroupFile04"
+                       aria-describedby="inputGroupFileAddon04" aria-label="Upload" onChange={handleChange} multiple/>
+                <button className="btn btn-primary px-3 d-none d-lg-flex" type="button" id="inputGroupFileAddon04" onClick={handleUpload}>Upload</button>
             </div>
+            <div>{progress}% Uploaded</div>
         </>
     );
 }
-
 export default FileUpload;
