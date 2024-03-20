@@ -23,10 +23,6 @@ const Login = () => {
             .min(6, 'Password must be at least 6 characters')
             .max(32, 'Password must not exceed 32 characters'),
     });
-    let currentUser = useSelector(state => {
-        console.log(state.users.currentUser !== null)
-        return state.users.currentUser
-    })
     const handleLogin = async (values) => {
         await dispatch(login(values)).then(user => {
             console.log(values);
@@ -157,7 +153,7 @@ const Login = () => {
                                         <div
                                             className="d-flex gap-2 gap-md-4 justify-content-center">
                                             <Link to={'/register'} className="link-secondary text-decoration-none"
-                                                  style={{}}>Register
+                                                >Register
                                                 Here</Link>
                                         </div>
                                     </div>

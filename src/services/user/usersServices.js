@@ -1,13 +1,10 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios";
 import customAxios from "../api";
 
-export const getUsers = createAsyncThunk('get/Users', async () => {
-    let res = await axios.get('http://localhost:8080/admin/users');
-    return res.data
-})
-export const getOwners = createAsyncThunk('get/Owners', async () => {
-    let res = await axios.get('http://localhost:8080/admin/owners');
+export const getUsers = createAsyncThunk(
+    'get/Users',
+    async () => {
+    let res = await customAxios.get('admin/users');
     return res.data
 })
 
@@ -35,7 +32,12 @@ export const login = createAsyncThunk(
 )
 export const logOut = createAsyncThunk(
     'user/logOut',
-    async () => {
-
+    async () => {}
+)
+export const updateUser = createAsyncThunk(
+    `user/updateUser`,
+    async ({id, values}) => {
+        await customAxios.put(`users/${id}`, values)
+        return values
     }
 )

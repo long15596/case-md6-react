@@ -30,8 +30,8 @@ body{
 }
 
 .card-body img{
-    width: 30%;
-    height: 30%;
+    width: 50%;
+    height: 50%;
 }
 .gutters-sm {
     margin-right: -8px;

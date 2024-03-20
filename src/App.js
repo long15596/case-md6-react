@@ -1,7 +1,5 @@
 import './css/style.css'
-import './css/bootstrap.min.css'
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
+import './css/bootstrap.min.css';
 import {Route, Routes} from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -10,7 +8,6 @@ import UserProfile from "./pages/user/UserProfile";
 import {useSelector} from "react-redux";
 import Admin from "./pages/admin/Admin";
 import UserTable from "./pages/admin/UserTable";
-
 
 function App() {
     let currentUser = useSelector(state => {

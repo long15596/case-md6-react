@@ -2,7 +2,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import React, {useEffect, useState} from "react";
 import {getUsers} from "../../services/user/usersServices";
-import {Link} from "react-router-dom";
 
 export default function UserTable() {
     const dispatch = useDispatch();
@@ -46,6 +45,7 @@ export default function UserTable() {
                                 <th scope="col">Name</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Phone</th>
+                                <th scope="col">Address</th>
                                 <th scope="col">Enabled</th>
                                 <th scope="col">Role</th>
                             </tr>
@@ -56,10 +56,11 @@ export default function UserTable() {
                                     navigate(`/admin/user/${user.id}`)
 
                                 }}>
-                                    <td>{index}</td>
+                                    <td>{index + 1}</td>
                                     <td>{user.name}</td>
                                     <td>{user.username}</td>
                                     <td>{user.phone}</td>
+                                    <td>{user.address}</td>
                                     <td>{user.enabled ? "Active" : "Block"}</td>
                                     <td><span>{user.roles[0].name}</span></td>
                                 </tr>

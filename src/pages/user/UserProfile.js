@@ -1,48 +1,30 @@
 import './UserProfile.css'
 import {useNavigate, useParams} from "react-router";
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-import React, {useState} from "react";
-export default function UserProfile(){
+import {useSelector} from "react-redux";
+import React from "react";
+export default function UserProfile() {
     let {id} = useParams();
-    let dispatch = useDispatch()
+
     let navigate = useNavigate()
+
     let users = useSelector(state => {
-        console.log(state);
-        return state.users.users.filter(user => user.id === id)
+        return state.users.users.filter(user => user.id == id)
     })
-    const [isEditing, setIsEditing] = useState(false);
-    const [userInfo, setUserInfo] = useState("Kenneth Valdez");
-    const handleUserInfoClick = () => {
-        setIsEditing(true);
-    };
 
-    const handleInputChange = (event) => {
-        setUserInfo(event.target.value);
-    };
+    let handleClickShowUpdate = () => {
 
-    const handleInputBlur = () => {
-        setIsEditing(false);
-    };
-
-    return(
+    }
+    return (
         <>
-            <nav aria-label="breadcrumb" className="main-breadcrumb">
-                <ol className="breadcrumb"></ol>
-                <ol className="breadcrumb"></ol>
-            </nav>
             <div className="row gutters-sm">
-                <div className="col-md-2"></div>
-                <div className="col-md-4 mb-3">
+                <div className="offset-2 col-md-4 mb-3">
                     <div className="card">
                         <div className="card-body">
                             <div className="d-flex flex-column align-items-center text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" width="200"/>
+                                <img src={users[0].avatar} alt="Admin"
+                                     className="rounded-circle"/>
                                 <div className="mt-3">
-                                    <h4>John Doe</h4>
-                                    <p className="text-secondary mb-1">Full Stack Developer</p>
-                                    <p className="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                    <button className="btn btn-outline-primary">Message</button>
+                                    <h4>{users[0].name}</h4>
                                 </div>
                             </div>
                         </div>
@@ -51,10 +33,13 @@ export default function UserProfile(){
                         <ul className="list-group list-group-flush">
                             <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 className="mb-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-globe mr-2 icon-inline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" className="feather feather-globe mr-2 icon-inline">
                                         <circle cx="12" cy="12" r="10"></circle>
                                         <line x1="2" y1="12" x2="22" y2="12"></line>
-                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                        <path
+                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
                                     </svg>
                                     Email
                                 </h6>
@@ -64,62 +49,42 @@ export default function UserProfile(){
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col-sm-3">
-                                            <h6 className="mb-0">Full Name</h6>
+                                            <h6 className="mb-0">Username</h6>
                                         </div>
-                                        <div className="col-sm-9 text-secondary">
-                                            {isEditing ? (
-                                                <input
-                                                    type="text"
-                                                    value={userInfo}
-                                                    onChange={handleInputChange}
-                                                    onBlur={handleInputBlur}
-                                                    autoFocus
-                                                />
-                                            ) : (
-                                                <span onClick={handleUserInfoClick}>{userInfo}</span>
-                                            )}
-                                        </div>
+                                        <div className="col-sm-9 text-secondary">{users[0].username}</div>
                                     </div>
-                                    <hr />
-                                    <div className="row">
-                                        <div className="col-sm-3">
-                                            <h6 className="mb-0">Email</h6>
-                                        </div>
-                                        <div className="col-sm-9 text-secondary">
-                                            fip@jukmuh.al
-                                        </div>
-                                    </div>
-                                    <hr />
+                                    <hr/>
                                     <div className="row">
                                         <div className="col-sm-3">
                                             <h6 className="mb-0">Phone</h6>
                                         </div>
-                                        <div className="col-sm-9 text-secondary">
-                                            (239) 816-9029
-                                        </div>
+                                        <div className="col-sm-9 text-secondary">{users[0].phone}</div>
                                     </div>
-                                    <hr />
-                                    <div className="row">
-                                        <div className="col-sm-3">
-                                            <h6 className="mb-0">Mobile</h6>
-                                        </div>
-                                        <div className="col-sm-9 text-secondary">
-                                            (320) 380-4539
-                                        </div>
-                                    </div>
-                                    <hr />
+                                    <hr/>
                                     <div className="row">
                                         <div className="col-sm-3">
                                             <h6 className="mb-0">Address</h6>
                                         </div>
-                                        <div className="col-sm-9 text-secondary">
-                                            Bay Area, San Francisco, CA
-                                        </div>
+                                        <div className="col-sm-9 text-secondary">{users[0].address}</div>
                                     </div>
-                                    <hr />
+                                    <hr/>
+                                    <div className="row">
+                                        <div className="col-sm-3">
+                                            <h6 className="mb-0">Status</h6>
+                                        </div>
+                                        <div className="col-sm-9 text-secondary">{users[0].status}</div>
+                                    </div>
+                                    <hr/>
+                                    <div className="row">
+                                        <div className="col-sm-3">
+                                            <h6 className="mb-0">Role</h6>
+                                        </div>
+                                        <div className="col-sm-9 text-secondary">{users[0].roles[0].name}</div>
+                                    </div>
+                                    <hr/>
                                     <div className="row">
                                         <div className="col-sm-12">
-                                            <a className="btn btn-info" target="_blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Save</a>
+                                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleClickShowUpdate}>Edit Profile</button>
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +92,6 @@ export default function UserProfile(){
                         </ul>
                     </div>
                 </div>
-
 
                 <div className="col-md-6">
                     <div className="navbar">
@@ -171,7 +135,6 @@ export default function UserProfile(){
                     </div>
                 </div>
             </div>
-
         </>
     )
 }
