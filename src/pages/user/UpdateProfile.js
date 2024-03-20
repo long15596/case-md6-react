@@ -1,3 +1,4 @@
+import './UserProfile.css'
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import FileUpload from "../../services/FileUpload";
 import React, {useState} from "react";
