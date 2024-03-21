@@ -1,5 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {getUsers, register, login, logOut, edit, updateUser} from "../../services/user/usersServices";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {getUsers, register, login, logOut, updateUser, inforUser} from "../../services/user/usersServices";
+
+
 let localStorageUser = () => {
     if (JSON.parse(localStorage.getItem(`currentUser`))) {
         return JSON.parse(localStorage.getItem(`currentUser`))
@@ -11,6 +13,7 @@ let initialState = {
     users: [],
     error: '',
 }
+
 let usersSlice = createSlice({
     name: 'user',
     initialState,
@@ -23,8 +26,12 @@ let usersSlice = createSlice({
         });
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentUser = action.payload
-            console.log(action.payload)
-            localStorage.setItem('currentUser', JSON.stringify(action.payload))
+            localStorage.setItem('currentUser', JSON.stringify(action.payload));
+            inforUserThunk(action.payload.id);;
+        });
+        builder.addCase(inforUser.fulfilled, (state, action) => {
+            console.log(state);
+            state.users = action.payload;
         });
         builder.addCase(register.fulfilled, (state, action) => {
             if (action.payload.username === undefined) {
@@ -41,4 +48,12 @@ let usersSlice = createSlice({
         })
     }
 })
+export const inforUserThunk = (id) => async dispatch => {
+    try {
+        await dispatch(inforUser({ id }));
+    } catch (error) {
+        console.error('Error fetching user information:', error);
+    }
+};
+export const { reducer, actions } = usersSlice;
 export default usersSlice.reducer

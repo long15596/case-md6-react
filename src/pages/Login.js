@@ -25,8 +25,6 @@ const Login = () => {
     });
     const handleLogin = async (values) => {
         await dispatch(login(values)).then(user => {
-            console.log(values);
-            console.log("abc", user.payload);
             if (user.payload === undefined) {
                 showError('Wrong Username or Password');
             } else {

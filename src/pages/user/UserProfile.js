@@ -8,7 +8,7 @@ export default function UserProfile() {
     let navigate = useNavigate()
 
     let users = useSelector(state => {
-        return state.users.users.filter(user => user.id == id)
+        return state.users.users.filter(user => user.id === id)
     })
 
     let handleClickShowUpdate = () => {

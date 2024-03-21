@@ -1,21 +1,37 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import {logOut} from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
+
+import "./Navbar.css"
+import {useEffect} from "react";
+import {inforUserThunk} from "../redux/user/usersSlice";
+
 export default function NavBar(){
     let navigate = useNavigate();
     const dispatch = useDispatch();
+
     let currentUser = useSelector(state => {
         return state.users.currentUser
+    })
+    let user = useSelector(state => {
+        return state.users.users
     })
     const handleLogin = () => {
         navigate('/login');
     };
+
     const handleLogout =()=>{
         localStorage.clear();
         dispatch(logOut())
         navigate('/')
     }
+    useEffect(() => {
+        // Kiểm tra nếu currentUser tồn tại và có id, thực hiện lấy thông tin người dùng
+        if (currentUser && currentUser.id) {
+            dispatch(inforUserThunk(currentUser.id));
+        }
+    }, []);
 
     return(
         <>
@@ -53,10 +69,29 @@ export default function NavBar(){
                             </div>
                             <a href="contact.html" className="nav-item nav-link">Contact</a>
                         </div>
-                        {(currentUser === null || currentUser === undefined )?
+                        {(currentUser === null || currentUser === undefined ) ?
                             <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
-                         :
-                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogout}>Logout</button>
+                            :
+                            <div className="nav-item dropdown">
+                                <a>
+                                    <img src={user.avatar} alt="Avatar" className="avatar"  />
+                                </a>
+                                <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
+                                    <div className="dropdown-item custom-dropdown-item">
+                                        <div onClick={handleLogout}>
+                                            <i className="bi bi-box-arrow-in-left"></i>
+                                            Logout
+                                        </div>
+                                    </div>
+                                    <div className="dropdown-item custom-dropdown-item"> <div>
+                                        <i className="bi bi-person-circle"></i>
+                                        Edit Profile
+                                        </div>
+                                    </div>
+                                    <a className="dropdown-item custom-dropdown-item">Property Agent</a>
+                                </div>
+                            </div>
+
                         }
                     </div>
                 </nav>
