@@ -2,7 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import customAxios from "../api";
 
 export const getUsers = createAsyncThunk(
-    'get/Users',
+    'get/users',
     async () => {
     let res = await customAxios.get('admin/users');
     return res.data
