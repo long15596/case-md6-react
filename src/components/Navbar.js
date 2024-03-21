@@ -1,13 +1,14 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router";
 import {logOut} from "../services/user/usersServices";
+import React, { useState, useEffect } from "react";
 import img from '../img/icon-deal.png'
 
 import "./Navbar.css"
-import {useEffect} from "react";
 import {inforUserThunk} from "../redux/user/usersSlice";
 
-export default function NavBar(){
+
+export default function Navbar() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -17,30 +18,45 @@ export default function NavBar(){
     let user = useSelector(state => {
         return state.users.users
     })
+
+    const [isSticky, setIsSticky] = useState(false);
+
+    useEffect(() => {
+        function handleScroll() {
+            if (window.scrollY > 0) {
+                setIsSticky(true);
+            } else {
+                setIsSticky(false);
+            }
+        }
+        if (currentUser && currentUser.id) {
+            dispatch(inforUserThunk(currentUser.id));
+        }
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     const handleLogin = () => {
         navigate('/login');
     };
 
-    const handleLogout =()=>{
-        localStorage.clear();
-        dispatch(logOut())
-        navigate('/')
-    }
-    useEffect(() => {
-        // Kiểm tra nếu currentUser tồn tại và có id, thực hiện lấy thông tin người dùng
-        if (currentUser && currentUser.id) {
-            dispatch(inforUserThunk(currentUser.id));
-        }
-    }, []);
 
-    return(
+    const handleLogout = () => {
+        localStorage.clear();
+        dispatch(logOut());
+        navigate('/');
+    }
+
+    return (
         <>
-            <div className="container-fluid nav-bar bg-transparent">
+            <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`} >
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                     <a href="index.html" className="navbar-brand d-flex align-items-center text-center">
                         <div className="icon p-2 me-2">
                             <img className="img-fluid" src={img} alt="Icon"
-                                 style={{width: "30px", height: "30px"}}/>
+                                 style={{ width: "30px", height: "30px" }} />
                         </div>
                         <h1 className="m-0 text-primary">UHome</h1>
                     </a>
@@ -69,7 +85,7 @@ export default function NavBar(){
                             </div>
                             <a href="contact.html" className="nav-item nav-link">Contact</a>
                         </div>
-                        {(currentUser === null || currentUser === undefined ) ?
+                        {(currentUser === null || currentUser === undefined) ?
                             <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
                             :
                             <div className="nav-item dropdown">
@@ -91,7 +107,6 @@ export default function NavBar(){
                                     <a className="dropdown-item custom-dropdown-item">Property Agent</a>
                                 </div>
                             </div>
-
                         }
                     </div>
                 </nav>
