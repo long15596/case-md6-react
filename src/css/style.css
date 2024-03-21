@@ -1,3 +1,4 @@
+
 /********** Template CSS **********/
 :root {
     --primary: #00B98E;
@@ -260,7 +261,7 @@
 }
 
 
-/*** Property List ***/
+/*** Category List ***/
 .nav-pills .nav-item .btn {
     color: var(--dark);
 }

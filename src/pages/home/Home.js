@@ -1,24 +1,19 @@
-
-import NavBar from "../../components/NavBar";
+import React from 'react';
+import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import {Outlet} from "react-router";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import Category from "../../components/Category";
 
 export default function Home() {
-
-
     return (
         <>
-            <div className="container-fluid">
+            <div className="container-fluid bg-white">
                 <div className="row">
-                    <NavBar></NavBar>
-                </div>
-                <div className="row ">
-                    <Outlet></Outlet>
-                </div>
-                <div className="row">
-                    <Footer></Footer>
+                    <div className="col-12" >
+                        <Navbar/>
+                        <Category/>
+                        <Footer/>
+
+                    </div>
                 </div>
             </div>
         </>

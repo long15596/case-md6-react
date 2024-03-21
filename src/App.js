@@ -16,11 +16,6 @@ function App() {
     })
     return (
         <>
-            <div className="container-fluid">
-                {/*<div className="row">*/}
-                {/*    <NavBar></NavBar>*/}
-                {/*</div>*/}
-                <div className="row">
                     <Routes>
                         <Route path={''} element={<Home />} />
                         <Route path={`login`} element={<Login />} />
@@ -38,11 +33,6 @@ function App() {
                             <Route path={`login`} element={<Login />} />
                         )}
                     </Routes>
-                </div>
-                {/*<div className="row">*/}
-                {/*    <Footer></Footer>*/}
-                {/*</div>*/}
-            </div>
         </>
     );
 }
