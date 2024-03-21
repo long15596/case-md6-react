@@ -57,27 +57,32 @@ export default function Navbar() {
                         <div className="navbar-nav ms-auto">
                             <a href="index.html" className="nav-item nav-link active">Home</a>
                             <a href="about.html" className="nav-item nav-link">About</a>
-                            <div className="nav-item dropdown">
-                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
-                                <div className="dropdown-menu rounded-0 m-0">
-                                    <a href="property-list.html" className="dropdown-item">Property List</a>
-                                    <a href="property-type.html" className="dropdown-item">Property Type</a>
-                                    <a href="property-agent.html" className="dropdown-item">Property Agent</a>
-                                </div>
-                            </div>
-                            <div className="nav-item dropdown">
-                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div className="dropdown-menu rounded-0 m-0">
-                                    <a href="testimonial.html" className="dropdown-item">Testimonial</a>
-                                    <a href="404.html" className="dropdown-item">404 Error</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" className="nav-item nav-link">Contact</a>
+                            {
+                                (currentUser === null || currentUser === undefined) ?
+                                    <div className="nav-item dropdown">
+                                        <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                                        <div className="dropdown-menu rounded-0 m-0">
+                                            <a href="property-list.html" className="dropdown-item">Property List</a>
+                                            <a href="property-type.html" className="dropdown-item">Property Type</a>
+                                            <a href="property-agent.html" className="dropdown-item">Property Agent</a>
+                                        </div>
+                                    </div> :
+                                    <div className="nav-item dropdown">
+                                        <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                        <div className="dropdown-menu rounded-0 m-0">
+                                            <a href="testimonial.html" className="dropdown-item">Hồ Sơ</a>
+                                            <a href="404.html" className="dropdown-item">Đăng Xuất</a>
+                                        </div>
+                                    </div>
+                            }
+
+                            {/*<a href="contact.html" className="nav-item nav-link">Contact</a>*/}
                         </div>
                         {(currentUser === null || currentUser === undefined) ?
                             <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
                             :
                             <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogout}>Logout</button>
+
                         }
                     </div>
                 </nav>

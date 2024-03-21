@@ -4,9 +4,9 @@ import customAxios from "../api";
 export const getUsers = createAsyncThunk(
     'get/Users',
     async () => {
-    let res = await customAxios.get('admin/users');
-    return res.data
-})
+        let res = await customAxios.get('admin/users');
+        return res.data
+    })
 
 export const register = createAsyncThunk(
     'user/register',
@@ -24,7 +24,7 @@ export const login = createAsyncThunk(
         try {
             const res = await customAxios.post(`login`, values)
             return res.data
-        } catch (error){
+        } catch (error) {
             console.log(error)
             throw error
         }
@@ -32,7 +32,8 @@ export const login = createAsyncThunk(
 )
 export const logOut = createAsyncThunk(
     'user/logOut',
-    async () => {}
+    async () => {
+    }
 )
 export const updateUser = createAsyncThunk(
     `user/updateUser`,
