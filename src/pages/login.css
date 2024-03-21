@@ -1,18 +1,24 @@
 #background{
-    height: 50px;
-    width: 160px;
-    margin-left: 858px;
-    border-radius: 29px
+    display: block;
+    width: 410px;
+    height: 56px;
+    text-align: center;
+    margin-left: 747px;
 }
 #header{
     display: flex;
+    margin-top: -17px;
 }
 #icons{
-    width: 100px;
-    height: 100px;
+    width: 13%;
+    height: 44%;
+    margin-left: -35px;
+    margin-top: -20px;
 }
+
 #signIn{
-    margin-left: 97px;
+    margin-left: 113px;
+    margin-top: -19px;
 }
 #hr{
   margin-top:-46px

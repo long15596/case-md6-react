@@ -4,9 +4,8 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import {login} from "../services/user/usersServices";
 import {useNavigate} from "react-router";
 import * as Yup from 'yup';
-import './login.css'
-import img from '../img/cross.png';
-import React from "react";
+import './login.css';
+import React, {useState} from "react";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -23,23 +22,29 @@ const Login = () => {
             .min(6, 'Password must be at least 6 characters')
             .max(32, 'Password must not exceed 32 characters'),
     });
+    let [check, setCheck] = useState(true)
+
     const handleLogin = async (values) => {
         await dispatch(login(values)).then(user => {
             console.log(values);
             console.log("abc", user.payload);
             if (user.payload === undefined) {
-                showError('Wrong Username or Password');
+                showError('Wrong Username or Password Check it out!');
+
             } else {
                 const userRoles = user.payload.roles.map(role => role.authority);
                 if (userRoles.includes("ROLE_USER")) {
                     showSuccess('Login successful');
                     setTimeout(() => {
+                        setCheck(true)
                         hideMessage();
                         navigate(`/`);
                     }, 3000);
                 } else if (userRoles.includes("ROLE_ADMINN")) {
+
                     showSuccess('Login successful');
                     setTimeout(() => {
+                        setCheck(true)
                         hideMessage();
                         navigate(`/admin`);
                     }, 3000);
@@ -50,19 +55,15 @@ const Login = () => {
     const showError = (errorMessage) => {
         const errorElement = document.getElementById(`error-title`);
         errorElement.innerHTML = errorMessage;
-        document.getElementById("background").style.background = 'white';
         errorElement.style.display = 'block';
-        console.log(errorMessage)
+        document.getElementById(`background`).style.display = 'block';
+        setCheck(false)
     };
     const showSuccess = (successMessage) => {
         const successElement = document.getElementById(`error-title`);
         successElement.innerHTML = successMessage;
-        document.getElementById("background").style.background = 'white';
         successElement.style.display = 'block';
-        console.log(successMessage)
-        setTimeout(() => {
-            hideMessage();
-        }, 3000);
+        document.getElementById(`background`).style.display = 'block';
     };
 
     const hideMessage = () => {
@@ -72,22 +73,26 @@ const Login = () => {
 
     return (
         <>
-            <div id={'background'}>
-                <div id={`error-title`} style={{textAlign: "center"}}></div>
+            <div className={`alert ${check ? "alert-success" : "alert-danger"}`} role="alert" id="background"
+                 style={{display: "none"}}>
+                <div id="error-title"></div>
             </div>
 
             <div className="container pt-5 pb-5 mt-5">
                 <div className="row justify-content-center">
-                    <div className="col-4">
+                    <div className="col-4" style={{width: "40.33333%"}}>
                         <div className="card border-0 shadow-sm rounded-4">
                             <div className="card-body p-3 p-md-4 p-xl-5">
                                 <div className="row">
                                     <div className="col-12" id={"header"}>
                                         <div id={"icons"}>
-                                            <Link to={'/'}><img src={img} alt=""/></Link>
+                                            <Link to={'/'} className={`btn-close`} aria-label={`Close`}></Link>
                                         </div>
                                         <div className="mb-5" id={"signIn"}>
-                                            <h3>Sign In</h3>
+                                            <h3 style={{
+                                                marginLeft: "13px",
+                                                marginTop: "0px"
+                                            }}>Sign In</h3>
                                         </div>
                                     </div>
                                     <hr id={"hr"}/>
@@ -153,7 +158,7 @@ const Login = () => {
                                         <div
                                             className="d-flex gap-2 gap-md-4 justify-content-center">
                                             <Link to={'/register'} className="link-secondary text-decoration-none"
-                                                >Register
+                                            >Register
                                                 Here</Link>
                                         </div>
                                     </div>

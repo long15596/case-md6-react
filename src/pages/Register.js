@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {Field, Form, Formik, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
 import {register} from '../services/user/usersServices';
-import img from "../img/cross.png";
 import './login.css'
 
 export default function Register() {
@@ -32,38 +31,74 @@ export default function Register() {
         phone: Yup.string().required('Phone is required'),
     });
 
-    const handleRegister = (values) => {
+    const [check, setCheck] = useState(true);
+
+    const handleRegister = async (values) => {
         dispatch(register({values})).then((x) => {
             console.log(x);
-            if (x.payload === undefined) {
-                navigate('/register');
-            } else if (x.payload.username !== undefined) {
-                navigate('/login');
-            } else {
-                navigate('/register');
+            if (x.payload.username === undefined) {
+                showErr("Username Exited PLease Change");
+                navigate("/register")
+            } else{
+                showSuccess("Register successful");
+                setTimeout(() => {
+                    hideMessage();
+                    navigate('/login');
+                }, 3000);
             }
         });
     };
 
-    return (<>
+    const showSuccess = (mess) => {
+        const a = document.getElementById("error-title");
+        if (a) {
+            a.innerHTML = mess;
+            a.style.display = "block";
+            document.getElementById(`background`).style.display = "block";
+            setCheck(true);
+        }
+    };
+
+    const showErr = (mess) => {
+        const errs = document.getElementById("error-title");
+        if (errs) {
+            errs.innerHTML = mess;
+            errs.style.display = "block";
+            document.getElementById(`background`).style.display = "block";
+            setCheck(false);
+        }
+    };
+
+    const hideMessage = () => {
+        const homes = document.getElementById(`background`);
+        const err = document.getElementById("error-title");
+        if (homes && err) {
+            homes.style.display = 'none';
+            err.style.display = "none";
+        }
+    };
+
+    return (
+        <>
+            <div className={`alert ${check ? "alert-success" : "alert-danger"}`} role="alert" id="background"
+                 style={{display: "none"}}>
+                <div id="error-title"></div>
+            </div>
             <div className="container pt-5 pb-5">
-                <div>
-                    {err}
-                </div>
                 <div className="row justify-content-center">
-                    <div className="col-4">
+                    <div className="col-4" style={{width: "40.33333%"}}>
                         <div className="card border-0 shadow-sm rounded-4">
                             <div className="card-body p-3 p-md-4 p-xl-5">
                                 <div className="row">
                                     <div className="col-12" id={"header"}>
-                                        <div id={"icons"} >
-                                            <Link to={'/'}><img src={img} alt=""/></Link>
+                                        <div id={"icons"}>
+                                            <Link to={'/'} className={`btn-close`} aria-label={`Close`}></Link>
                                         </div>
                                         <div className="mb-5" id={"signIn"}>
                                             <h3>Register</h3>
                                         </div>
                                     </div>
-                                    <hr id={"hr"} />
+                                    <hr id={"hr"}/>
                                 </div>
                                 <Formik
                                     initialValues={{
@@ -181,7 +216,7 @@ export default function Register() {
                                         <hr className="mt-5 mb-4 border-secondary-subtle"/>
                                         <div
                                             className="d-flex gap-2 gap-md-4 justify-content-center">
-                                            <Link to={'/login'} className="link-secondary text-decoration-none" >Login
+                                            <Link to={'/login'} className="link-secondary text-decoration-none">Login
                                                 here</Link>
                                             {/*<a href="#!" className="link-secondary text-decoration-none">Forgot*/}
                                             {/*    password</a>*/}

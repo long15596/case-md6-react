@@ -1,5 +1,5 @@
 
-import NavBar from "../../components/NavBar";
+import Navbar from "../../components/Navbar";
 import React from "react";
 import {Outlet} from "react-router";
 
@@ -8,7 +8,7 @@ export default function Admin() {
         <>
             <div className="container-fluid">
                 <div className="row">
-                    <NavBar></NavBar>
+                    <Navbar></Navbar>
                 </div>
                 <div className="row">
                     <div className="offset-2 col-10 pt-5">
