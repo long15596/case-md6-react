@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { logOut } from "../services/user/usersServices";
+import {getUsers, logOut} from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
 import '../css/style.css'
-
+import './Navbar.css'
 export default function Navbar() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -15,6 +15,7 @@ export default function Navbar() {
     const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
+        dispatch(getUsers())
         function handleScroll() {
             if (window.scrollY > 0) {
                 setIsSticky(true);
@@ -27,7 +28,17 @@ export default function Navbar() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+    let users = useSelector(state => {
+        if (currentUser !== null && currentUser !== undefined) {
+            let filteredUsers = state.users.users.filter((user) => user.id == currentUser.id);
 
+            if (filteredUsers.length > 0) {
+                return filteredUsers[0]; // Trả về user đầu tiên trong mảng đã lọc
+            }
+        }
+        return null; // Trả về null nếu không có user nào phù hợp hoặc currentUser là null/undefined
+    });
+    console.log(users);
     const handleLogin = () => {
         navigate('/login');
     };
@@ -40,6 +51,7 @@ export default function Navbar() {
 
     return (
         <>
+
             <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`} >
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                     <a href="index.html" className="navbar-brand d-flex align-items-center text-center">
@@ -83,7 +95,9 @@ export default function Navbar() {
                             :
                             <div className="nav-item dropdown">
                                 <a>
-                                    <img src={"#"} alt="Avatar" className="avatar"  />
+                                    {users && (
+                                        <img src={users.avatar} alt="Avatar" className="avatar" />
+                                    )}
                                 </a>
                                 <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
