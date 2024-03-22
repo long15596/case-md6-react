@@ -8,6 +8,7 @@ import UserProfile from "./pages/user/UserProfile";
 import {useSelector} from "react-redux";
 import Admin from "./pages/admin/Admin";
 import UserTable from "./pages/admin/UserTable";
+import UpdateProfile from "./pages/user/UpdateProfile";
 
 function App() {
     let currentUser = useSelector(state => {
@@ -20,6 +21,7 @@ function App() {
                         <Route path={''} element={<Home />} />
                         <Route path={`login`} element={<Login />} />
                         <Route path={"register"} element={<Register />} />
+                        <Route path={"update/:id"} element={<UpdateProfile/>}></Route>
                         {currentUser && currentUser.roles ? (
                             currentUser.roles[0].authority === "ROLE_ADMINN" ? (
                                 <Route path={`admin`} element={<Admin />}>
