@@ -10,6 +10,7 @@ import Admin from "./pages/admin/Admin";
 import UserTable from "./pages/admin/UserTable";
 import UpdateProfile from "./pages/user/UpdateProfile";
 import User from "./pages/user/User";
+import UserDetail from "./pages/user/UserDetail";
 
 function App() {
     let currentUser = useSelector(state => {
@@ -31,7 +32,7 @@ function App() {
                         ) : currentUser.roles[0].authority === "ROLE_USER" ? (
                             <Route path={`user`} element={<User/>}>
                                 <Route path={''} element={<Home></Home>}></Route>
-                                <Route path={'edit/:id'} element={<UpdateProfile></UpdateProfile>}></Route>
+                                <Route path={'edit/:id'} element={<UserDetail></UserDetail>}></Route>
                             </Route>
                         ) : (
                             <Route path={``} element={<Home/>}/>
