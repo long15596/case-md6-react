@@ -27,12 +27,9 @@ let usersSlice = createSlice({
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentUser = action.payload
             localStorage.setItem('currentUser', JSON.stringify(action.payload));
-            inforUserThunk(action.payload.id);;
+
         });
-        builder.addCase(inforUser.fulfilled, (state, action) => {
-            console.log(state);
-            state.users = action.payload;
-        });
+
         builder.addCase(register.fulfilled, (state, action) => {
             if (action.payload.username === undefined) {
                 state.error = action.payload
@@ -48,12 +45,5 @@ let usersSlice = createSlice({
         })
     }
 })
-export const inforUserThunk = (id) => async dispatch => {
-    try {
-        await dispatch(inforUser({ id }));
-    } catch (error) {
-        console.error('Error fetching user information:', error);
-    }
-};
-export const { reducer, actions } = usersSlice;
+
 export default usersSlice.reducer

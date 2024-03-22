@@ -30,13 +30,7 @@ export const login = createAsyncThunk(
         }
     }
 )
-export const inforUser = createAsyncThunk(
-    `user/inforUser`,
-    async ({ id, values }) => {
-        const response = await customAxios.get(`users/${id}`, values);
-        return response.data; // Trả về dữ liệu thực tế từ phản hồi
-    }
-);
+
 export const logOut = createAsyncThunk(
     'user/logOut',
     async () => {}

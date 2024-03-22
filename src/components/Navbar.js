@@ -5,8 +5,8 @@ import React, { useState, useEffect } from "react";
 import img from '../img/icon-deal.png'
 
 import "./Navbar.css"
-import {inforUserThunk} from "../redux/user/usersSlice";
-
+// import {inforUserThunk} from "../redux/user/usersSlice";
+import '../css/style.css'
 
 export default function Navbar() {
     let navigate = useNavigate();
@@ -14,9 +14,6 @@ export default function Navbar() {
 
     let currentUser = useSelector(state => {
         return state.users.currentUser
-    })
-    let user = useSelector(state => {
-        return state.users.users
     })
 
     const [isSticky, setIsSticky] = useState(false);
@@ -29,9 +26,9 @@ export default function Navbar() {
                 setIsSticky(false);
             }
         }
-        if (currentUser && currentUser.id) {
-            dispatch(inforUserThunk(currentUser.id));
-        }
+        // if (currentUser && currentUser.id) {
+        //     dispatch(inforUserThunk(currentUser.id));
+        // }
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -90,7 +87,7 @@ export default function Navbar() {
                             :
                             <div className="nav-item dropdown">
                                 <a>
-                                    <img src={user.avatar} alt="Avatar" className="avatar"  />
+                                    <img src={"#"} alt="Avatar" className="avatar"  />
                                 </a>
                                 <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
