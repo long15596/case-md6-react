@@ -15,7 +15,7 @@ export default function UpdateProfile() {
         return state.users.users.filter(user => user.id == id)
     })
 
-    let [urls, setUrls] = useState('')
+    let [urls, setUrls] = useState(users[0].avatar)
 
     const validationSchema = Yup.object().shape({
         username: Yup.string()
@@ -37,17 +37,15 @@ export default function UpdateProfile() {
                         validationSchema={validationSchema}
                         onSubmit={values => {
                             values = {...values, avatar: urls}
-                            console.log(values)
                             handleUpdate(users[0].id, values)
                         }} enableReinitialize={true}>
                         <Form>
                             <div className="card">
                                 <div className="card-body">
                                     <div className="d-flex flex-column align-items-center text-center">
-                                        <img src={users[0].avatar} alt="user-avatar" className="rounded-circle"/>
+                                        <img src={urls} alt="user-avatar" className="rounded-circle"/>
                                         <div className="mt-3">
                                             <FileUpload onUpload={(uploadedUrls) => {
-                                                console.log(uploadedUrls[0])
                                                 setUrls(uploadedUrls[0])
                                                 console.log(urls)
                                             }}></FileUpload>

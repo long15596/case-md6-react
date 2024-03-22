@@ -8,7 +8,6 @@ export default function UserProfile() {
     let {id} = useParams();
     let dispatch = useDispatch()
     let users = useSelector(state => {
-        console.log(state)
         if (!state.users.users || state.users.users.length === 0) {
             return [];
         }
