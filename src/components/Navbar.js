@@ -31,12 +31,11 @@ export default function Navbar() {
     let users = useSelector(state => {
         if (currentUser !== null && currentUser !== undefined) {
             let filteredUsers = state.users.users.filter((user) => user.id == currentUser.id);
-
             if (filteredUsers.length > 0) {
-                return filteredUsers[0]; // Trả về user đầu tiên trong mảng đã lọc
+                return filteredUsers[0];
             }
         }
-        return null; // Trả về null nếu không có user nào phù hợp hoặc currentUser là null/undefined
+        return null;
     });
     console.log(users);
     const handleLogin = () => {
@@ -87,8 +86,6 @@ export default function Navbar() {
                                         </div>
                                     </div>
                             }
-
-                            {/*<a href="contact.html" className="nav-item nav-link">Contact</a>*/}
                         </div>
                         {(currentUser === null || currentUser === undefined) ?
                             <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
@@ -108,7 +105,7 @@ export default function Navbar() {
                                     </div>
                                     <div className="dropdown-item custom-dropdown-item"> <div>
                                         <i className="bi bi-person-circle"></i>
-                                        Edit Profile
+                                        Profile
                                         </div>
                                     </div>
                                     <a className="dropdown-item custom-dropdown-item">Property Agent</a>
