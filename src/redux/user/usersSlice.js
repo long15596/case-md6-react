@@ -1,14 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {
-    getUsers,
-    register,
-    login,
-    logOut,
-    edit,
-    updateUser,
-    setUser,
-    getOneUser
-} from "../../services/user/usersServices";
+import {getUsers, register, login, logOut, updateUser} from "../../services/user/usersServices";
 let localStorageUser = () => {
     if (JSON.parse(localStorage.getItem(`currentUser`))) {
         return JSON.parse(localStorage.getItem(`currentUser`))
@@ -48,7 +39,6 @@ let usersSlice = createSlice({
                 state.users[updatedUserIndex] = action.payload;
             }
         })
-
     }
 })
 export default usersSlice.reducer

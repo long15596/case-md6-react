@@ -26,8 +26,6 @@ const Login = () => {
 
     const handleLogin = async (values) => {
         await dispatch(login(values)).then(user => {
-            console.log(values);
-            console.log("abc", user.payload);
             if (user.payload === undefined) {
                 showError('Wrong Username or Password Check it out!');
 
@@ -118,6 +116,7 @@ const Login = () => {
                                                         component="div"
                                                         className="text-danger"
                                                     />
+                                                    <p id={`error-title`}></p>
                                                 </div>
                                             </div>
                                             <div className="col-12">
@@ -160,6 +159,8 @@ const Login = () => {
                                             <Link to={'/register'} className="link-secondary text-decoration-none"
                                             >Register
                                                 Here</Link>
+                                            <Link href="#!" className="link-secondary text-decoration-none">Forgot
+                                                password</Link>
                                         </div>
                                     </div>
                                 </div>

@@ -1,0 +1,37 @@
+/* CSS cho phần dropdown-menu */
+.custom-dropdown-menu {
+    /*position: absolute; !* Đảm bảo dropdown-menu được hiển thị đúng vị trí *!*/
+    left: -100px; /* Căn chỉnh dropdown sang bên trái */
+    top: -100px;
+    margin: 0; /* Xóa margin */
+    border-radius: 0; /* Xóa viền tròn */
+}
+
+/* CSS cho các mục dropdown-item */
+.custom-dropdown-itemm {
+    padding: 0; /* Xóa padding */
+    border-bottom: 1px solid #ccc; /* Thêm border dưới mỗi mục */
+}
+
+/* CSS cho biểu tượng và văn bản trong mỗi mục dropdown-item */
+.custom-dropdown-item div {
+    display: flex; /* Sử dụng flexbox để căn chỉnh biểu tượng và văn bản */
+    align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
+    padding: 8px 16px; /* Thêm padding cho mỗi mục */
+}
+
+/* CSS cho biểu tượng trong mỗi mục dropdown-item */
+.custom-dropdown-item i {
+    margin-right: 8px; /* Khoảng cách giữa biểu tượng và văn bản */
+    font-size: 20px;
+}
+/* Khi hover trên mục dropdown-item */
+.custom-dropdown-item:hover {
+    background-color: #f5f5f5; /* Màu nền khi hover */
+}
+.avatar {
+    width: 40px; /* Đặt kích thước avatar */
+    height: 40px;
+    border-radius: 50%; /* Làm tròn góc */
+    object-fit: cover; /* Đảm bảo ảnh sẽ được fill đầy vào kích thước của thẻ */
+}
