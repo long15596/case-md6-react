@@ -30,6 +30,7 @@ export const login = createAsyncThunk(
         }
     }
 )
+
 export const logOut = createAsyncThunk(
     'user/logOut',
     async () => {

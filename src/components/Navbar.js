@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import {getUsers, logOut} from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
 import '../css/style.css'
-
+import './Navbar.css'
 export default function Navbar() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -12,13 +12,10 @@ export default function Navbar() {
         return state.users.currentUser
     })
 
-    let user = useSelector(state => {
-        return state.users.user
-    })
-    console.log(user)
     const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
+        dispatch(getUsers())
         function handleScroll() {
             if (window.scrollY > 0) {
                 setIsSticky(true);
@@ -31,7 +28,17 @@ export default function Navbar() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+    let users = useSelector(state => {
+        if (currentUser !== null && currentUser !== undefined) {
+            let filteredUsers = state.users.users.filter((user) => user.id == currentUser.id);
 
+            if (filteredUsers.length > 0) {
+                return filteredUsers[0]; // Trả về user đầu tiên trong mảng đã lọc
+            }
+        }
+        return null; // Trả về null nếu không có user nào phù hợp hoặc currentUser là null/undefined
+    });
+    console.log(users);
     const handleLogin = () => {
         navigate('/login');
     };
@@ -83,17 +90,29 @@ export default function Navbar() {
                             {/*<a href="contact.html" className="nav-item nav-link">Contact</a>*/}
                         </div>
                         {(currentUser === null || currentUser === undefined) ?
-                            <>
-                                <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login
-                                </button>
-                            </>
+                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
                             :
-                            <>
-                                <button className="btn btn-primary px-3 d-none d-lg-flex"
-                                        onClick={handleLogout}>Logout
-                                </button>
-                                {/*<p>{user.id}</p>*/}
-                            </>
+                            <div className="nav-item dropdown">
+                                <a>
+                                    {users && (
+                                        <img src={users.avatar} alt="Avatar" className="avatar" />
+                                    )}
+                                </a>
+                                <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
+                                    <div className="dropdown-item custom-dropdown-item">
+                                        <div onClick={handleLogout}>
+                                            <i className="bi bi-box-arrow-in-left"></i>
+                                            Logout
+                                        </div>
+                                    </div>
+                                    <div className="dropdown-item custom-dropdown-item"> <div>
+                                        <i className="bi bi-person-circle"></i>
+                                        Edit Profile
+                                        </div>
+                                    </div>
+                                    <a className="dropdown-item custom-dropdown-item">Property Agent</a>
+                                </div>
+                            </div>
                         }
                     </div>
                 </nav>

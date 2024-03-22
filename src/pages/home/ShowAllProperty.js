@@ -48,12 +48,12 @@ export default function ShowAllProperty() {
                                                 <div className="position-relative overflow-hidden">
                                                     <a href=""><img className="img-fluid" src="img/property-1.jpg" alt=""/></a>
                                                     <div className="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
-                                                    <div className="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{item.category.name}</div>
+                                                    <div className="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{item.category && item.category.name}</div>
                                                 </div>
                                                 <div className="p-4 pb-0">
                                                     <h5 className="text-primary mb-3">{item.price}$</h5>
                                                     <a className="d-block h5 mb-2" href="">{item.name}</a>
-                                                    <p><i className="fa fa-map-marker-alt text-primary me-2"></i>{item.location.name}</p>
+                                                    <p><i className="fa fa-map-marker-alt text-primary me-2"></i>{item.location && item.location.name}</p>
                                                 </div>
                                                 <div className="d-flex border-top">
                                                     <small className="flex-fill text-center border-end py-2"><i
