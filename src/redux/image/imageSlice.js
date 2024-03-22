@@ -1,0 +1,4 @@
+let initialState = {
+    images: [],
+    error: '',
+}

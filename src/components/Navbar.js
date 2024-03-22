@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { logOut } from "../services/user/usersServices";
+import {getUsers, logOut} from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
 import '../css/style.css'
 
@@ -12,6 +12,10 @@ export default function Navbar() {
         return state.users.currentUser
     })
 
+    let user = useSelector(state => {
+        return state.users.user
+    })
+    console.log(user)
     const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
@@ -79,10 +83,17 @@ export default function Navbar() {
                             {/*<a href="contact.html" className="nav-item nav-link">Contact</a>*/}
                         </div>
                         {(currentUser === null || currentUser === undefined) ?
-                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
+                            <>
+                                <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login
+                                </button>
+                            </>
                             :
-                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogout}>Logout</button>
-
+                            <>
+                                <button className="btn btn-primary px-3 d-none d-lg-flex"
+                                        onClick={handleLogout}>Logout
+                                </button>
+                                {/*<p>{user.id}</p>*/}
+                            </>
                         }
                     </div>
                 </nav>

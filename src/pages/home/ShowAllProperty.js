@@ -10,7 +10,6 @@ export default function ShowAllProperty() {
     useEffect(() => {
         dispatch(getProperties())
     }, [])
-    console.log(properties)
     return(
         <>
             <div className="container-xxl py-5">
