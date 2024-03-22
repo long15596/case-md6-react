@@ -1,26 +1,43 @@
 import './UserProfile.css'
-import {useNavigate, useParams} from "react-router";
-import {useSelector} from "react-redux";
-import React from "react";
+import {useParams} from "react-router";
+import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect} from "react";
+import { getUsers} from "../../services/user/usersServices";
+
 export default function UserProfile() {
     let {id} = useParams();
-
-    let navigate = useNavigate()
-
+    let dispatch = useDispatch()
     let users = useSelector(state => {
-        return state.users.users.filter(user => user.id === id)
-    })
+        console.log(state)
+        if (!state.users.users || state.users.users.length === 0) {
+            return [];
+        }
+        return state.users.users.filter((user) => {
+            if (user) {
+                return user.id == id
+            }
+        });
+    });
+    useEffect(() => {
+        if (users === null || users.length === 0) {
+           dispatch(getUsers())
+        }
+    }, []);
 
-    let handleClickShowUpdate = () => {
-
+    if (!users || users.length === 0) {
+        return <div>Loading...</div>;
     }
+
     return (
         <>
             <div className="row gutters-sm">
                 <div className="offset-2 col-md-4 mb-3">
-                    <div className="card">
+                    <div className="card" style={{height: "280px"}}>
                         <div className="card-body">
-                            <div className="d-flex flex-column align-items-center text-center">
+                            <div className="d-flex flex-column align-items-center text-center" style={{
+                                width: "374px",
+                                height: "359px"
+                            }}>
                                 <img src={users[0].avatar} alt="Admin"
                                      className="rounded-circle"/>
                                 <div className="mt-3">
@@ -84,7 +101,11 @@ export default function UserProfile() {
                                     <hr/>
                                     <div className="row">
                                         <div className="col-sm-12">
-                                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleClickShowUpdate}>Edit Profile</button>
+                                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={() => {
+
+                                            }}>Edit Profile
+                                            </button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -97,7 +118,8 @@ export default function UserProfile() {
                     <div className="navbar">
                         <a className="navbar-brand">Lịch sử thuê nhà</a>
                         <form className="form-inline">
-                            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <input className="form-control mr-sm-2" type="search" placeholder="Search"
+                                   aria-label="Search"/>
                             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </div>

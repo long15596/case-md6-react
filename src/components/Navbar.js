@@ -1,17 +1,13 @@
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate, useParams} from "react-router";
-import {logOut} from "../services/user/usersServices";
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { logOut } from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
-
-import "./Navbar.css"
-// import {inforUserThunk} from "../redux/user/usersSlice";
 import '../css/style.css'
 
 export default function Navbar() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
-
     let currentUser = useSelector(state => {
         return state.users.currentUser
     })
@@ -26,9 +22,6 @@ export default function Navbar() {
                 setIsSticky(false);
             }
         }
-        // if (currentUser && currentUser.id) {
-        //     dispatch(inforUserThunk(currentUser.id));
-        // }
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -38,7 +31,6 @@ export default function Navbar() {
     const handleLogin = () => {
         navigate('/login');
     };
-
 
     const handleLogout = () => {
         localStorage.clear();
@@ -65,22 +57,26 @@ export default function Navbar() {
                         <div className="navbar-nav ms-auto">
                             <a href="index.html" className="nav-item nav-link active">Home</a>
                             <a href="about.html" className="nav-item nav-link">About</a>
-                            <div className="nav-item dropdown">
-                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
-                                <div className="dropdown-menu rounded-0 m-0">
-                                    <a className="dropdown-item">Property List</a>
-                                    <a className="dropdown-item">Property Type</a>
-                                    <a className="dropdown-item">Property Agent</a>
-                                </div>
-                            </div>
-                            <div className="nav-item dropdown">
-                                <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div className="dropdown-menu rounded-0 m-0">
-                                    <a href="testimonial.html" className="dropdown-item">Testimonial</a>
-                                    <a href="404.html" className="dropdown-item">404 Error</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" className="nav-item nav-link">Contact</a>
+                            {
+                                (currentUser === null || currentUser === undefined) ?
+                                    <div className="nav-item dropdown">
+                                        <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                                        <div className="dropdown-menu rounded-0 m-0">
+                                            <a href="property-list.html" className="dropdown-item">Property List</a>
+                                            <a href="property-type.html" className="dropdown-item">Property Type</a>
+                                            <a href="property-agent.html" className="dropdown-item">Property Agent</a>
+                                        </div>
+                                    </div> :
+                                    <div className="nav-item dropdown">
+                                        <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                        <div className="dropdown-menu rounded-0 m-0">
+                                            <a href="testimonial.html" className="dropdown-item">Hồ Sơ</a>
+                                            <a href="404.html" className="dropdown-item">Đăng Xuất</a>
+                                        </div>
+                                    </div>
+                            }
+
+                            {/*<a href="contact.html" className="nav-item nav-link">Contact</a>*/}
                         </div>
                         {(currentUser === null || currentUser === undefined) ?
                             <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>

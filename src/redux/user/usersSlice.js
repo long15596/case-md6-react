@@ -1,7 +1,5 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {getUsers, register, login, logOut, updateUser, inforUser} from "../../services/user/usersServices";
-
-
+import {createSlice} from "@reduxjs/toolkit";
+import {getUsers, register, login, logOut, updateUser} from "../../services/user/usersServices";
 let localStorageUser = () => {
     if (JSON.parse(localStorage.getItem(`currentUser`))) {
         return JSON.parse(localStorage.getItem(`currentUser`))
@@ -13,7 +11,6 @@ let initialState = {
     users: [],
     error: '',
 }
-
 let usersSlice = createSlice({
     name: 'user',
     initialState,
@@ -26,10 +23,9 @@ let usersSlice = createSlice({
         });
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentUser = action.payload
-            localStorage.setItem('currentUser', JSON.stringify(action.payload));
-
+            console.log(action.payload)
+            localStorage.setItem('currentUser', JSON.stringify(action.payload))
         });
-
         builder.addCase(register.fulfilled, (state, action) => {
             if (action.payload.username === undefined) {
                 state.error = action.payload
@@ -45,5 +41,4 @@ let usersSlice = createSlice({
         })
     }
 })
-
 export default usersSlice.reducer
