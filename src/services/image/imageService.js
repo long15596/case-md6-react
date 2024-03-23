@@ -11,7 +11,7 @@ export const getImages = createAsyncThunk(
 export const addImages = createAsyncThunk(
     `images/createImages`,
     async ({values}) =>{
-        let res = await customAxios.post(`images`, values)
+        await customAxios.post(`images`, values);
         return values
     }
 )

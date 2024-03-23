@@ -14,7 +14,6 @@ import PropertyDetail from "./pages/property/PropertyDetail";
 
 function App() {
     let currentUser = useSelector(state => {
-        console.log(state.users.currentUser !== null)
         return state.users.currentUser
     })
     return (
@@ -24,7 +23,7 @@ function App() {
                 <Route path={`login`} element={<Login/>}/>
                 <Route path={"register"} element={<Register/>}/>
                 {currentUser && currentUser.roles ? (
-                    currentUser.roles[0].authority === "ROLE_ADMINN" ? (
+                    currentUser.roles[0].authority === "ROLE_ADMIN" ? (
                         <Route path={`admin`} element={<Admin/>}>
                             <Route path={''} element={<UserTable></UserTable>}/>
                             <Route path={`user/:id`} element={<UserProfile/>}/>
@@ -37,10 +36,9 @@ function App() {
                 )}
                 <Route path={`createProperty`} element={<CreateForm/>}/>
                 <Route path={`userDetail`} element={<UserDetail/>}/>
-                <Route path={`propertyDetail`} element={<PropertyDetail/>}/>
+                <Route path={`propertyDetail/:id`} element={<PropertyDetail/>}/>
             </Routes>
         </>
     );
 }
-
 export default App;

@@ -1,6 +1,9 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getProperties} from "../../services/property/propertyService";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBath, faBed, faMapLocationDot, faMountainCity, faTv} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 
 export default function ShowAllProperty() {
     const dispatch = useDispatch();
@@ -10,7 +13,6 @@ export default function ShowAllProperty() {
     useEffect(() => {
         dispatch(getProperties())
     }, [])
-    console.log(properties)
     return(
         <>
             <div className="container-xxl py-5">
@@ -39,32 +41,28 @@ export default function ShowAllProperty() {
                         </div>
                     </div>
                     <div className="tab-content">
-
                         <div id="tab-1" className="tab-pane fade show p-0 active">
                             <div className="row g-4">
                                 {
-                                    properties.map((item) => (
-                                        <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                            <div className="property-item rounded overflow-hidden">
+                                    properties.map((property) => (
+                                        <div  className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                            <Link to={`propertyDetail/${property.id}`} className="property-item rounded overflow-hidden">
                                                 <div className="position-relative overflow-hidden">
-                                                    <a href=""><img className="img-fluid" src="img/property-1.jpg" alt=""/></a>
+                                                    <div><img className="img-fluid" src="img/property-1.jpg" alt=""/></div>
                                                     <div className="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
-                                                    <div className="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{item.category && item.category.name}</div>
+                                                    <div className="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{property.category && property.category.name}</div>
                                                 </div>
                                                 <div className="p-4 pb-0">
-                                                    <h5 className="text-primary mb-3">{item.price}$</h5>
-                                                    <a className="d-block h5 mb-2" href="">{item.name}</a>
-                                                    <p><i className="fa fa-map-marker-alt text-primary me-2"></i>{item.location && item.location.name}</p>
+                                                    <h5 className="text-primary mb-3"> {property.price}$/ night</h5>
+                                                    <FontAwesomeIcon icon={faMountainCity}/> {property.name}
+                                                    <p><FontAwesomeIcon icon={faMapLocationDot} /> {property.location.name}</p>
                                                 </div>
                                                 <div className="d-flex border-top">
-                                                    <small className="flex-fill text-center border-end py-2"><i
-                                                        className="fa fa-ruler-combined text-primary me-2"></i>{item.livingRoom} Living Room</small>
-                                                    <small className="flex-fill text-center border-end py-2"><i
-                                                        className="fa fa-bed text-primary me-2"></i>{item.bedroom} Bed</small>
-                                                    <small className="flex-fill text-center py-2"><i
-                                                        className="fa fa-bath text-primary me-2"></i>{item.bathroom} Bath</small>
+                                                    <small className="flex-fill text-center border-end py-2"><FontAwesomeIcon icon={faTv} /> {property.livingRoom} Living Room</small>
+                                                    <small className="flex-fill text-center border-end py-2"><FontAwesomeIcon icon={faBed}/> {property.bedroom} Bed</small>
+                                                    <small className="flex-fill text-center py-2"><FontAwesomeIcon icon={faBath} /> {property.bathroom} Bath</small>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         </div>
                                     ))
                                 }
