@@ -28,21 +28,17 @@ const Login = () => {
         await dispatch(login(values)).then(user => {
             if (user.payload === undefined) {
                 showError('Wrong Username or Password Check it out!');
-
             } else {
                 const userRoles = user.payload.roles.map(role => role.authority);
                 if (userRoles.includes("ROLE_USER")) {
                     showSuccess('Login successful');
                     setTimeout(() => {
-                        setCheck(true)
                         hideMessage();
                         navigate(`/`);
                     }, 3000);
                 } else if (userRoles.includes("ROLE_ADMIN")) {
-
                     showSuccess('Login successful');
                     setTimeout(() => {
-                        setCheck(true)
                         hideMessage();
                         navigate(`/admin`);
                     }, 3000);
@@ -62,11 +58,13 @@ const Login = () => {
         successElement.innerHTML = successMessage;
         successElement.style.display = 'block';
         document.getElementById(`background`).style.display = 'block';
+        setCheck(true)
     };
 
     const hideMessage = () => {
         document.getElementById(`error-title`).style.display = 'none';
         document.getElementById("background").style.display = "none"
+        setCheck(true)
     };
 
     return (
