@@ -3,14 +3,13 @@
     /*position: absolute; !* Đảm bảo dropdown-menu được hiển thị đúng vị trí *!*/
     left: -100px; /* Căn chỉnh dropdown sang bên trái */
     top: -100px;
-    margin: 0; /* Xóa margin */
-    border-radius: 0; /* Xóa viền tròn */
+    margin: 0;
+    border-radius: 0;
 }
 
-/* CSS cho các mục dropdown-item */
 .custom-dropdown-itemm {
-    padding: 0; /* Xóa padding */
-    border-bottom: 1px solid #ccc; /* Thêm border dưới mỗi mục */
+    padding: 0;
+    border-bottom: 1px solid #ccc;
 }
 
 /* CSS cho biểu tượng và văn bản trong mỗi mục dropdown-item */
@@ -30,8 +29,51 @@
     background-color: #f5f5f5; /* Màu nền khi hover */
 }
 .avatar {
-    width: 40px; /* Đặt kích thước avatar */
+    width: 40px;
     height: 40px;
-    border-radius: 50%; /* Làm tròn góc */
-    object-fit: cover; /* Đảm bảo ảnh sẽ được fill đầy vào kích thước của thẻ */
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.custom1 {
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #ffffff;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.custom1:hover {
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+}
+
+.custom1 i {
+    font-size: 24px;
+    color: #000000;
+}
+
+.custom1 .dropdown-menu {
+    position: absolute;
+    top: 64px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom1 .dropdown-menu a {
+    display: block;
+    padding-left: 20px;
+    color: #000000;
+    text-decoration: none;
+
+}
+
+.custom1 .dropdown-menu a:hover {
+    background-color: #f1f1f1;
 }

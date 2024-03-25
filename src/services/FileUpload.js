@@ -25,36 +25,38 @@ function FileUpload({onUpload}) {
             setFiles(selectedFiles);
         }
     };
-    const handleUpload = () => {
-        files.forEach((file) => {
+    const handleUpload = async () => {
+        let uploadedUrls = [];
+        for (const file of files) {
             const storageRef = ref(storage, `files/${file.name}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
-            uploadTask.on(
-                'state_changed',
-                (snapshot) => {
-                    const progress = Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    setProgress(progress);
-                },
-                (error) => {
-                    console.log(error);
-                },
-                () => {
-                    getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                        setFileUrls(prevUrls => [...prevUrls, url]);
-                        onUpload(fileUrls)
-                    });
-                }
-            );
-        })
+            await new Promise((resolve, reject) => {
+                uploadTask.on(
+                    'state_changed',
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        setProgress(progress);
+                    },
+                    reject,
+                    () => {
+                        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                            uploadedUrls.push(url);
+                            resolve();
+                        }).catch(reject);
+                    }
+                );
+            });
+        }
+        setFileUrls(uploadedUrls);
+        onUpload(uploadedUrls);
     };
     return (
         <>
-            <div className="input-group">
-                <input type="file" className="form-control" id="inputGroupFile04"
-                       aria-describedby="inputGroupFileAddon04" aria-label="Upload" onChange={handleChange} multiple/>
-                <button className="btn btn-primary px-3 d-none d-lg-flex" type="button" id="inputGroupFileAddon04" onClick={handleUpload}>Upload</button>
-            </div>
-            <div>{progress}% Uploaded</div>
+            <input type="file" className="form-control" id="inputGroupFile04"
+                   aria-describedby="inputGroupFileAddon04" aria-label="Upload" onChange={handleChange} multiple style={{width:" 304px",
+                marginLeft: "133px"}}/>
+            <div style={{marginTop:"20px" , marginBottom:"20px"}}>{progress}% Uploaded</div>
+            <button className="btn btn-primary" type="button" onClick={handleUpload}>Upload new image</button>
         </>
     );
 }

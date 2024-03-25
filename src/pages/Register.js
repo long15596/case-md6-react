@@ -10,7 +10,6 @@ export default function Register() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const err = useSelector((state) => {
-        console.log(state.users.error);
         return state.users.error;
     });
 
@@ -35,7 +34,6 @@ export default function Register() {
 
     const handleRegister = async (values) => {
         dispatch(register({values})).then((x) => {
-            console.log(x);
             if (x.payload.username === undefined) {
                 showErr("Username Exited PLease Change");
                 navigate("/register")
