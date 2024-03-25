@@ -11,6 +11,7 @@ import UserTable from "./pages/admin/UserTable";
 import CreateForm from "./pages/property/CreateForm";
 import UserDetail from "./pages/user/UserDetail";
 import PropertyDetail from "./pages/property/PropertyDetail";
+import EditForm from "./pages/property/EditForm";
 
 function App() {
     let currentUser = useSelector(state => {
@@ -37,6 +38,7 @@ function App() {
                 <Route path={`createProperty`} element={<CreateForm/>}/>
                 <Route path={`userDetail`} element={<UserDetail/>}/>
                 <Route path={`propertyDetail/:id`} element={<PropertyDetail/>}/>
+                <Route path={`editProperty`} element={<EditForm/>}/>
             </Routes>
         </>
     );

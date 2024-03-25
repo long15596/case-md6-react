@@ -1,5 +1,4 @@
 import './userdetail.css'
-import {Formik} from "formik";
 export default function UserDetail() {
     return(
         <>
