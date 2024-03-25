@@ -43,3 +43,10 @@ export const updateUser = createAsyncThunk(
         return values
     }
 )
+export const getAllUser = createAsyncThunk(
+    'user/getAll',
+    async  ()=>{
+       let res =  await customAxios.get('users');
+        return res.data
+    }
+)

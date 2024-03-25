@@ -8,31 +8,41 @@ import UserProfile from "./pages/user/UserProfile";
 import {useSelector} from "react-redux";
 import Admin from "./pages/admin/Admin";
 import UserTable from "./pages/admin/UserTable";
+import UpdateProfile from "./pages/user/UpdateProfile";
+import User from "./pages/user/User";
+import UserDetail from "./pages/user/UserDetail";
 
 function App() {
     let currentUser = useSelector(state => {
-        console.log(state.users.currentUser !== null)
         return state.users.currentUser
     })
     return (
         <>
-                    <Routes>
-                        <Route path={''} element={<Home />} />
-                        <Route path={`login`} element={<Login />} />
-                        <Route path={"register"} element={<Register />} />
-                        {currentUser && currentUser.roles ? (
-                            currentUser.roles[0].authority === "ROLE_ADMINN" ? (
-                                <Route path={`admin`} element={<Admin />}>
-                                    <Route path={''} element={<UserTable></UserTable>}/>
-                                    <Route path={`user/:id`} element={<UserProfile />} />
-                                </Route>
-                            ) : (
-                                <Route path={``} element={<Home />} />
-                            )
+            <Routes>
+                <Route path={''} element={<Home/>}/>
+                <Route path={`login`} element={<Login/>}/>
+                <Route path={"register"} element={<Register/>}/>
+                {currentUser && currentUser.roles ? (
+                    <>
+                        {currentUser.roles[0].authority === "ROLE_ADMIN" ? (
+                            <Route path={`admin`} element={<Admin/>}>
+                                <Route path={''} element={<UserTable></UserTable>}/>
+                                <Route path={`user/:id`} element={<UserProfile/>}/>
+                            </Route>
+                        ) : currentUser.roles[0].authority === "ROLE_USER" ? (
+                            <Route path={`user`} element={<User/>}>
+                                <Route path={''} element={<Home></Home>}></Route>
+                                <Route path={'edit/:id'} element={<UserDetail></UserDetail>}></Route>
+                            </Route>
                         ) : (
-                            <Route path={`login`} element={<Login />} />
+                            <Route path={``} element={<Home/>}/>
                         )}
-                    </Routes>
+                    </>
+                ) : (
+                    <Route path={`login`} element={<Login/>}/>
+                )}
+            </Routes>
+
         </>
     );
 }

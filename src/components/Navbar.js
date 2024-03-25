@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import {getUsers, logOut} from "../services/user/usersServices";
+import React, {useState, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router";
+import {getAllUser, getUsers, logOut} from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
 import '../css/style.css'
 import './Navbar.css'
@@ -15,7 +15,7 @@ export default function Navbar() {
     const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
-        dispatch(getUsers())
+        dispatch(getAllUser())
         function handleScroll() {
             if (window.scrollY > 0) {
                 setIsSticky(true);
@@ -33,12 +33,11 @@ export default function Navbar() {
             let filteredUsers = state.users.users.filter((user) => user.id == currentUser.id);
 
             if (filteredUsers.length > 0) {
-                return filteredUsers[0]; // Trả về user đầu tiên trong mảng đã lọc
+                return filteredUsers[0];
             }
         }
-        return null; // Trả về null nếu không có user nào phù hợp hoặc currentUser là null/undefined
+        return null;
     });
-    console.log(users);
     const handleLogin = () => {
         navigate('/login');
     };
@@ -51,12 +50,13 @@ export default function Navbar() {
 
     return (
         <>
+
             <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`} >
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                     <a href="index.html" className="navbar-brand d-flex align-items-center text-center">
                         <div className="icon p-2 me-2">
                             <img className="img-fluid" src={img} alt="Icon"
-                                 style={{ width: "30px", height: "30px" }} />
+                                 style={{width: "30px", height: "30px"}}/>
                         </div>
                         <h1 className="m-0 text-primary">UHome</h1>
                     </a>
@@ -71,7 +71,8 @@ export default function Navbar() {
                             {
                                 (currentUser === null || currentUser === undefined) ?
                                     <div className="nav-item dropdown">
-                                        <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                                        <a href="#" className="nav-link dropdown-toggle"
+                                           data-bs-toggle="dropdown">Property</a>
                                         <div className="dropdown-menu rounded-0 m-0">
                                             <a href="property-list.html" className="dropdown-item">Property List</a>
                                             <a href="property-type.html" className="dropdown-item">Property Type</a>
@@ -79,7 +80,8 @@ export default function Navbar() {
                                         </div>
                                     </div> :
                                     <div className="nav-item dropdown">
-                                        <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                        <a href="#" className="nav-link dropdown-toggle"
+                                           data-bs-toggle="dropdown">Pages</a>
                                         <div className="dropdown-menu rounded-0 m-0">
                                             <a href="testimonial.html" className="dropdown-item">Hồ Sơ</a>
                                             <a href="404.html" className="dropdown-item">Đăng Xuất</a>
@@ -87,33 +89,36 @@ export default function Navbar() {
                                     </div>
                             }
 
-                            {/*<a href="contact.html" className="nav-item nav-link">Contact</a>*/}
-                            {(currentUser === null || currentUser === undefined) ?
-                                <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
-                                :
-                                <div className="nav-item dropdown">
-                                    <a>
-                                        {users && (
-                                            <img src={users.avatar} alt="Avatar" className="avatar" />
-                                        )}
-                                    </a>
-                                    <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
-                                        <div className="dropdown-item custom-dropdown-item">
-                                            <div onClick={handleLogout}>
-                                                <i className="bi bi-box-arrow-in-left"></i>
-                                                Logout
-                                            </div>
+                        </div>
+                        {!currentUser ?
+                            <button className="btn btn-primary px-3 d-none d-lg-flex"
+                                    onClick={handleLogin}>Login</button>
+                            :
+                            <div className="nav-item dropdown">
+                                <a>
+                                    {users && (
+                                        <img src={users.avatar} alt="Avatar" className="avatar"/>
+                                    )}
+                                </a>
+                                <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
+                                    <div className="dropdown-item custom-dropdown-item">
+                                        <div onClick={handleLogout}>
+                                            <i className="bi bi-box-arrow-in-left"></i>
+                                            Logout
                                         </div>
-                                        <div className="dropdown-item custom-dropdown-item"> <div>
+                                    </div>
+                                    <div className="dropdown-item custom-dropdown-item">
+                                        <div onClick={()=>{
+                                            navigate(`user/edit/${currentUser.id}`)
+                                        }}>
                                             <i className="bi bi-person-circle"></i>
                                             Edit Profile
                                         </div>
-                                        </div>
-                                        <a className="dropdown-item custom-dropdown-item">Property Agent</a>
                                     </div>
+                                    <a className="dropdown-item custom-dropdown-item">Property Agent</a>
                                 </div>
-                            }
-                        </div>
+                            </div>
+                        }
                     </div>
                 </nav>
             </div>
