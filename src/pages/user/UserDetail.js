@@ -3,17 +3,15 @@ import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import * as Yup from "yup";
-import {getAllUser, getUsers, updateUser} from "../../services/user/usersServices";
+import {getUsers, updateUser} from "../../services/user/usersServices";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import FileUpload from "../../services/FileUpload";
 
 export default function UserDetail() {
     let {id} = useParams();
-    let navigate = useNavigate()
+    let navigate = useNavigate();
     let dispatch = useDispatch();
-
-
-    let [urls, setUrls] = useState('')
+    let [urls, setUrls] = useState('');
     let users = useSelector(state => {
         if (!state.users.users || state.users.users.length === 0) {
             return [];
@@ -26,27 +24,20 @@ export default function UserDetail() {
     });
     useEffect(() => {
         if (users === null || users.length === 0) {
-            dispatch(getUsers())
+            dispatch(getUsers());
         } else {
-            setUrls(users[0].avatar)
+            setUrls(users[0].avatar);
         }
     }, []);
 
-
-    console.log(urls)
-
     const validationSchema = Yup.object().shape({
-        username: Yup.string()
-            .required('Username is required')
-            .matches(/^[A-Z][a-zA-Z0-9]*$/, 'Username must start with an uppercase letter')
-            .min(2, 'Username must be at least 2 characters')
-            .max(32, 'Username must not exceed 32 characters'),
-        phone: Yup.string().required('Phone is required'),
+        username: Yup.string().required('Username is required'),
+        phone: Yup.string().required('Phone is required').matches(/^[0-9]+$/, 'Phone must be a number'),
     });
 
     let handleUpdate = (id, values) => {
         dispatch(updateUser({id, values}));
-        navigate(`/user`);
+        navigate(`/`);
     };
 
     return (
@@ -72,13 +63,14 @@ export default function UserDetail() {
                                         }}/>
                                         <div className="mt-3">
                                             <FileUpload onUpload={(uploadedUrls) => {
-                                                setUrls(uploadedUrls[0]);
+                                                if (uploadedUrls.length === 1) {
+                                                    setUrls(uploadedUrls[0]);
+                                                } else {
+                                                    let lastImageUrl = uploadedUrls[uploadedUrls.length - 1];
+                                                    setUrls(lastImageUrl);
+                                                }
                                             }}/>
                                         </div>
-                                        <div className="small font-italic text-muted mb-4">JPG or PNG no larger than 5
-                                            MB
-                                        </div>
-                                        <button className="btn btn-primary" type="button">Upload new image</button>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +81,7 @@ export default function UserDetail() {
                                         <div className="mb-3">
                                             <label className="small mb-1" htmlFor="inputUsername">Username</label>
                                             <Field className="form-control" id="inputUsername" type="text"
-                                                   placeholder="Enter your username" name={"username"}/>
+                                                   placeholder="Enter your username" name={"username"} readOnly/>
                                             <ErrorMessage
                                                 name="username"
                                                 component="div"
@@ -97,22 +89,22 @@ export default function UserDetail() {
                                             />
                                         </div>
                                         <div className="mb-3">
-                                            <label className="small mb-1" htmlFor="inputUsername">Name</label>
-                                            <Field className="form-control" id="inputUsername" type="text"
-                                                   placeholder="Enter your username" name={"name"}/>
+                                            <label className="small mb-1" htmlFor="inputPhone">Phone</label>
+                                            <Field className="form-control" id="inputPhone" type="text"
+                                                   placeholder="Enter your phone" name={"phone"}/>
                                             <ErrorMessage
-                                                name="name"
+                                                name="phone"
                                                 component="div"
                                                 className="text-danger"
                                             />
                                         </div>
                                         <div className="row gx-3 mb-3">
                                             <div className="col-md-6">
-                                                <label className="small mb-1" htmlFor="inputFirstName">Phone</label>
+                                                <label className="small mb-1" htmlFor="inputFirstName">Name</label>
                                                 <Field className="form-control" id="inputFirstName" type="text"
-                                                       placeholder="Enter your first name" name={"phone"}/>
+                                                       placeholder="Enter your name" name={"name"}/>
                                                 <ErrorMessage
-                                                    name="phone"
+                                                    name="name"
                                                     component="div"
                                                     className="text-danger"
                                                 />
@@ -120,7 +112,7 @@ export default function UserDetail() {
                                             <div className="col-md-6">
                                                 <label className="small mb-1" htmlFor="inputLastName">Address</label>
                                                 <Field className="form-control" id="inputLastName" type="text"
-                                                       placeholder="Enter your last name" name={"address"}/>
+                                                       placeholder="Enter your address" name={"address"}/>
                                                 <ErrorMessage
                                                     name="address"
                                                     component="div"
@@ -129,6 +121,9 @@ export default function UserDetail() {
                                             </div>
                                         </div>
                                         <button className="btn btn-primary" type="submit">Save changes</button>
+                                        <button className="btn btn-primary" style={{marginLeft:"15px"}} onClick={()=>{
+                                            navigate("/")
+                                        }}>Cancel</button>
                                     </div>
                                 </div>
                             </div>
