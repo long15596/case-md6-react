@@ -51,7 +51,6 @@ export default function Navbar() {
 
     return (
         <>
-
             <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`} >
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                     <a href="index.html" className="navbar-brand d-flex align-items-center text-center">
@@ -89,32 +88,32 @@ export default function Navbar() {
                             }
 
                             {/*<a href="contact.html" className="nav-item nav-link">Contact</a>*/}
-                        </div>
-                        {(currentUser === null || currentUser === undefined) ?
-                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
-                            :
-                            <div className="nav-item dropdown">
-                                <a>
-                                    {users && (
-                                        <img src={users.avatar} alt="Avatar" className="avatar" />
-                                    )}
-                                </a>
-                                <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
-                                    <div className="dropdown-item custom-dropdown-item">
-                                        <div onClick={handleLogout}>
-                                            <i className="bi bi-box-arrow-in-left"></i>
-                                            Logout
+                            {(currentUser === null || currentUser === undefined) ?
+                                <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
+                                :
+                                <div className="nav-item dropdown">
+                                    <a>
+                                        {users && (
+                                            <img src={users.avatar} alt="Avatar" className="avatar" />
+                                        )}
+                                    </a>
+                                    <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
+                                        <div className="dropdown-item custom-dropdown-item">
+                                            <div onClick={handleLogout}>
+                                                <i className="bi bi-box-arrow-in-left"></i>
+                                                Logout
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="dropdown-item custom-dropdown-item"> <div>
-                                        <i className="bi bi-person-circle"></i>
-                                        Edit Profile
+                                        <div className="dropdown-item custom-dropdown-item"> <div>
+                                            <i className="bi bi-person-circle"></i>
+                                            Edit Profile
                                         </div>
+                                        </div>
+                                        <a className="dropdown-item custom-dropdown-item">Property Agent</a>
                                     </div>
-                                    <a className="dropdown-item custom-dropdown-item">Property Agent</a>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                     </div>
                 </nav>
             </div>
