@@ -10,7 +10,8 @@ import Admin from "./pages/admin/Admin";
 import UserTable from "./pages/admin/UserTable";
 import User from "./pages/user/User";
 import UserDetail from "./pages/user/UserDetail";
-import UserProfile1 from "./pages/user/UserProfile1";
+import Password from "./pages/user/Password";
+import React from "react";
 
 function App() {
     let currentUser = useSelector(state => {
@@ -22,7 +23,7 @@ function App() {
                 <Route path={''} element={<Home/>}/>
                 <Route path={`login`} element={<Login/>}/>
                 <Route path={"register"} element={<Register/>}/>
-                <Route path={"hi"} element={<UserProfile1></UserProfile1>}></Route>
+                <Route path={"hi"} element={<Password></Password>}></Route>
                 {currentUser && currentUser.roles ? (
                     <>
                         {currentUser.roles[0].authority === "ROLE_ADMIN" ? (
@@ -43,7 +44,6 @@ function App() {
                     <Route path={`login`} element={<Login/>}/>
                 )}
             </Routes>
-
         </>
     );
 }

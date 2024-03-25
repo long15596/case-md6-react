@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
-import {getAllUser, getUsers, logOut} from "../services/user/usersServices";
+import {getAllUser, logOut} from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
 import '../css/style.css'
 import './Navbar.css'
+import {faKey, faRightFromBracket, faUserTie} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Password from "../pages/user/Password";
+
+
 export default function Navbar() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -16,6 +21,7 @@ export default function Navbar() {
 
     useEffect(() => {
         dispatch(getAllUser())
+
         function handleScroll() {
             if (window.scrollY > 0) {
                 setIsSticky(true);
@@ -23,6 +29,7 @@ export default function Navbar() {
                 setIsSticky(false);
             }
         }
+
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -54,7 +61,7 @@ export default function Navbar() {
     return (
         <>
 
-            <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`} >
+            <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`}>
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                     <a href="index.html" className="navbar-brand d-flex align-items-center text-center">
                         <div className="icon p-2 me-2">
@@ -112,7 +119,7 @@ export default function Navbar() {
                                 <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
                                         <div onClick={handleLogout}>
-                                            <i className="bi bi-box-arrow-in-left"></i>
+                                            <i><FontAwesomeIcon icon={faRightFromBracket} /></i>
                                             Logout
                                         </div>
                                     </div>
@@ -120,17 +127,26 @@ export default function Navbar() {
                                         <div onClick={() => {
                                             navigate(`user/edit/${currentUser.id}`)
                                         }}>
-                                            <i className="bi bi-person-circle"></i>
-                                            Edit Profile
+                                            <i><FontAwesomeIcon icon={faUserTie} /></i>
+                                            Profile
                                         </div>
                                     </div>
-                                    <a className="dropdown-item custom-dropdown-item">Property Agent</a>
+                                    <div className="dropdown-item custom-dropdown-item">
+                                        <div onClick={()=>{
+                                                document.getElementById("idForm").style.display= "block"
+                                        }}>
+                                            <i><FontAwesomeIcon icon={faKey} /></i>
+                                            Password
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         }
                     </div>
                 </nav>
             </div>
+
         </>
     )
 }
