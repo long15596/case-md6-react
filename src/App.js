@@ -8,6 +8,7 @@ import UserProfile from "./pages/user/UserProfile";
 import {useSelector} from "react-redux";
 import Admin from "./pages/admin/Admin";
 import UserTable from "./pages/admin/UserTable";
+
 import User from "./pages/user/User";
 import UserDetail from "./pages/user/UserDetail";
 import Password from "./pages/user/Password";
@@ -44,6 +45,7 @@ function App() {
                     <Route path={`login`} element={<Login/>}/>
                 )}
             </Routes>
+
         </>
     );
 }
