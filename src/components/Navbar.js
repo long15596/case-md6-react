@@ -41,6 +41,9 @@ export default function Navbar() {
     const handleLogin = () => {
         navigate('/login');
     };
+    const handleRegister = () => {
+        navigate('/register');
+    };
 
     const handleLogout = () => {
         localStorage.clear();
@@ -87,14 +90,20 @@ export default function Navbar() {
                                             <a href="404.html" className="dropdown-item">Đăng Xuất</a>
                                         </div>
                                     </div>
+
                             }
 
                         </div>
                         {!currentUser ?
-                            <button className="btn btn-primary px-3 d-none d-lg-flex"
-                                    onClick={handleLogin}>Login</button>
-                            :
-                            <div className="nav-item dropdown">
+                            <div className="nav-item dropdown custom1">
+                                <i className="bi bi-person-circle"></i>
+                                <i className="bi bi-list"></i>
+                                <div className="dropdown-menu rounded-0 m-0">
+                                    <a href="" className="dropdown-item login" onClick={handleLogin}>Login</a>
+                                    <a href="" className="dropdown-item register" onClick={handleRegister}>Register</a>
+                                </div>
+                            </div>
+                            : <div className="nav-item dropdown">
                                 <a>
                                     {users && (
                                         <img src={users.avatar} alt="Avatar" className="avatar"/>
@@ -108,7 +117,7 @@ export default function Navbar() {
                                         </div>
                                     </div>
                                     <div className="dropdown-item custom-dropdown-item">
-                                        <div onClick={()=>{
+                                        <div onClick={() => {
                                             navigate(`user/edit/${currentUser.id}`)
                                         }}>
                                             <i className="bi bi-person-circle"></i>

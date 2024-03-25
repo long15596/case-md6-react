@@ -34,3 +34,46 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+.custom1 {
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: #ffffff;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.custom1:hover {
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+}
+
+.custom1 i {
+    font-size: 24px;
+    color: #000000;
+}
+
+.custom1 .dropdown-menu {
+    position: absolute;
+    top: 64px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom1 .dropdown-menu a {
+    display: block;
+    padding-left: 20px;
+    color: #000000;
+    text-decoration: none;
+
+}
+
+.custom1 .dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
