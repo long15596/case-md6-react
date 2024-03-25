@@ -13,7 +13,6 @@ export default function Admin() {
                 <div className="row">
                     <div className="offset-2 col-10 pt-5">
                         <Outlet></Outlet>
-
                     </div>
                 </div>
             </div>
