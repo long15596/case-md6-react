@@ -8,7 +8,7 @@ import UserProfile from "./pages/user/UserProfile";
 import {useSelector} from "react-redux";
 import Admin from "./pages/admin/Admin";
 import UserTable from "./pages/admin/UserTable";
-import UpdateProfile from "./pages/user/UpdateProfile";
+
 import User from "./pages/user/User";
 import UserDetail from "./pages/user/UserDetail";
 import CreateForm from "./pages/property/CreateForm";
