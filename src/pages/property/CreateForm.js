@@ -41,6 +41,7 @@ export default function CreateForm() {
         dispatch(getCategories())
         dispatch(getLocations())
     }, [])
+
     let [showUpload, setShowUpload] = useState(false)
     let [locationId, setLocationId] = useState('')
     let [categoryId, setCategoryId] = useState('')
@@ -55,25 +56,40 @@ export default function CreateForm() {
     }
     let handleAdd = async (values) => {
         values = {...values, category: {id: categoryId}, location: {id: locationId}}
-        await dispatch(addProperty({values}))
-        console.log(values)
-        await setPropertyId(values.id)
+        let resProperty = await dispatch(addProperty({values}))
+        console.log(resProperty.payload.id)
+        await setPropertyId(resProperty.payload.id)
         await setShowUpload(true)
     }
     let handleAddImage = async () => {
-        properties.map((property) => {
-            if (propertyId === property.id ) {
-                urls.map(async (url) => {
+        for (let property of properties) {
+            if (propertyId == property.id) {
+                console.log(property.id)
+                for (let url of urls) {
                     let values = {
                         src: url,
                         property: {id: property.id},
                     }
                     console.log(values)
                     await dispatch(addImages({values}))
-                })
+                }
             }
-        })
+        }
     }
+    //     properties.map((property) => {
+    //         if (propertyId === property.id ) {
+    //             console.log(propertyId)
+    //             urls.map(async (url) => {
+    //                 let values = {
+    //                     src: url,
+    //                     property: {id: property.id},
+    //                 }
+    //                 console.log(values)
+    //                 await dispatch(addImages({values}))
+    //             })
+    //         }
+    //     })
+    // }
     return (
         <>
             <div className="container-xxl py-5">
