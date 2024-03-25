@@ -96,7 +96,7 @@ export default function CreateForm() {
                                         </div>
                                     </div>
                                 </div>
-                                <div id="carouselExampleControls" className="carousel slide pt-2"
+                                <div id="carouselExampleControls" className="carousel slide pt-5"
                                      data-bs-ride="carousel">
                                     <div className="carousel-inner">
                                         <div className="carousel-item active">
