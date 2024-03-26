@@ -76,7 +76,7 @@ export default function UserProfile() {
                             </div>
                         </div>
                     </div>
-                    <div className="navbar" id='Nav-userProfile'>
+                    <div className="navbar" id="Nav-userProfile">
                             <div className='col-md-8'>
                                 <label className="navbar-brand">Lịch sử thuê nhà</label>
                             </div>
