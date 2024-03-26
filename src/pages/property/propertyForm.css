@@ -1,0 +1,14 @@
+body {
+    background-color: #eee
+}
+
+.square-thumbnail {
+    width: 70%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover
+}
+.square-icon {
+    background: #00B98E;
+    color: white;
+}

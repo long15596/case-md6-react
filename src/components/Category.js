@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getCategories} from "../services/category/categoryService";
+import {Link} from "react-router-dom";
 
 function Category() {
     const propertyItems = [
@@ -23,7 +24,7 @@ function Category() {
     const renderPropertyItems = () => {
         return categories.map((category, index) => (
             <div key={index} className={`col-lg-3 col-sm-6 wow fadeInUp`} data-wow-delay={`0.5s`}>
-                <a className="cat-item d-block bg-light text-center rounded p-3" href="">
+                <Link to={``} className="cat-item d-block bg-light text-center rounded p-3">
                     <div className="rounded p-4">
                         <div className="icon mb-3">
                             <img className="img-fluid" src={``} alt="Icon"/>
@@ -31,11 +32,10 @@ function Category() {
                         <h6>{category.name}</h6>
                         <span>10</span>
                     </div>
-                </a>
+                </Link>
             </div>
         ));
     };
-
     return (
         <>
             <div className="container-xxl py-5">

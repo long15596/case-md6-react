@@ -11,6 +11,8 @@ import UserTable from "./pages/admin/UserTable";
 import User from "./pages/user/User";
 import UserDetail from "./pages/user/UserDetail";
 import React from "react";
+import PropertyDetail from "./pages/property/PropertyDetail";
+import CreateForm from "./pages/property/CreateForm";
 
 function App() {
     let currentUser = useSelector(state => {
@@ -41,8 +43,9 @@ function App() {
                 ) : (
                     <Route path={`login`} element={<Login/>}/>
                 )}
+                <Route path={`propertyDetail/:id`} element={<PropertyDetail/>}/>
+                <Route path={`createForm`} element={<CreateForm/>}/>
             </Routes>
-
         </>
     );
 }

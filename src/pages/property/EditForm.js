@@ -1,12 +1,11 @@
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBath, faBed, faMapLocationDot, faMountainCity, faTv} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
+import React from "react";
 import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBath, faBed, faKitchenSet, faMapLocationDot, faMountainCity, faTv} from "@fortawesome/free-solid-svg-icons";
-import React from "react";
-import Comment from "../../components/Comment";
 
-export default function PropertyDetail() {
+export default function EditForm(){
     let {id} = useParams()
     let dispatch = useDispatch()
     let navigate = useNavigate()
@@ -74,7 +73,8 @@ export default function PropertyDetail() {
                     </div>
                     <div className="row g-5 align-items-center pt-2">
                         <div className="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                            <h2 className="mb-4"><FontAwesomeIcon icon={faMapLocationDot} /> {properties[0].location.name}</h2>
+                            <h2 className="mb-4"><FontAwesomeIcon
+                                icon={faMapLocationDot}/> {properties[0].location.name}</h2>
                             <p className="mb-4">{properties[0].information}</p>
                             <div className={`d-flex align-items-center`}>
                                 <h3 className="mb-4">{properties[0].price}$</h3><p>/ night</p>
@@ -82,13 +82,11 @@ export default function PropertyDetail() {
                             <p><FontAwesomeIcon icon={faTv}/> {properties[0].livingRoom} Living Room</p>
                             <p><FontAwesomeIcon icon={faBed}/> {properties[0].bedroom} Bed</p>
                             <p><FontAwesomeIcon icon={faBath}/> {properties[0].bathroom} Bath</p>
-                            <p><FontAwesomeIcon icon={faKitchenSet}/>{properties[0].kitchen} Kitchen</p>
                             <Link to={``} className="btn btn-primary py-3 px-5 mt-3" href="">Book Now</Link>
                         </div>
                     </div>
                 </div>
             </div>
-            <Comment></Comment>
         </>
     )
 }
