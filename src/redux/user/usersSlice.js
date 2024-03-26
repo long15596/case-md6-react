@@ -34,6 +34,7 @@ let usersSlice = createSlice({
         });
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentUser = action.payload
+            console.log(action.payload)
             localStorage.setItem('currentUser', JSON.stringify(action.payload))
         });
         builder.addCase(register.fulfilled, (state, action) => {
@@ -49,7 +50,6 @@ let usersSlice = createSlice({
                 state.users[updatedUserIndex] = action.payload;
             }
         });
-
     }
 })
 export default usersSlice.reducer

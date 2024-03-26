@@ -19,7 +19,6 @@ export default function Navbar() {
 
     useEffect(() => {
         dispatch(getAllUser())
-
         function handleScroll() {
             if (window.scrollY > 0) {
                 setIsSticky(true);
@@ -27,7 +26,6 @@ export default function Navbar() {
                 setIsSticky(false);
             }
         }
-
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -58,7 +56,6 @@ export default function Navbar() {
 
     return (
         <>
-
             <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`}>
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                     <a href="index.html" className="navbar-brand d-flex align-items-center text-center">
@@ -95,9 +92,7 @@ export default function Navbar() {
                                             <a href="404.html" className="dropdown-item">Đăng Xuất</a>
                                         </div>
                                     </div>
-
                             }
-
                         </div>
                         {!currentUser ?
                             <div className="nav-item dropdown custom1">
@@ -116,7 +111,7 @@ export default function Navbar() {
                                 <div className="dropdown-menu rounded-2 m-3 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
                                         <div onClick={handleLogout}>
-                                            <i><FontAwesomeIcon icon={faRightFromBracket} /></i>
+                                            <i className="bi bi-box-arrow-in-left"></i>
                                             Logout
                                         </div>
                                     </div>
@@ -135,7 +130,6 @@ export default function Navbar() {
                                             <i><FontAwesomeIcon icon={faKey} /></i>
                                             Password
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +137,6 @@ export default function Navbar() {
                     </div>
                 </nav>
             </div>
-
         </>
     )
 }

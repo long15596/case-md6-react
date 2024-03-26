@@ -49,14 +49,13 @@ function FileUpload({onUpload}) {
         setFileUrls(uploadedUrls);
         onUpload(uploadedUrls);
     };
-
     return (
         <>
-            <input type="file" className="form-control" id="inputGroupFile04"
-                   aria-describedby="inputGroupFileAddon04" aria-label="Upload" onChange={handleChange} multiple style={{width:" 304px",
-                marginLeft: "133px"}}/>
-            <div style={{marginTop:"20px" , marginBottom:"20px"}}>{progress}% Uploaded</div>
-            <button className="btn btn-primary" type="button" onClick={handleUpload}>Upload new image</button>
+            <div className="input-group">
+                <input type="file" className="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" onChange={handleChange} multiple/>
+                <button className="btn btn-outline-primary" type="button" id="inputGroupFileAddon04" onClick={handleUpload}>Upload</button>
+            </div>
+            <span>{progress}% Uploaded</span>
         </>
     );
 }

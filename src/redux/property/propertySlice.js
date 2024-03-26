@@ -1,8 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getProperties} from "../../services/property/propertyService";
+import {addProperty, getProperties} from "../../services/property/propertyService";
 
 let initialState = {
     properties: [],
+    newProperty: {},
     error: '',
 }
 let propertiesSlice = createSlice({
@@ -12,6 +13,10 @@ let propertiesSlice = createSlice({
         builder.addCase(getProperties.fulfilled, (state, action) => {
             state.properties = action.payload
         });
+        builder.addCase(addProperty.fulfilled, (state, action) => {
+            state.properties.push(action.payload)
+            state.newProperty = action.payload
+        })
     }
 })
 export default propertiesSlice.reducer
