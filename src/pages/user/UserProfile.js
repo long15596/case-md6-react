@@ -3,8 +3,7 @@ import {useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
 import { getUsers} from "../../services/user/usersServices";
-import FileUpload from "../../services/FileUpload";
-import {ErrorMessage, Field} from "formik";
+
 
 export default function UserProfile() {
     let {id} = useParams();
@@ -77,7 +76,7 @@ export default function UserProfile() {
                             </div>
                         </div>
                     </div>
-                    <div className="navbar">
+                    <div className="navbar" id='Nav-userProfile'>
                             <div className='col-md-8'>
                                 <label className="navbar-brand">Lịch sử thuê nhà</label>
                             </div>

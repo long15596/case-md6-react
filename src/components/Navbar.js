@@ -7,8 +7,6 @@ import '../css/style.css'
 import './Navbar.css'
 import {faKey, faRightFromBracket, faUserTie} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import Password from "../pages/user/Password";
-
 
 export default function Navbar() {
     let navigate = useNavigate();

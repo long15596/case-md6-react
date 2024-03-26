@@ -63,8 +63,7 @@
 }
 
 
-.navbar {
-    width: 1430px;
+#Nav-userProfile {
     margin-left: 6px;
     padding: 10px; /* Tùy chỉnh padding của navbar */
     background-color: white;
