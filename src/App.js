@@ -8,12 +8,10 @@ import UserProfile from "./pages/user/UserProfile";
 import {useSelector} from "react-redux";
 import Admin from "./pages/admin/Admin";
 import UserTable from "./pages/admin/UserTable";
-
 import User from "./pages/user/User";
 import UserDetail from "./pages/user/UserDetail";
-import CreateForm from "./pages/property/CreateForm";
-import PropertyDetail from "./pages/property/PropertyDetail";
-import EditForm from "./pages/property/EditForm";
+import Password from "./pages/user/Password";
+import React from "react";
 
 function App() {
     let currentUser = useSelector(state => {
@@ -22,9 +20,6 @@ function App() {
     return (
         <>
             <Routes>
-                <Route path={`createProperty`} element={<CreateForm/>}/>
-                <Route path={`propertyDetail/:id`} element={<PropertyDetail/>}/>
-                <Route path={`editProperty`} element={<EditForm/>}/>
                 <Route path={''} element={<Home/>}/>
                 <Route path={`login`} element={<Login/>}/>
                 <Route path={"register"} element={<Register/>}/>
@@ -48,6 +43,7 @@ function App() {
                     <Route path={`login`} element={<Login/>}/>
                 )}
             </Routes>
+
         </>
     );
 }

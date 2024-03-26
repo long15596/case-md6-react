@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
-import {getAllUser, getUsers, logOut} from "../services/user/usersServices";
+import {getAllUser, logOut} from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
 import '../css/style.css'
 import './Navbar.css'
+import {faKey, faRightFromBracket, faUserTie} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 export default function Navbar() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -31,6 +34,7 @@ export default function Navbar() {
     let users = useSelector(state => {
         if (currentUser !== null && currentUser !== undefined) {
             let filteredUsers = state.users.users.filter((user) => user.id == currentUser.id);
+
             if (filteredUsers.length > 0) {
                 return filteredUsers[0];
             }
@@ -53,7 +57,7 @@ export default function Navbar() {
     return (
         <>
 
-            <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`} >
+            <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`}>
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                     <a href="index.html" className="navbar-brand d-flex align-items-center text-center">
                         <div className="icon p-2 me-2">
@@ -105,7 +109,7 @@ export default function Navbar() {
                             : <div className="nav-item dropdown">
                                 <a>
                                     {users && (
-                                        <img src={users.avatar} alt="Avatar" className="avatar" />
+                                        <img src={users.avatar} alt="Avatar" className="avatar"/>
                                     )}
                                 </a>
                                 <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
@@ -119,10 +123,19 @@ export default function Navbar() {
                                         <div onClick={() => {
                                             navigate(`user/edit/${currentUser.id}`)
                                         }}>
-                                            <i className="bi bi-person-circle"></i>
-                                            Edit Profile
+                                            <i><FontAwesomeIcon icon={faUserTie} /></i>
+                                            Profile
                                         </div>
                                     </div>
+                                    <div className="dropdown-item custom-dropdown-item">
+                                        <div onClick={()=>{
+                                                document.getElementById("idForm").style.display= "block"
+                                        }}>
+                                            <i><FontAwesomeIcon icon={faKey} /></i>
+                                            Password
+                                        </div>
+                                    </div>
+                                    <a className="dropdown-item custom-dropdown-item">Property Agent</a>
                                 </div>
                             </div>
                         }

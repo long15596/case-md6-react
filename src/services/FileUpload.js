@@ -1,7 +1,6 @@
-
-import { initializeApp } from "firebase/app";
-import React, { useState } from 'react';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {initializeApp} from "firebase/app";
+import React, {useState} from 'react';
+import {getStorage, ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDi3k1wLzdUDz_UPUeuKatQBGvdcuMjPrQ",
