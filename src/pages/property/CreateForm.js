@@ -13,7 +13,7 @@ import {
     faTv
 } from "@fortawesome/free-solid-svg-icons";
 import {Field, Form, Formik} from "formik";
-import {addProperty} from "../../services/property/propertyService";
+import {addProperty, getProperties} from "../../services/property/propertyService";
 import {getCategories} from "../../services/category/categoryService";
 import {getLocations} from "../../services/location/locationService";
 import {addImages} from "../../services/image/imageService";
@@ -38,6 +38,7 @@ export default function CreateForm() {
     })
 
     useEffect(() => {
+        dispatch(getProperties())
         dispatch(getCategories())
         dispatch(getLocations())
     }, [])
@@ -57,8 +58,9 @@ export default function CreateForm() {
     let handleAdd = async (values) => {
         values = {...values, category: {id: categoryId}, location: {id: locationId}}
         let resProperty = await dispatch(addProperty({values}))
-        console.log(resProperty.payload.id)
-        await setPropertyId(resProperty.payload.id)
+        let newPropertyID = resProperty.payload
+        console.log(newPropertyID)
+        await setPropertyId(newPropertyID)
         await setShowUpload(true)
     }
     let handleAddImage = async () => {
