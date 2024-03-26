@@ -44,8 +44,8 @@ function App() {
                 ) : (
                     <Route path={`login`} element={<Login/>}/>
                 )}
-                <Route path={`propertyDetail/:id`} element={<PropertyDetail/>}/>
-                <Route path={`createForm`} element={<CreateForm/>}/>
+                <Route path={`property-detail/:id`} element={<PropertyDetail/>}/>
+                <Route path={`create-form`} element={<CreateForm/>}/>
             </Routes>
         </>
     );

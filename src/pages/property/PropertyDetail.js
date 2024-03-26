@@ -11,6 +11,10 @@ export default function PropertyDetail() {
     let dispatch = useDispatch()
     let navigate = useNavigate()
 
+    let currentUser = useSelector(state => {
+        return state.users.currentUser
+    })
+
     let properties = useSelector(state => {
         if (!state.properties.properties || state.properties.properties.length === 0) {
             return [];
@@ -83,7 +87,14 @@ export default function PropertyDetail() {
                             <p><FontAwesomeIcon icon={faBed}/> {properties[0].bedroom} Bed</p>
                             <p><FontAwesomeIcon icon={faBath}/> {properties[0].bathroom} Bath</p>
                             <p><FontAwesomeIcon icon={faKitchenSet}/>{properties[0].kitchen} Kitchen</p>
-                            <Link to={``} className="btn btn-primary py-3 px-5 mt-3" href="">Book Now</Link>
+                            {
+                             currentUser.roles[0].authority === "ROLE_USER"
+                                 ?
+                                 <Link to={``} className="btn btn-primary py-3 px-5 mt-3">Book Now</Link>
+                                 :
+                                 <Link to={``} className={`btn btn-primary py-3 px-5 mt-3`}>Edit</Link>
+                            }
+
                         </div>
                     </div>
                 </div>
