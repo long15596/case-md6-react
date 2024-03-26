@@ -131,7 +131,6 @@ export default function Navbar() {
                                             Password
                                         </div>
                                     </div>
-                                    <a className="dropdown-item custom-dropdown-item">Property Agent</a>
                                 </div>
                             </div>
                         }
