@@ -103,18 +103,17 @@ export default function Navbar() {
                             <div className="nav-item dropdown custom1">
                                 <i className="bi bi-person-circle"></i>
                                 <i className="bi bi-list"></i>
-                                <div className="dropdown-menu rounded-0 m-0">
+                                <div className="dropdown-menu rounded-2 m-2 custom-dropdown-menu">
                                     <a href="" className="dropdown-item login" onClick={handleLogin}>Login</a>
                                     <a href="" className="dropdown-item register" onClick={handleRegister}>Register</a>
                                 </div>
                             </div>
-                            : <div className="nav-item dropdown">
-                                <a>
+                            : <div className="nav-item dropdown custom1">
                                     {users && (
                                         <img src={users.avatar} alt="Avatar" className="avatar"/>
                                     )}
-                                </a>
-                                <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
+                                    <i className="bi bi-list"></i>
+                                <div className="dropdown-menu rounded-2 m-3 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
                                         <div onClick={handleLogout}>
                                             <i><FontAwesomeIcon icon={faRightFromBracket} /></i>

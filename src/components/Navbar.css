@@ -1,13 +1,12 @@
 /* CSS cho phần dropdown-menu */
 .custom-dropdown-menu {
     /*position: absolute; !* Đảm bảo dropdown-menu được hiển thị đúng vị trí *!*/
-    left: -100px; /* Căn chỉnh dropdown sang bên trái */
-    top: -100px;
+    left: -120px; /* Căn chỉnh dropdown sang bên trái */
     margin: 0;
-    border-radius: 0;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
 }
 
-.custom-dropdown-itemm {
+.custom-dropdown-item {
     padding: 0;
     border-bottom: 1px solid #ccc;
 }
@@ -29,8 +28,8 @@
     background-color: #f5f5f5; /* Màu nền khi hover */
 }
 .avatar {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     object-fit: cover;
 }
