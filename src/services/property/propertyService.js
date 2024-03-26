@@ -12,7 +12,6 @@ export const addProperty = createAsyncThunk(
     `properties/addProperties`,
     async ({values}) => {
         let res = await customAxios.post(`properties`, values)
-        console.log(res.data)
         return res.data
     }
 )

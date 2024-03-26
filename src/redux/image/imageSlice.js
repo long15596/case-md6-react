@@ -13,7 +13,8 @@ let imagesSlice = createSlice({
             state.images = action.payload
         });
         builder.addCase(addImages.fulfilled, (state, action) =>{
-            state.images.push(action.payload.data)
+            console.log(action.payload)
+            state.images.push(action.payload)
         })
     }
 })

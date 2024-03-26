@@ -6,8 +6,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faBath,
     faBed,
-    faCircleInfo, faKitchenSet, faLocationDot,
-    faMapLocationDot,
+    faCircleInfo,
+    faKitchenSet,
     faMoneyBill,
     faMountainCity,
     faTv
@@ -25,8 +25,8 @@ export default function CreateForm() {
         return state.users.currentUser
     })
 
-    let properties = useSelector(state => {
-        return state.properties.properties
+    let newProperty = useSelector(state => {
+        return state.properties.newProperty
     })
 
     let locations = useSelector(state => {
@@ -46,7 +46,6 @@ export default function CreateForm() {
     let [showUpload, setShowUpload] = useState(false)
     let [locationId, setLocationId] = useState('')
     let [categoryId, setCategoryId] = useState('')
-    let [propertyId, setPropertyId] = useState('')
     let [urls, setUrls] = useState([])
     let handleLocation = (event) => {
         setLocationId(event.target.value)
@@ -57,41 +56,21 @@ export default function CreateForm() {
     }
     let handleAdd = async (values) => {
         values = {...values, category: {id: categoryId}, location: {id: locationId}}
-        let resProperty = await dispatch(addProperty({values}))
-        let newPropertyID = resProperty.id
-        console.log(newPropertyID)
-        await setPropertyId(newPropertyID)
+        await dispatch(addProperty({values}))
         await setShowUpload(true)
     }
     let handleAddImage = async () => {
-        for (let property of properties) {
-            if (propertyId == property.id) {
-                console.log(property.id)
-                for (let url of urls) {
-                    let values = {
-                        src: url,
-                        property: {id: property.id},
-                    }
-                    console.log(values)
-                    await dispatch(addImages({values}))
+        for (const url of urls) {
+            let values = {
+                src: url,
+                property: {
+                    id: newProperty.id
                 }
             }
+            console.log(values)
+            await dispatch(addImages({values}))
         }
     }
-    //     properties.map((property) => {
-    //         if (propertyId === property.id ) {
-    //             console.log(propertyId)
-    //             urls.map(async (url) => {
-    //                 let values = {
-    //                     src: url,
-    //                     property: {id: property.id},
-    //                 }
-    //                 console.log(values)
-    //                 await dispatch(addImages({values}))
-    //             })
-    //         }
-    //     })
-    // }
     return (
         <>
             <div className="container-xxl py-5">
