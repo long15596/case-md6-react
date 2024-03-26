@@ -24,7 +24,6 @@ function App() {
                 <Route path={''} element={<Home/>}/>
                 <Route path={`login`} element={<Login/>}/>
                 <Route path={"register"} element={<Register/>}/>
-                <Route path={"hi"} element={<Password></Password>}></Route>
                 {currentUser && currentUser.roles ? (
                     <>
                         {currentUser.roles[0].authority === "ROLE_ADMIN" ? (
