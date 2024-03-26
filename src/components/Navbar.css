@@ -6,10 +6,10 @@
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
 }
 
-.custom-dropdown-item {
-    padding: 0;
-    border-bottom: 1px solid #ccc;
-}
+/*.custom-dropdown-item {*/
+/*    padding: 0;*/
+/*    border-bottom: 1px solid #ccc;*/
+/*}*/
 
 /* CSS cho biểu tượng và văn bản trong mỗi mục dropdown-item */
 .custom-dropdown-item div {
