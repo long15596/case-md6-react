@@ -13,6 +13,7 @@ let propertiesSlice = createSlice({
             state.properties = action.payload
         });
         builder.addCase(addProperty.fulfilled, (state, action) => {
+            console.log(action.payload)
             state.properties.push(action.payload.data)
         })
     }

@@ -58,7 +58,7 @@ export default function CreateForm() {
     let handleAdd = async (values) => {
         values = {...values, category: {id: categoryId}, location: {id: locationId}}
         let resProperty = await dispatch(addProperty({values}))
-        let newPropertyID = resProperty.payload
+        let newPropertyID = resProperty.id
         console.log(newPropertyID)
         await setPropertyId(newPropertyID)
         await setShowUpload(true)
@@ -116,50 +116,44 @@ export default function CreateForm() {
                                     <div className="row align-items-center">
                                         <div className="col wow fadeIn" data-wow-delay="0.5s">
                                             <div className="input-group">
-                                                <span className="input-group-text"><FontAwesomeIcon
+                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
                                                     icon={faMountainCity}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
                                                            id="floatingInputGroup2"
                                                            placeholder="Information" required
                                                            name={`name`}/>
-                                                    <label htmlFor="floatingInputGroup2">Name</label>
+                                                    <label htmlFor="floatingInputGroup2">Property Name</label>
                                                 </div>
                                             </div>
-                                            <div className="col-md pt-2">
-                                                <div className="form-floating">
-                                                    <div className={`input-group`}>
-                                                        <span className="input-group-text"><FontAwesomeIcon
-                                                            icon={faLocationDot}/></span>
+                                            <div className="row g-2 pt-2">
+                                                <div className="col-md">
+                                                    <div className="form-floating">
                                                         <select className="form-select" id="floatingSelectGrid"
                                                                 onChange={handleCategory}>
-                                                            <option selected>Choice Property Type</option>
                                                             {categories.map((category, index) => (
                                                                 <option key={index}
                                                                         value={category.id}>{category.name}</option>
                                                             ))}
                                                         </select>
+                                                        <label htmlFor="floatingSelectGrid">Choice Property Type</label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-md pt-2">
-                                                <div className="form-floating">
-                                                    <div className={`input-group`}>
-                                                <span className="input-group-text"><FontAwesomeIcon
-                                                    icon={faMapLocationDot}/></span>
+                                                <div className="col-md">
+                                                    <div className="form-floating">
                                                         <select className="form-select" id="floatingSelectGrid"
                                                                 onChange={handleLocation}>
-                                                            <option selected>Choice Location</option>
                                                             {locations.map((location, index) => (
                                                                 <option key={index}
                                                                         value={location.id}>{location.name}</option>
                                                             ))}
                                                         </select>
+                                                        <label htmlFor="floatingSelectGrid">Choice Location</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text"><FontAwesomeIcon
+                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
                                                     icon={faCircleInfo}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
@@ -170,7 +164,7 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text"><FontAwesomeIcon icon={faMoneyBill}/></span>
+                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon icon={faMoneyBill}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
                                                            id="floatingInputGroup2"
@@ -180,7 +174,7 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text"><FontAwesomeIcon icon={faTv}/></span>
+                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon icon={faTv}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
                                                            id="floatingInputGroup2"
@@ -190,7 +184,7 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text"><FontAwesomeIcon
+                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
                                                     icon={faBed}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
@@ -201,7 +195,7 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text"><FontAwesomeIcon
+                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
                                                     icon={faBath}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
@@ -212,7 +206,7 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text"><FontAwesomeIcon
+                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
                                                     icon={faKitchenSet}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
