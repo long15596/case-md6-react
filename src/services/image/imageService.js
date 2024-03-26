@@ -8,3 +8,11 @@ export const getImages = createAsyncThunk(
         return res.data
     }
 )
+export const addImages = createAsyncThunk(
+    `images/addImages`,
+    async ({values}) => {
+        console.log(values)
+        await customAxios.post(`images`, values);
+        return values
+    }
+)

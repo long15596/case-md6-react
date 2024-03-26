@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import {getUsers, logOut} from "../services/user/usersServices";
+import React, {useState, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router";
+import {getAllUser, logOut} from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
 import '../css/style.css'
 import './Navbar.css'
+import {faKey, faRightFromBracket, faUserTie} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 export default function Navbar() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
@@ -15,7 +18,7 @@ export default function Navbar() {
     const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
-        dispatch(getUsers())
+        dispatch(getAllUser())
         function handleScroll() {
             if (window.scrollY > 0) {
                 setIsSticky(true);
@@ -33,14 +36,16 @@ export default function Navbar() {
             let filteredUsers = state.users.users.filter((user) => user.id == currentUser.id);
 
             if (filteredUsers.length > 0) {
-                return filteredUsers[0]; // Trả về user đầu tiên trong mảng đã lọc
+                return filteredUsers[0];
             }
         }
-        return null; // Trả về null nếu không có user nào phù hợp hoặc currentUser là null/undefined
+        return null;
     });
-    console.log(users);
     const handleLogin = () => {
         navigate('/login');
+    };
+    const handleRegister = () => {
+        navigate('/register');
     };
 
     const handleLogout = () => {
@@ -51,12 +56,12 @@ export default function Navbar() {
 
     return (
         <>
-            <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`} >
+            <div className={`container-fluid nav-bar bg-transparent ${isSticky ? 'sticky-top' : ''}`}>
                 <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                     <a href="index.html" className="navbar-brand d-flex align-items-center text-center">
                         <div className="icon p-2 me-2">
                             <img className="img-fluid" src={img} alt="Icon"
-                                 style={{ width: "30px", height: "30px" }} />
+                                 style={{width: "30px", height: "30px"}}/>
                         </div>
                         <h1 className="m-0 text-primary">UHome</h1>
                     </a>
@@ -71,7 +76,8 @@ export default function Navbar() {
                             {
                                 (currentUser === null || currentUser === undefined) ?
                                     <div className="nav-item dropdown">
-                                        <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                                        <a href="#" className="nav-link dropdown-toggle"
+                                           data-bs-toggle="dropdown">Property</a>
                                         <div className="dropdown-menu rounded-0 m-0">
                                             <a href="property-list.html" className="dropdown-item">Property List</a>
                                             <a href="property-type.html" className="dropdown-item">Property Type</a>
@@ -79,35 +85,50 @@ export default function Navbar() {
                                         </div>
                                     </div> :
                                     <div className="nav-item dropdown">
-                                        <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                        <a href="#" className="nav-link dropdown-toggle"
+                                           data-bs-toggle="dropdown">Pages</a>
                                         <div className="dropdown-menu rounded-0 m-0">
                                             <a href="testimonial.html" className="dropdown-item">Hồ Sơ</a>
                                             <a href="404.html" className="dropdown-item">Đăng Xuất</a>
                                         </div>
                                     </div>
                             }
-
-                            {/*<a href="contact.html" className="nav-item nav-link">Contact</a>*/}
                         </div>
-                        {(currentUser === null || currentUser === undefined) ?
-                            <button className="btn btn-primary px-3 d-none d-lg-flex" onClick={handleLogin}>Login</button>
-                            :
-                            <div className="nav-item dropdown">
-                                <a>
+                        {!currentUser ?
+                            <div className="nav-item dropdown custom1">
+                                <i className="bi bi-person-circle"></i>
+                                <i className="bi bi-list"></i>
+                                <div className="dropdown-menu rounded-2 m-2 custom-dropdown-menu">
+                                    <a href="" className="dropdown-item login" onClick={handleLogin}>Login</a>
+                                    <a href="" className="dropdown-item register" onClick={handleRegister}>Register</a>
+                                </div>
+                            </div>
+                            : <div className="nav-item dropdown custom1">
                                     {users && (
-                                        <img src={users.avatar} alt="Avatar" className="avatar" />
+                                        <img src={users.avatar} alt="Avatar" className="avatar"/>
                                     )}
-                                </a>
-                                <div className="dropdown-menu rounded-0 m-0 custom-dropdown-menu">
+                                    <i className="bi bi-list"></i>
+                                <div className="dropdown-menu rounded-2 m-3 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
                                         <div onClick={handleLogout}>
                                             <i className="bi bi-box-arrow-in-left"></i>
                                             Logout
                                         </div>
                                     </div>
-                                    <div className="dropdown-item custom-dropdown-item"> <div>
-                                        <i className="bi bi-person-circle"></i>
-                                        Edit Profile
+                                    <div className="dropdown-item custom-dropdown-item">
+                                        <div onClick={() => {
+                                            navigate(`user/edit/${currentUser.id}`)
+                                        }}>
+                                            <i><FontAwesomeIcon icon={faUserTie} /></i>
+                                            Profile
+                                        </div>
+                                    </div>
+                                    <div className="dropdown-item custom-dropdown-item">
+                                        <div onClick={()=>{
+                                                document.getElementById("idForm").style.display= "block"
+                                        }}>
+                                            <i><FontAwesomeIcon icon={faKey} /></i>
+                                            Password
                                         </div>
                                     </div>
                                     <a className="dropdown-item custom-dropdown-item">Property Agent</a>

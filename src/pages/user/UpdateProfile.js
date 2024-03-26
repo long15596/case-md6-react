@@ -25,7 +25,6 @@ export default function UpdateProfile() {
             .max(32, 'Username must not exceed 32 characters'),
         phone: Yup.string().required('Phone is required'),
     });
-
     let handleUpdate = (id, values) => {
         dispatch(updateUser({id, values}))
         navigate(``)
@@ -47,9 +46,7 @@ export default function UpdateProfile() {
                                         <img src={users[0].avatar} alt="user-avatar" className="rounded-circle"/>
                                         <div className="mt-3">
                                             <FileUpload onUpload={(uploadedUrls) => {
-                                                console.log(uploadedUrls[0])
                                                 setUrls(uploadedUrls[0])
-                                                console.log(urls)
                                             }}></FileUpload>
                                         </div>
                                     </div>

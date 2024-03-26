@@ -11,9 +11,8 @@ export default function Admin() {
                     <Navbar></Navbar>
                 </div>
                 <div className="row">
-                    <div className="offset-2 col-10 pt-5">
+                    <div>
                         <Outlet></Outlet>
-
                     </div>
                 </div>
             </div>

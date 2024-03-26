@@ -43,3 +43,18 @@ export const updateUser = createAsyncThunk(
         return values
     }
 )
+export const getAllUser = createAsyncThunk(
+    'user/getAll',
+    async  ()=>{
+       let res =  await customAxios.get('users');
+        return res.data
+    }
+)
+export const editPassword = createAsyncThunk(
+    'user/editPassword',
+    async ({id,values})=>{
+      let res =  await customAxios.put(`updatePass/${id}`, values)
+        console.log(res.data)
+        return res
+    }
+)
