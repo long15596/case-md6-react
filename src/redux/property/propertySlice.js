@@ -3,6 +3,7 @@ import {addProperty, getProperties} from "../../services/property/propertyServic
 
 let initialState = {
     properties: [],
+    newProperty: {},
     error: '',
 }
 let propertiesSlice = createSlice({
@@ -15,6 +16,8 @@ let propertiesSlice = createSlice({
         builder.addCase(addProperty.fulfilled, (state, action) => {
             console.log(action.payload)
             state.properties.push(action.payload.data)
+            state.newProperty = action.payload
+            console.log(state.newProperty)
         })
     }
 })
