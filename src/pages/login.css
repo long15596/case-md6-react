@@ -1,9 +1,12 @@
 #background{
-    display: block;
-    width: 410px;
-    height: 56px;
+    display: flex;
     text-align: center;
-    margin-left: 747px;
+    /*justify-content: center;*/
+    /*width: 410px;*/
+    /*height: 56px;*/
+    margin-left: 35%;
+    margin-right: 35%;
+    /*margin-left: 747px;*/
 }
 #header{
     display: flex;

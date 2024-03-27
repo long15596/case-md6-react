@@ -33,7 +33,7 @@ export default function Navbar() {
     }, []);
     let users = useSelector(state => {
         if (currentUser !== null && currentUser !== undefined) {
-            let filteredUsers = state.users.users.filter((user) => user.id == currentUser.id);
+            let filteredUsers = state.users.users.filter((user) => user.id === currentUser.id);
 
             if (filteredUsers.length > 0) {
                 return filteredUsers[0];
