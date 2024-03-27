@@ -41,7 +41,7 @@ let usersSlice = createSlice({
             if (action.payload.username === undefined) {
                 state.error = action.payload
             } else {
-                state.users.push(action.payload.data)
+                state.users.push(action.payload)
             }
         });
         builder.addCase(updateUser.fulfilled, (state, action) => {

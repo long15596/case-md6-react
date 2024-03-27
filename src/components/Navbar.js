@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router";
-import {getAllUser, logOut} from "../services/user/usersServices";
+import {getAllUser, getUsers, logOut} from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
 import '../css/style.css'
 import './Navbar.css'
@@ -19,6 +19,7 @@ export default function Navbar() {
 
     useEffect(() => {
         dispatch(getAllUser())
+
         function handleScroll() {
             if (window.scrollY > 0) {
                 setIsSticky(true);
@@ -33,7 +34,7 @@ export default function Navbar() {
     }, []);
     let users = useSelector(state => {
         if (currentUser !== null && currentUser !== undefined) {
-            let filteredUsers = state.users.users.filter((user) => user.id === currentUser.id);
+            let filteredUsers = state.users.users.filter((user) => user.id == currentUser.id);
 
             if (filteredUsers.length > 0) {
                 return filteredUsers[0];
@@ -73,26 +74,26 @@ export default function Navbar() {
                         <div className="navbar-nav ms-auto">
                             <a href="index.html" className="nav-item nav-link active">Home</a>
                             <a href="about.html" className="nav-item nav-link">About</a>
-                            {
-                                (currentUser === null || currentUser === undefined) ?
-                                    <div className="nav-item dropdown">
-                                        <a href="#" className="nav-link dropdown-toggle"
-                                           data-bs-toggle="dropdown">Property</a>
-                                        <div className="dropdown-menu rounded-0 m-0">
-                                            <a href="property-list.html" className="dropdown-item">Property List</a>
-                                            <a href="property-type.html" className="dropdown-item">Property Type</a>
-                                            <a href="property-agent.html" className="dropdown-item">Property Agent</a>
-                                        </div>
-                                    </div> :
-                                    <div className="nav-item dropdown">
-                                        <a href="#" className="nav-link dropdown-toggle"
-                                           data-bs-toggle="dropdown">Pages</a>
-                                        <div className="dropdown-menu rounded-0 m-0">
-                                            <a href="testimonial.html" className="dropdown-item">Hồ Sơ</a>
-                                            <a href="404.html" className="dropdown-item">Đăng Xuất</a>
-                                        </div>
-                                    </div>
-                            }
+                            {/*{*/}
+                            {/*    (currentUser === null || currentUser === undefined) ?*/}
+                            {/*        <div className="nav-item dropdown">*/}
+                            {/*            <a href="#" className="nav-link dropdown-toggle"*/}
+                            {/*               data-bs-toggle="dropdown">Property</a>*/}
+                            {/*            <div className="dropdown-menu rounded-0 m-0">*/}
+                            {/*                <a href="property-list.html" className="dropdown-item">Property List</a>*/}
+                            {/*                <a href="property-type.html" className="dropdown-item">Property Type</a>*/}
+                            {/*                <a href="property-agent.html" className="dropdown-item">Property Agent</a>*/}
+                            {/*            </div>*/}
+                            {/*        </div> :*/}
+                            {/*        <div className="nav-item dropdown">*/}
+                            {/*            <a href="#" className="nav-link dropdown-toggle"*/}
+                            {/*               data-bs-toggle="dropdown">Pages</a>*/}
+                            {/*            <div className="dropdown-menu rounded-0 m-0">*/}
+                            {/*                <a href="testimonial.html" className="dropdown-item">Hồ Sơ</a>*/}
+                            {/*                <a href="404.html" className="dropdown-item">Đăng Xuất</a>*/}
+                            {/*            </div>*/}
+                            {/*        </div>*/}
+                            {/*}*/}
                         </div>
                         {!currentUser ?
                             <div className="nav-item dropdown custom1">
@@ -104,10 +105,10 @@ export default function Navbar() {
                                 </div>
                             </div>
                             : <div className="nav-item dropdown custom1">
-                                    {users && (
-                                        <img src={users.avatar} alt="Avatar" className="avatar"/>
-                                    )}
-                                    <i className="bi bi-list"></i>
+                                {users && (
+                                    <img src={users.avatar} alt="Avatar" className="avatar"/>
+                                )}
+                                <i className="bi bi-list"></i>
                                 <div className="dropdown-menu rounded-2 m-3 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
                                         <div onClick={handleLogout}>
@@ -116,18 +117,27 @@ export default function Navbar() {
                                         </div>
                                     </div>
                                     <div className="dropdown-item custom-dropdown-item">
-                                        <div onClick={() => {
-                                            navigate(`user/edit/${currentUser.id}`)
-                                        }}>
-                                            <i><FontAwesomeIcon icon={faUserTie} /></i>
-                                            Profile
-                                        </div>
+                                        {
+                                            currentUser.roles[0].authority === "ROLE_ADMIN" ?
+                                                <div onClick={() => {
+                                                    navigate(`/admin/edit/${currentUser.id}`)
+                                                }}>
+                                                    <i><FontAwesomeIcon icon={faUserTie}/></i>
+                                                    Profile
+                                                </div> :
+                                                <div onClick={() => {
+                                                    navigate(`/user/edit/${currentUser.id}`)
+                                                }}>
+                                                    <i><FontAwesomeIcon icon={faUserTie}/></i>
+                                                    Profile
+                                                </div>
+                                        }
                                     </div>
                                     <div className="dropdown-item custom-dropdown-item">
-                                        <div onClick={()=>{
-                                                document.getElementById("idForm").style.display= "block"
+                                        <div onClick={() => {
+                                            document.getElementById("idForm").style.display = "block"
                                         }}>
-                                            <i><FontAwesomeIcon icon={faKey} /></i>
+                                            <i><FontAwesomeIcon icon={faKey}/></i>
                                             Password
                                         </div>
                                     </div>

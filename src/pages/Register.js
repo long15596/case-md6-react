@@ -107,7 +107,7 @@ export default function Register() {
                                         avatar: 'https://firebasestorage.googleapis.com/v0/b/test-91e51.appspot.com/o/music%2F7307z5196658011641_0329736c6cd4b9d272bbc529f19d1065.jpg?alt=media&token=993f59d3-9079-4bea-8590-1aba11cf47b7',
                                     }}
                                     validationSchema={validationSchema}
-                                    onSubmit={(values) => {
+                                    onSubmit={(values ) => {
                                         handleRegister(values).then();
                                     }}
                                 >
