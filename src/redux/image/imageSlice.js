@@ -15,7 +15,7 @@ let imagesSlice = createSlice({
         builder.addCase(addImages.fulfilled, (state, action) =>{
             console.log(action.payload)
             state.images.push(action.payload)
-        })
+        });
     }
 })
 export default imagesSlice.reducer
