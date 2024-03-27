@@ -3,7 +3,7 @@ import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import * as Yup from "yup";
-import {getUsers, updateUser} from "../../services/user/usersServices";
+import {getUsers, logOut, updateUser} from "../../services/user/usersServices";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import FileUpload from "../../services/FileUpload";
 
@@ -22,6 +22,11 @@ export default function UserDetail() {
             }
         });
     });
+    let currentUser = useSelector(state => {
+        console.log(state.users.currentUser)
+        return state.users.currentUser
+    })
+    console.log(users)
     useEffect(() => {
         if (users === null || users.length === 0) {
             dispatch(getUsers());
@@ -121,9 +126,17 @@ export default function UserDetail() {
                                             </div>
                                         </div>
                                         <button className="btn btn-primary" type="submit">Save changes</button>
-                                        <button className="btn btn-primary" style={{marginLeft:"15px"}} onClick={()=>{
-                                            navigate("/")
-                                        }}>Cancel</button>
+                                        {
+                                            currentUser.roles[0].authority === "ROLE_ADMIN" ?
+                                                <button className="btn btn-primary" style={{marginLeft: "15px"}}
+                                                        onClick={() => {
+                                                            navigate("/admin")
+                                                        }}>Cancel</button> :
+                                                <button className="btn btn-primary" style={{marginLeft: "15px"}}
+                                                        onClick={() => {
+                                                            navigate("/")
+                                                        }}>Cancel</button>
+                                        }
                                     </div>
                                 </div>
                             </div>

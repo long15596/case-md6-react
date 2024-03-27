@@ -1,9 +1,11 @@
 #background{
     display: block;
-    width: 410px;
-    height: 56px;
+    /*width: 410px;*/
+    /*height: 56px;*/
     text-align: center;
-    margin-left: 747px;
+    /*margin-left: 747px;*/
+    margin-left: 37%;
+    margin-right: 37%;
 }
 #header{
     display: flex;

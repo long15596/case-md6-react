@@ -13,7 +13,7 @@ export const register = createAsyncThunk(
     async ({values}) => {
         let res = await customAxios.post(`register/2`, values);
         if (res.status === 201) {
-            return values
+            return res.data
         } else {
             return res.data
         }

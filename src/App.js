@@ -30,6 +30,8 @@ function App() {
                             <Route path={`admin`} element={<Admin/>}>
                                 <Route path={''} element={<UserTable></UserTable>}/>
                                 <Route path={`user/:id`} element={<UserProfile/>}/>
+                                <Route path={'edit/:id'} element={<UserDetail></UserDetail>}></Route>
+
                             </Route>
                         ) : currentUser.roles[0].authority === "ROLE_USER" ? (
                             <Route path={`user`} element={<User/>}>
