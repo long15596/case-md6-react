@@ -10,7 +10,6 @@ import Admin from "./pages/admin/Admin";
 import UserTable from "./pages/admin/UserTable";
 import User from "./pages/user/User";
 import UserDetail from "./pages/user/UserDetail";
-import Password from "./pages/user/Password";
 import React from "react";
 import PropertyDetail from "./pages/property/PropertyDetail";
 import CreateForm from "./pages/property/CreateForm";
@@ -31,6 +30,8 @@ function App() {
                             <Route path={`admin`} element={<Admin/>}>
                                 <Route path={''} element={<UserTable></UserTable>}/>
                                 <Route path={`user/:id`} element={<UserProfile/>}/>
+                                <Route path={'edit/:id'} element={<UserDetail></UserDetail>}></Route>
+
                             </Route>
                         ) : currentUser.roles[0].authority === "ROLE_USER" ? (
                             <Route path={`user`} element={<User/>}>

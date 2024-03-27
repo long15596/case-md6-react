@@ -35,13 +35,13 @@ const Login = () => {
                     setTimeout(() => {
                         hideMessage();
                         navigate(`/`);
-                    }, 3000);
+                    }, 2000);
                 } else if (userRoles.includes("ROLE_ADMIN")) {
                     showSuccess('Login successful');
                     setTimeout(() => {
                         hideMessage();
                         navigate(`/admin`);
-                    }, 3000);
+                    }, 2000);
                 }
             }
         })
