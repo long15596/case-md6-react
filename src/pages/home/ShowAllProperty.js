@@ -10,6 +10,7 @@ export default function ShowAllProperty() {
     let properties = useSelector(state => {
         return state.properties.properties
     })
+    console.log(properties)
     useEffect(() => {
         dispatch(getProperties())
     }, [])
