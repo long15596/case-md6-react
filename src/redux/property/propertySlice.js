@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addProperty, getProperties} from "../../services/property/propertyService";
+import {addProperty, getProperties, updateProperty} from "../../services/property/propertyService";
 
 let initialState = {
     properties: [],
@@ -16,6 +16,10 @@ let propertiesSlice = createSlice({
         builder.addCase(addProperty.fulfilled, (state, action) => {
             state.properties.push(action.payload)
             state.newProperty = action.payload
+        });
+        builder.addCase(updateProperty.fulfilled, (state, action) => {
+            let updatePropertyIndex = state.properties.findIndex(property => property.id === action.payload.id)
+            if (updatePropertyIndex !== -1) state.properties[updatePropertyIndex] = action.payload;
         })
     }
 })

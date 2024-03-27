@@ -3,14 +3,25 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBath, faBed, faKitchenSet, faMapLocationDot, faMountainCity, faTv} from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React, {useEffect} from "react";
 import Comment from "../../components/Comment";
+import {getImages} from "../../services/image/imageService";
 
 export default function PropertyDetail() {
     let {id} = useParams()
     let dispatch = useDispatch()
     let navigate = useNavigate()
 
+    let currentUser = useSelector(state => {
+        return state.users.currentUser
+    })
+    let images = useSelector(state => {
+        return state.images.images
+    })
+    console.log(images)
+    useEffect(() => {
+        dispatch(getImages({id}))
+    }, [])
     let properties = useSelector(state => {
         if (!state.properties.properties || state.properties.properties.length === 0) {
             return [];
@@ -83,7 +94,7 @@ export default function PropertyDetail() {
                             <p><FontAwesomeIcon icon={faBed}/> {properties[0].bedroom} Bed</p>
                             <p><FontAwesomeIcon icon={faBath}/> {properties[0].bathroom} Bath</p>
                             <p><FontAwesomeIcon icon={faKitchenSet}/>{properties[0].kitchen} Kitchen</p>
-                            <Link to={``} className="btn btn-primary py-3 px-5 mt-3" href="">Book Now</Link>
+                            <Link to={`/edit-property/${properties[0].id}`} className={`btn btn-primary py-3 px-5 mt-3`}>Edit</Link>
                         </div>
                     </div>
                 </div>

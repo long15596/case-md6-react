@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addImages, createImages, getImages} from "../../services/image/imageService";
+import {addImages, getImages} from "../../services/image/imageService";
 
 let initialState = {
     images: [],

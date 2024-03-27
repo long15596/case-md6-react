@@ -67,7 +67,6 @@ export default function CreateForm() {
                     id: newProperty.id
                 }
             }
-            console.log(values)
             await dispatch(addImages({values}))
         }
     }
@@ -95,8 +94,9 @@ export default function CreateForm() {
                                     <div className="row align-items-center">
                                         <div className="col wow fadeIn" data-wow-delay="0.5s">
                                             <div className="input-group">
-                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
-                                                    icon={faMountainCity}/></span>
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon">
+                                                    <FontAwesomeIcon icon={faMountainCity}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
                                                            id="floatingInputGroup2"
@@ -132,8 +132,9 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
-                                                    icon={faCircleInfo}/></span>
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon">
+                                                    <FontAwesomeIcon icon={faCircleInfo}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
                                                            id="floatingInputGroup2"
@@ -143,7 +144,9 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon icon={faMoneyBill}/></span>
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
+                                                    icon={faMoneyBill}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
                                                            id="floatingInputGroup2"
@@ -153,7 +156,9 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon icon={faTv}/></span>
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
+                                                    icon={faTv}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
                                                            id="floatingInputGroup2"
@@ -163,7 +168,8 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
                                                     icon={faBed}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
@@ -174,7 +180,8 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
                                                     icon={faBath}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
@@ -185,7 +192,8 @@ export default function CreateForm() {
                                                 </div>
                                             </div>
                                             <div className="input-group pt-2">
-                                                <span className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
                                                     icon={faKitchenSet}/></span>
                                                 <div className="form-floating">
                                                     <Field type="text" className="form-control"
@@ -236,7 +244,9 @@ export default function CreateForm() {
                                                  data-bs-target="#carouselExampleControls" data-bs-slide-to={index}/>
                                         </div>
                                     ))}
-                                    <button className="btn btn-primary py-3 px-5 mt-3" onClick={handleAddImage}>Add Property</button>
+                                    <button className="btn btn-primary py-3 px-5 mt-3" onClick={handleAddImage}>
+                                        Add Property
+                                    </button>
                                 </div>
                             </div>
                         }
