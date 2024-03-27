@@ -67,7 +67,6 @@ export default function CreateForm() {
                     id: newProperty.id
                 }
             }
-            console.log(values)
             await dispatch(addImages({values}))
         }
     }

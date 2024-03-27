@@ -13,6 +13,7 @@ import UserDetail from "./pages/user/UserDetail";
 import React from "react";
 import PropertyDetail from "./pages/property/PropertyDetail";
 import CreateForm from "./pages/property/CreateForm";
+import EditForm from "./pages/property/EditForm";
 
 function App() {
     let currentUser = useSelector(state => {
@@ -46,6 +47,7 @@ function App() {
                     <Route path={`login`} element={<Login/>}/>
                 )}
                 <Route path={`property-detail/:id`} element={<PropertyDetail/>}/>
+                <Route path={`edit-property/:id`} element={<EditForm/>}/>
                 <Route path={`create-form`} element={<CreateForm/>}/>
             </Routes>
         </>

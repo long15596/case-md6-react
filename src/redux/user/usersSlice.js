@@ -34,7 +34,6 @@ let usersSlice = createSlice({
         });
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentUser = action.payload
-            console.log(action.payload)
             localStorage.setItem('currentUser', JSON.stringify(action.payload))
         });
         builder.addCase(register.fulfilled, (state, action) => {

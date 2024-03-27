@@ -15,3 +15,10 @@ export const addProperty = createAsyncThunk(
         return res.data
     }
 )
+export const updateProperty = createAsyncThunk(
+    `properties/updateProperty`,
+    async ({id, values}) => {
+        let res = await customAxios.put(`properties/${id}`, values)
+        return res.data
+    }
+)
