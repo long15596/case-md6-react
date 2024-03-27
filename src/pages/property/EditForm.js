@@ -1,14 +1,54 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBath, faBed, faMapLocationDot, faMountainCity, faTv} from "@fortawesome/free-solid-svg-icons";
+import {
+    faBath,
+    faBed,
+    faCircleInfo, faKitchenSet,
+    faMapLocationDot,
+    faMoneyBill,
+    faMountainCity,
+    faTv
+} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
+import {Field, Form, Formik} from "formik";
+import FileUpload from "../../services/FileUpload";
+import {addProperty, getProperties, updateProperty} from "../../services/property/propertyService";
+import {addImages} from "../../services/image/imageService";
+import {getCategories} from "../../services/category/categoryService";
+import {getLocations} from "../../services/location/locationService";
 
-export default function EditForm(){
+export default function EditForm() {
     let {id} = useParams()
     let dispatch = useDispatch()
     let navigate = useNavigate()
+
+    let currentUser = useSelector((state) => {
+        return state.users.currentUser
+    })
+
+    let newProperty = useSelector(state => {
+        return state.properties.newProperty
+    })
+
+    let locations = useSelector(state => {
+        return state.locations.locations
+    })
+
+    let categories = useSelector(state => {
+        return state.categories.categories
+    })
+
+    useEffect(() => {
+        dispatch(getProperties())
+        dispatch(getCategories())
+        dispatch(getLocations())
+    }, [])
+
+    let [locationId, setLocationId] = useState('')
+    let [categoryId, setCategoryId] = useState('')
+    let [urls, setUrls] = useState()
 
     let properties = useSelector(state => {
         if (!state.properties.properties || state.properties.properties.length === 0) {
@@ -21,69 +61,195 @@ export default function EditForm(){
     if (!properties || properties.length === 0) {
         return <div>Loading...</div>;
     }
-    return(
+    let handleLocation = (event) => {
+        setLocationId(event.target.value)
+    }
+
+    let handleCategory = (event) => {
+        setCategoryId(event.target.value)
+    }
+    let handleAdd = async (values) => {
+        values = {...values, category: {id: categoryId}, location: {id: locationId}}
+        await dispatch(updateProperty({values}))
+    }
+    let handleAddImage = async () => {
+        for (const url of urls) {
+            let values = {
+                src: url,
+                property: {
+                    id: newProperty.id
+                }
+            }
+            await dispatch(addImages({values}))
+        }
+    }
+    return (
         <>
             <div className="container-xxl py-5">
-                <div className="container">
-                    <div className="row-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                        <div className="d-flex justify-content-between align-items-start">
-                            <h1 className="mb-4"><FontAwesomeIcon icon={faMountainCity}/> {properties[0].name}</h1>
-                            <h3 className="mb-4">{properties[0].category.name}</h3>
-                        </div>
-                        <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-                            <div className="carousel-inner">
-                                <div className="carousel-item active">
-                                    <img src="link_to_large_image1.jpg" className="d-block w-100"
-                                         alt="Large Thumbnail 1"/>
+                <div className="row">
+                    <div className="col-md-6 ">
+                        <Formik initialValues={properties[0]} onSubmit={values => {
+                            handleAdd(values).then()
+                        }} enableReinitialize={true}>
+                            <Form>
+                                <div className="container-xxl">
+                                    <div className="row align-items-center">
+                                        <div className="col wow fadeIn" data-wow-delay="0.5s">
+                                            <div className="input-group">
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon">
+                                                    <FontAwesomeIcon icon={faMountainCity}/></span>
+                                                <div className="form-floating">
+                                                    <Field type="text" className="form-control"
+                                                           id="floatingInputGroup2"
+                                                           placeholder="Information" required
+                                                           name={`name`}/>
+                                                    <label htmlFor="floatingInputGroup2">Property Name</label>
+                                                </div>
+                                            </div>
+                                            <div className="row g-2 pt-2">
+                                                <div className="col-md">
+                                                    <div className="form-floating">
+                                                        <select className="form-select" id="floatingSelectGrid"
+                                                                onChange={handleCategory}>
+                                                            {categories.map((category, index) => (
+                                                                <option key={index}
+                                                                        value={category.id}>{category.name}</option>
+                                                            ))}
+                                                        </select>
+                                                        <label htmlFor="floatingSelectGrid">Choice Property Type</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md">
+                                                    <div className="form-floating">
+                                                        <select className="form-select" id="floatingSelectGrid"
+                                                                onChange={handleLocation}>
+                                                            {locations.map((location, index) => (
+                                                                <option key={index}
+                                                                        value={location.id}>{location.name}</option>
+                                                            ))}
+                                                        </select>
+                                                        <label htmlFor="floatingSelectGrid">Choice Location</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="input-group pt-2">
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon">
+                                                    <FontAwesomeIcon icon={faCircleInfo}/></span>
+                                                <div className="form-floating">
+                                                    <Field type="text" className="form-control"
+                                                           id="floatingInputGroup2"
+                                                           placeholder="Information" required
+                                                           name={`information`}/>
+                                                    <label htmlFor="floatingInputGroup2">Information</label>
+                                                </div>
+                                            </div>
+                                            <div className="input-group pt-2">
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
+                                                    icon={faMoneyBill}/></span>
+                                                <div className="form-floating">
+                                                    <Field type="text" className="form-control"
+                                                           id="floatingInputGroup2"
+                                                           placeholder="Price" required
+                                                           name={`price`}/>
+                                                    <label htmlFor="floatingInputGroup2">Price</label>
+                                                </div>
+                                            </div>
+                                            <div className="input-group pt-2">
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
+                                                    icon={faTv}/></span>
+                                                <div className="form-floating">
+                                                    <Field type="text" className="form-control"
+                                                           id="floatingInputGroup2"
+                                                           placeholder="Living Room" required
+                                                           name={`livingRoom`}/>
+                                                    <label htmlFor="floatingInputGroup2">Living Room</label>
+                                                </div>
+                                            </div>
+                                            <div className="input-group pt-2">
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
+                                                    icon={faBed}/></span>
+                                                <div className="form-floating">
+                                                    <Field type="text" className="form-control"
+                                                           id="floatingInputGroup2"
+                                                           placeholder="Bedroom" required
+                                                           name={`bedroom`}/>
+                                                    <label htmlFor="floatingInputGroup2">Bedroom</label>
+                                                </div>
+                                            </div>
+                                            <div className="input-group pt-2">
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
+                                                    icon={faBath}/></span>
+                                                <div className="form-floating">
+                                                    <Field type="text" className="form-control"
+                                                           id="floatingInputGroup2"
+                                                           placeholder="Bathroom" required
+                                                           name={`bathroom`}/>
+                                                    <label htmlFor="floatingInputGroup2">Bathroom</label>
+                                                </div>
+                                            </div>
+                                            <div className="input-group pt-2">
+                                                <span
+                                                    className="input-group-text d-flex justify-content-center align-items-center square-icon"><FontAwesomeIcon
+                                                    icon={faKitchenSet}/></span>
+                                                <div className="form-floating">
+                                                    <Field type="text" className="form-control"
+                                                           id="floatingInputGroup2"
+                                                           placeholder="Kitchen" required
+                                                           name={`kitchen`}/>
+                                                    <label htmlFor="floatingInputGroup2">Kitchen</label>
+                                                </div>
+                                            </div>
+                                            <button className="btn btn-primary py-3 px-5 mt-3">Save</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="carousel-item">
-                                    <img src="link_to_large_image2.jpg" className="d-block w-100"
-                                         alt="Large Thumbnail 2"/>
-                                </div>
-                                <div className="carousel-item">
-                                    <img src="link_to_large_image3.jpg" className="d-block w-100"
-                                         alt="Large Thumbnail 3"/>
-                                </div>
-                            </div>
-                            <button className="carousel-control-prev" type="button"
-                                    data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span className="visually-hidden">Previous</span>
-                            </button>
-                            <button className="carousel-control-next" type="button"
-                                    data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span className="visually-hidden">Next</span>
-                            </button>
-                            <div className="row mt-3">
-                                <div className="col">
-                                    <img src="link_to_thumbnail_image1.jpg" className="d-block w-100" alt="Thumbnail 1"
-                                         data-bs-target="#carouselExampleControls" data-bs-slide-to="0"/>
-                                </div>
-                                <div className="col">
-                                    <img src="link_to_thumbnail_image2.jpg" className="d-block w-100" alt="Thumbnail 2"
-                                         data-bs-target="#carouselExampleControls" data-bs-slide-to="1"/>
-                                </div>
-                                <div className="col">
-                                    <img src="link_to_thumbnail_image3.jpg" className="d-block w-100" alt="Thumbnail 3"
-                                         data-bs-target="#carouselExampleControls" data-bs-slide-to="2"/>
-                                </div>
-                            </div>
-                        </div>
+                            </Form>
+                        </Formik>
                     </div>
-                    <div className="row g-5 align-items-center pt-2">
-                        <div className="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                            <h2 className="mb-4"><FontAwesomeIcon
-                                icon={faMapLocationDot}/> {properties[0].location.name}</h2>
-                            <p className="mb-4">{properties[0].information}</p>
-                            <div className={`d-flex align-items-center`}>
-                                <h3 className="mb-4">{properties[0].price}$</h3><p>/ night</p>
+                    <div className="col-md-6 ">
+                            <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                                <div className={`row`}>
+                                    <FileUpload onUpload={(uploadedUrls) => {
+                                        setUrls(uploadedUrls)
+                                    }}/>
+                                </div>
+                                <div className="carousel-inner pt-2">
+                                    {urls.map((url, index) => (
+                                        <div className={`carousel-item ${index === 0 ? `active` : ''}`}>
+                                            <img src={url} className="d-block w-100 square-thumbnail"
+                                                 alt={`Large Thumbnail ${index}`}/>
+                                        </div>
+                                    ))}
+                                </div>
+                                <button className="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span className="visually-hidden">Previous</span>
+                                </button>
+                                <button className="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span className="visually-hidden">Next</span>
+                                </button>
+                                <div className="row mt-3">
+                                    {urls.map((url, index) => (
+                                        <div className="col">
+                                            <img src={url} className="d-block w-100 square-thumbnail"
+                                                 alt={`Thumbnail ${index}`}
+                                                 data-bs-target="#carouselExampleControls" data-bs-slide-to={index}/>
+                                        </div>
+                                    ))}
+                                    <button className="btn btn-primary py-3 px-5 mt-3" onClick={handleAddImage}>
+                                        Confirm
+                                    </button>
+                                </div>
                             </div>
-                            <p><FontAwesomeIcon icon={faTv}/> {properties[0].livingRoom} Living Room</p>
-                            <p><FontAwesomeIcon icon={faBed}/> {properties[0].bedroom} Bed</p>
-                            <p><FontAwesomeIcon icon={faBath}/> {properties[0].bathroom} Bath</p>
-                            <Link to={``} className="btn btn-primary py-3 px-5 mt-3" href="">Book Now</Link>
-                        </div>
                     </div>
                 </div>
             </div>

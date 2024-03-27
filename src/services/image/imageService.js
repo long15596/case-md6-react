@@ -3,8 +3,8 @@ import customAxios from "../api";
 
 export const getImages = createAsyncThunk(
     `images/getImages`,
-    async () => {
-        let res = await customAxios.get(`images`)
+    async ({id}) => {
+        let res = await customAxios.get(`images?propertyId=${id}`)
         return res.data
     }
 )
