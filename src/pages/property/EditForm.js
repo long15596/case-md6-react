@@ -3,7 +3,6 @@ import {
     faBath,
     faBed,
     faCircleInfo, faKitchenSet,
-    faMapLocationDot,
     faMoneyBill,
     faMountainCity,
     faTv

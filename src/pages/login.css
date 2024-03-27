@@ -2,6 +2,7 @@
     display: block;
     /*width: 410px;*/
     /*height: 56px;*/
+    display: flex;
     text-align: center;
     /*margin-left: 747px;*/
     margin-left: 37%;

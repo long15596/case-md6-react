@@ -11,9 +11,10 @@ export default function Admin() {
                     <Navbar></Navbar>
                 </div>
                 <div className="row">
-                    <div>
-                        <Outlet></Outlet>
+                    <div className="col-2">
+
                     </div>
+                    <div className="col-10"><Outlet></Outlet></div>
                 </div>
             </div>
         </>

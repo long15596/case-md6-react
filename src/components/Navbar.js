@@ -27,7 +27,6 @@ export default function Navbar() {
                 setIsSticky(false);
             }
         }
-
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -36,11 +35,8 @@ export default function Navbar() {
     let users = useSelector(state => {
         if (currentUser !== null && currentUser !== undefined) {
             let filteredUsers = state.users.users.filter((user) => user.id == currentUser.id);
-            console.log(filteredUsers)
 
             if (filteredUsers.length > 0) {
-                console.log(filteredUsers[0])
-
                 return filteredUsers[0];
             }
         }
@@ -103,7 +99,7 @@ export default function Navbar() {
                             <div className="nav-item dropdown custom1">
                                 <i className="bi bi-person-circle"></i>
                                 <i className="bi bi-list"></i>
-                                <div className="dropdown-menu rounded-2 m-2 custom-dropdown-menu">
+                                <div className="dropdown-menu rounded-4 m-3 custom-dropdown-menu">
                                     <a href="" className="dropdown-item login" onClick={handleLogin}>Login</a>
                                     <a href="" className="dropdown-item register" onClick={handleRegister}>Register</a>
                                 </div>
@@ -113,7 +109,7 @@ export default function Navbar() {
                                     <img src={users.avatar} alt="Avatar" className="avatar"/>
                                 )}
                                 <i className="bi bi-list"></i>
-                                <div className="dropdown-menu rounded-2 m-3 custom-dropdown-menu">
+                                <div className="dropdown-menu rounded-4 m-3 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
                                         <div onClick={handleLogout}>
                                             <i className="bi bi-box-arrow-in-left"></i>
