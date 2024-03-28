@@ -15,7 +15,6 @@
 .custom-dropdown-item div {
     display: flex; /* Sử dụng flexbox để căn chỉnh biểu tượng và văn bản */
     align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
-    padding: 8px 16px; /* Thêm padding cho mỗi mục */
 }
 
 /* CSS cho biểu tượng trong mỗi mục dropdown-item */

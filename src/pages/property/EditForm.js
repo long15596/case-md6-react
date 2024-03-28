@@ -3,7 +3,6 @@ import {
     faBath,
     faBed,
     faCircleInfo, faKitchenSet,
-    faMapLocationDot,
     faMoneyBill,
     faMountainCity,
     faTv
@@ -15,7 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Field, Form, Formik} from "formik";
 import FileUpload from "../../services/FileUpload";
 import {addProperty, getProperties, updateProperty} from "../../services/property/propertyService";
-import {addImages} from "../../services/image/imageService";
+import {addImages, deleteImages, getImages} from "../../services/image/imageService";
 import {getCategories} from "../../services/category/categoryService";
 import {getLocations} from "../../services/location/locationService";
 
@@ -28,10 +27,6 @@ export default function EditForm() {
         return state.users.currentUser
     })
 
-    let newProperty = useSelector(state => {
-        return state.properties.newProperty
-    })
-
     let locations = useSelector(state => {
         return state.locations.locations
     })
@@ -40,7 +35,12 @@ export default function EditForm() {
         return state.categories.categories
     })
 
+    let imageUrls = useSelector(state => state.images.images.map(image => image.src));
+
+    console.log(imageUrls)
+
     useEffect(() => {
+        dispatch(getImages({id}))
         dispatch(getProperties())
         dispatch(getCategories())
         dispatch(getLocations())
@@ -48,7 +48,7 @@ export default function EditForm() {
 
     let [locationId, setLocationId] = useState('')
     let [categoryId, setCategoryId] = useState('')
-    let [urls, setUrls] = useState()
+    let [urls, setUrls] = useState(imageUrls)
 
     let properties = useSelector(state => {
         if (!state.properties.properties || state.properties.properties.length === 0) {
@@ -68,19 +68,21 @@ export default function EditForm() {
     let handleCategory = (event) => {
         setCategoryId(event.target.value)
     }
-    let handleAdd = async (values) => {
+    let handleUpdate = async (id, values) => {
         values = {...values, category: {id: categoryId}, location: {id: locationId}}
-        await dispatch(updateProperty({values}))
+        await dispatch(updateProperty({id, values}))
     }
     let handleAddImage = async () => {
         for (const url of urls) {
             let values = {
                 src: url,
                 property: {
-                    id: newProperty.id
+                    id: properties[0].id
                 }
             }
+            await dispatch(deleteImages({id: properties[0].id}))
             await dispatch(addImages({values}))
+            navigate(`/property-detail/${properties[0].id}`)
         }
     }
     return (
@@ -89,7 +91,7 @@ export default function EditForm() {
                 <div className="row">
                     <div className="col-md-6 ">
                         <Formik initialValues={properties[0]} onSubmit={values => {
-                            handleAdd(values).then()
+                            handleUpdate(properties[0].id, values).then()
                         }} enableReinitialize={true}>
                             <Form>
                                 <div className="container-xxl">
@@ -212,44 +214,44 @@ export default function EditForm() {
                             </Form>
                         </Formik>
                     </div>
-                    <div className="col-md-6 ">
-                            <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-                                <div className={`row`}>
-                                    <FileUpload onUpload={(uploadedUrls) => {
-                                        setUrls(uploadedUrls)
-                                    }}/>
-                                </div>
-                                <div className="carousel-inner pt-2">
-                                    {urls.map((url, index) => (
-                                        <div className={`carousel-item ${index === 0 ? `active` : ''}`}>
-                                            <img src={url} className="d-block w-100 square-thumbnail"
-                                                 alt={`Large Thumbnail ${index}`}/>
-                                        </div>
-                                    ))}
-                                </div>
-                                <button className="carousel-control-prev" type="button"
-                                        data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span className="visually-hidden">Previous</span>
-                                </button>
-                                <button className="carousel-control-next" type="button"
-                                        data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span className="visually-hidden">Next</span>
-                                </button>
-                                <div className="row mt-3">
-                                    {urls.map((url, index) => (
-                                        <div className="col">
-                                            <img src={url} className="d-block w-100 square-thumbnail"
-                                                 alt={`Thumbnail ${index}`}
-                                                 data-bs-target="#carouselExampleControls" data-bs-slide-to={index}/>
-                                        </div>
-                                    ))}
-                                    <button className="btn btn-primary py-3 px-5 mt-3" onClick={handleAddImage}>
-                                        Confirm
-                                    </button>
-                                </div>
+                    <div className="col-md-6 d-flex">
+                        <div id="carouselLargeThumnail" className="carousel slide" data-bs-ride="carousel">
+                            <div className={`col-md-10`}>
+                                <FileUpload onUpload={(uploadedUrls) => {
+                                    setUrls(uploadedUrls)
+                                }}/>
                             </div>
+                            <div className="carousel-inner pt-2">
+                                {urls.map((url, index) => (
+                                    <div className={`carousel-item ${index === 0 ? `active` : ''}`}>
+                                        <img src={url} className="d-block w-100 square-thumbnail"
+                                             alt={`Large Thumbnail ${index}`}/>
+                                    </div>
+                                ))}
+                            </div>
+                            <button className="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselLargeThumnail" data-bs-slide="prev">
+                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span className="visually-hidden">Previous</span>
+                            </button>
+                            <button className="carousel-control-next" type="button"
+                                    data-bs-target="#carouselLargeThumnail" data-bs-slide="next">
+                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span className="visually-hidden">Next</span>
+                            </button>
+                            <div className="row mt-3">
+                                {urls.map((url, index) => (
+                                    <div className="col">
+                                        <img src={url} className="d-block w-100 square-thumbnail"
+                                             alt={`Thumbnail ${index}`}
+                                             data-bs-target="#carouselLargeThumnail" data-bs-slide-to={index}/>
+                                    </div>
+                                ))}
+                                <button className="btn btn-primary py-3 px-5 mt-3" onClick={handleAddImage}>
+                                    Confirm
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

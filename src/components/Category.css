@@ -1,0 +1,27 @@
+
+.icon-container {
+    border: solid white;
+    background-color: white;
+    padding: 10px;
+}
+
+.icon-container i {
+    font-size: 24px;
+    color: black;
+    transform: scale(1.5);
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content-wrapper {
+    flex-grow: 1; /* Chia phần dư còn lại của không gian trống */
+}
+
+.inner-wrapper {
+    margin-left: 10px; /* hoặc bất kỳ giá trị margin nào bạn muốn */
+    margin-right: 10px; /* hoặc bất kỳ giá trị margin nào bạn muốn */
+    min-height: 432px;
+}
