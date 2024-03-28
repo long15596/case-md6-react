@@ -26,7 +26,6 @@ export default function UserDetail() {
         console.log(state.users.currentUser)
         return state.users.currentUser
     })
-    console.log(users)
     useEffect(() => {
         if (users === null || users.length === 0) {
             dispatch(getUsers());

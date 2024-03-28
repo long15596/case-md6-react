@@ -16,3 +16,9 @@ export const addImages = createAsyncThunk(
         return values
     }
 )
+export const deleteImages = createAsyncThunk(
+    `images/deleteImages`,
+    async ({id}) => {
+        await customAxios.delete(`images?propertyId=${id}`)
+    }
+)
