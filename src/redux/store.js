@@ -11,6 +11,6 @@ export let store = configureStore({
         properties: propertyReducer,
         categories: categoryReducer,
         locations: locationReducer,
-        images: imageReducer
+        images: imageReducer,
     },
 })

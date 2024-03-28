@@ -10,29 +10,28 @@ export default function ShowAllProperty() {
         return state.users.currentUser
     })
     let propertyByUser= useSelector(state => {
-        console.log(state)
         return state.properties.propertiesUser
     })
     let properties = useSelector(state => {
         if (propertyByUser && currentUser === null ){
-            console.log(3)
             return state.properties.properties
-        }else   {
-            return propertyByUser
+        }else {
+            if (currentUser.roles[0].authority==="ROLE_OWNER")   {
+                return propertyByUser
+            } else {
+                return state.properties.properties
+            }
         }
     });
-    console.log(properties)
     useEffect(() => {
         if (currentUser !== null && currentUser.roles && currentUser.roles.length > 0) {
             if (currentUser.roles[0].authority === "ROLE_OWNER") {
                 dispatch(getByUserId({ id: currentUser.id }))
-                console.log(1)
+            } else if (currentUser.roles[0].authority === "ROLE_USER"){
+                dispatch(getProperties())
             }
         } else {
-            dispatch(getProperties()).then(x=>{
-                console.log(2)
-                console.log(x.payload)
-            })
+            dispatch(getProperties())
         }
     }, [currentUser]);
 
@@ -70,8 +69,13 @@ export default function ShowAllProperty() {
                                     properties.map((property) => (
                                         <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                             <div className="property-item rounded overflow-hidden">
-                                                <Link to={`property-detail/${property.id}`}>
-                                                    <div className="position-relative overflow-hidden">
+                                                <Link
+                                                    to={
+                                                        !currentUser ? `property-detail/${property.id}` :
+                                                            currentUser.roles[0].authority === "ROLE_USER" ? `/user/property-detail/${property.id}` :
+                                                                currentUser.roles[0].authority === "ROLE_OWNER" ? `/owner/property-detail/${property.id}` :
+                                                                    `property-detail/${property.id}`}>
+                                                <div className="position-relative overflow-hidden">
                                                         <div><img style={{aspectRatio: `1`, objectFit: `cover`}}
                                                                   className="img-fluid" src={`${property.avatar}`}
                                                                   alt=""/></div>

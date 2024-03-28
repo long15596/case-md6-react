@@ -34,7 +34,7 @@ const Login = () => {
                     showSuccess('Login successful');
                     setTimeout(() => {
                         hideMessage();
-                        navigate(`/`);
+                        navigate(`/user`);
                     }, 2000);
                 } else if (userRoles.includes("ROLE_ADMIN")) {
                     showSuccess('Login successful');

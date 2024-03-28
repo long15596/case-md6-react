@@ -41,7 +41,7 @@ export default function UserDetail() {
 
     let handleUpdate = (id, values) => {
         dispatch(updateUser({id, values}));
-        navigate(`/`);
+        navigate(`/user`);
     };
 
     return (
@@ -133,7 +133,7 @@ export default function UserDetail() {
                                                         }}>Cancel</button> :
                                                 <button className="btn btn-primary" style={{marginLeft: "15px"}}
                                                         onClick={() => {
-                                                            navigate("/")
+                                                            navigate("/user")
                                                         }}>Cancel</button>
                                         }
                                     </div>

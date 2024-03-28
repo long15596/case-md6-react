@@ -7,29 +7,31 @@ import React, {useEffect} from "react";
 import Comment from "../../components/Comment";
 import {getImages} from "../../services/image/imageService";
 import './propertyForm.css'
+import {getProperties} from "../../services/property/propertyService";
 
 export default function PropertyDetail() {
     let {id} = useParams()
-    let dispatch = useDispatch()
-    let navigate = useNavigate()
-
     let currentUser = useSelector(state => {
         return state.users.currentUser
     })
+    let dispatch = useDispatch()
     let images = useSelector(state => {
         return state.images.images
     })
 
     useEffect(() => {
         dispatch(getImages({id}))
+        dispatch(getProperties())
     }, [])
     let properties = useSelector(state => {
+        console.log(state)
         if (!state.properties.properties || state.properties.properties.length === 0) {
             return [];
         }
         return state.properties.properties.filter((property) => {
             if (property) return property.id == id
         })
+
     })
     if (!properties || properties.length === 0) {
         return <div>Loading...</div>;
@@ -88,8 +90,18 @@ export default function PropertyDetail() {
                                 <p><FontAwesomeIcon icon={faBed}/> {properties[0].bedroom} Bed</p>
                                 <p><FontAwesomeIcon icon={faBath}/> {properties[0].bathroom} Bath</p>
                                 <p><FontAwesomeIcon icon={faKitchenSet}/>{properties[0].kitchen} Kitchen</p>
-                                <Link to={`/edit-property/${properties[0].id}`}
-                                      className={`btn btn-primary py-3 px-5 mt-3`}>Edit</Link>
+                                {
+                                    currentUser ?
+                                        <div>
+                                            {
+                                                currentUser.roles[0].authority === "ROLE_OWNER" &&
+                                                <Link to={`/owner/edit-property/${properties[0].id}`}
+                                                      className={`btn btn-primary py-3 px-5 mt-3`}>Edit Property</Link>}
+                                        </div>
+                                        :
+                                        <div></div>
+
+                                }
                             </div>
                         </div>
                     </div>

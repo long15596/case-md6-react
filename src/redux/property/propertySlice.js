@@ -23,7 +23,6 @@ let propertiesSlice = createSlice({
             if (updatePropertyIndex !== -1) state.properties[updatePropertyIndex] = action.payload;
         });
         builder.addCase(getByUserId.fulfilled, (state,action)=>{
-            console.log(action.payload)
             state.propertiesUser = action.payload
         })
     }

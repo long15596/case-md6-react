@@ -25,7 +25,6 @@ export const login = createAsyncThunk(
             const res = await customAxios.post(`login`, values)
             return res.data
         } catch (error) {
-            console.log(error)
             throw error
         }
     }
@@ -54,7 +53,6 @@ export const editPassword = createAsyncThunk(
     'user/editPassword',
     async ({id,values})=>{
       let res =  await customAxios.put(`updatePass/${id}`, values)
-        console.log(res.data)
         return res
     }
 )
