@@ -14,6 +14,8 @@ import React from "react";
 import PropertyDetail from "./pages/property/PropertyDetail";
 import CreateForm from "./pages/property/CreateForm";
 import EditForm from "./pages/property/EditForm";
+import Owner from "./pages/owner/Owner";
+import ShowAllProperty from "./pages/home/ShowAllProperty";
 
 function App() {
     let currentUser = useSelector(state => {
@@ -39,16 +41,22 @@ function App() {
                                 <Route path={''} element={<Home></Home>}></Route>
                                 <Route path={'edit/:id'} element={<UserDetail></UserDetail>}></Route>
                             </Route>
+                        ) : currentUser.roles[0].authority === "ROLE_OWNER" ? (
+                            <Route path={`owner`} element={<Owner></Owner>}>
+                                <Route path={``} element={<ShowAllProperty></ShowAllProperty>}></Route>
+                                <Route path={`property-detail/:id`} element={<PropertyDetail/>}/>
+                                <Route path={`create-form`} element={<CreateForm/>}/>
+                            </Route>
                         ) : (
                             <Route path={``} element={<Home/>}/>
-                        )}
+                        )
+                        }
                     </>
                 ) : (
                     <Route path={`login`} element={<Login/>}/>
                 )}
-                <Route path={`property-detail/:id`} element={<PropertyDetail/>}/>
+
                 <Route path={`edit-property/:id`} element={<EditForm/>}/>
-                <Route path={`create-form`} element={<CreateForm/>}/>
             </Routes>
         </>
     );

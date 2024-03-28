@@ -1,29 +1,40 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
-import {getProperties} from "../../services/property/propertyService";
+import {useEffect} from "react";
+import {getByUserId, getProperties} from "../../services/property/propertyService";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBath, faBed, faMapLocationDot, faMountainCity, faTv} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
-import {getImagesByProperty} from "../../services/image/imageService";
-
 export default function ShowAllProperty() {
     const dispatch = useDispatch();
+    let currentUser = useSelector(state => {
+        return state.users.currentUser
+    })
+    let propertyByUser= useSelector(state => {
+        console.log(state)
+        return state.properties.propertiesUser
+    })
     let properties = useSelector(state => {
-        return state.properties.properties
+        if (propertyByUser && currentUser === null ){
+            console.log(3)
+            return state.properties.properties
+        }else   {
+            return propertyByUser
+        }
     });
-    // let images = useSelector(state => {
-    //     return state.images.images;
-    // });
+    console.log(properties)
     useEffect(() => {
-        dispatch(getProperties())
-    }, [])
-    // useEffect(() => {
-    //     if (properties) {
-    //         properties.forEach(property => {
-    //             dispatch(getImagesByProperty({id: property.id}))
-    //         });
-    //     }
-    // }, [properties]);
+        if (currentUser !== null && currentUser.roles && currentUser.roles.length > 0) {
+            if (currentUser.roles[0].authority === "ROLE_OWNER") {
+                dispatch(getByUserId({ id: currentUser.id }))
+                console.log(1)
+            }
+        } else {
+            dispatch(getProperties()).then(x=>{
+                console.log(2)
+                console.log(x.payload)
+            })
+        }
+    }, [currentUser]);
 
     return (
         <>
