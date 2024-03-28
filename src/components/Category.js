@@ -22,7 +22,7 @@ function Category() {
         return state.categories.categories
     })
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(8);
+    const [itemsPerPage, setItemsPerPage] = useState(4);
     const [indexOfLastItem, setIndexOfLastItem] = useState(0);
 
     useEffect(() => {

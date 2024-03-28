@@ -23,5 +23,5 @@
 .inner-wrapper {
     margin-left: 10px; /* hoặc bất kỳ giá trị margin nào bạn muốn */
     margin-right: 10px; /* hoặc bất kỳ giá trị margin nào bạn muốn */
-    min-height: 432px;
+    min-height: 200px;
 }
