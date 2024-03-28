@@ -13,7 +13,7 @@ import {
     faTv
 } from "@fortawesome/free-solid-svg-icons";
 import {Field, Form, Formik} from "formik";
-import {addProperty, getProperties} from "../../services/property/propertyService";
+import {addProperty, getProperties, updateProperty} from "../../services/property/propertyService";
 import {getCategories} from "../../services/category/categoryService";
 import {getLocations} from "../../services/location/locationService";
 import {addImages} from "../../services/image/imageService";
@@ -60,6 +60,8 @@ export default function CreateForm() {
         await setShowUpload(true)
     }
     let handleAddImage = async () => {
+        newProperty = {...newProperty, avatar: urls[0]}
+        dispatch(updateProperty({id: newProperty.id, values: newProperty}))
         for (const url of urls) {
             let values = {
                 src: url,

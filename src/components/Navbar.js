@@ -111,7 +111,7 @@ export default function Navbar() {
                                 <div className="dropdown-menu rounded-4 m-3 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
                                         <div onClick={handleLogout}>
-                                            <i className="bi bi-box-arrow-in-left"></i>
+                                            <i><FontAwesomeIcon icon={faRightFromBracket} /></i>
                                             Logout
                                         </div>
                                     </div>

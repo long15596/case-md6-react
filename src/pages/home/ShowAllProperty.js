@@ -11,21 +11,19 @@ export default function ShowAllProperty() {
     let properties = useSelector(state => {
         return state.properties.properties
     });
-    let images = useSelector(state => {
-        return state.images.images;
-    });
-    console.log(images)
-    // console.log(properties)
+    // let images = useSelector(state => {
+    //     return state.images.images;
+    // });
     useEffect(() => {
         dispatch(getProperties())
     }, [])
-    useEffect(() => {
-        if (properties && properties.id !== null) {
-            properties.forEach(property => {
-                dispatch(getImagesByProperty({id: property.id}))
-            });
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (properties) {
+    //         properties.forEach(property => {
+    //             dispatch(getImagesByProperty({id: property.id}))
+    //         });
+    //     }
+    // }, [properties]);
 
     return (
         <>
@@ -57,47 +55,46 @@ export default function ShowAllProperty() {
                     <div className="tab-content">
                         <div id="tab-1" className="tab-pane fade show p-0 active">
                             <div className="row g-4">
-                                { images.length>0 && images.map((img) => (
-                                    img[0]&& (
-                                    <div className="col-lg-3 col-md-6 mb-4">
-                                        <div className="property-item rounded overflow-hidden">
-                                            <Link to={`property-detail/${img[0].property.id}`}>
-                                                <div className="position-relative overflow-hidden">
-                                                    <div>
-                                                        <img style={{aspectRatio: `1`, objectFit: `cover`}}
-                                                             className="img-fluid" src={`${img[0].src}`} alt=""/>
+                                {
+                                    properties.map((property) => (
+                                        <div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                            <div className="property-item rounded overflow-hidden">
+                                                <Link to={`property-detail/${property.id}`}>
+                                                    <div className="position-relative overflow-hidden">
+                                                        <div><img style={{aspectRatio: `1`, objectFit: `cover`}}
+                                                                  className="img-fluid" src={`${property.avatar}`}
+                                                                  alt=""/></div>
+                                                        <div
+                                                            className="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For
+                                                            Sell
+                                                        </div>
+                                                        <div
+                                                            className="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{property.category.name}</div>
                                                     </div>
-                                                    <div
-                                                        className="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For
-                                                        Sell
+                                                    <div className="p-4 pb-0">
+                                                        <h5 className="text-primary mb-3"> {property.price}$/ night</h5>
+                                                        <FontAwesomeIcon icon={faMountainCity}/> {property.name}
+                                                        <p><FontAwesomeIcon
+                                                            icon={faMapLocationDot}/> {property.location.name}</p>
                                                     </div>
-                                                    <div
-                                                        className="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">{img[0].property.category.name}</div>
-                                                </div>
-                                                <div className="p-4 pb-0">
-                                                    <h5 className="text-primary mb-3"> {img[0].property.price}$/
-                                                        night</h5>
-                                                    <FontAwesomeIcon icon={faMountainCity}/> {img[0].property.name}
-                                                    <p><FontAwesomeIcon
-                                                        icon={faMapLocationDot}/> {img[0].property.location.name}
-                                                    </p>
-                                                </div>
-                                                <div className="d-flex border-top">
-                                                    <small
-                                                        className="flex-fill text-center border-end py-2"><FontAwesomeIcon
-                                                        icon={faTv}/> {img[0].property.livingRoom} Living
-                                                        Room</small>
-                                                    <small
-                                                        className="flex-fill text-center border-end py-2"><FontAwesomeIcon
-                                                        icon={faBed}/> {img[0].property.bedroom} Bed</small>
-                                                    <small className="flex-fill text-center py-2"><FontAwesomeIcon
-                                                        icon={faBath}/> {img[0].property.bathroom} Bath</small>
-                                                </div>
-                                            </Link>
+                                                    <div className="d-flex border-top">
+                                                        <small
+                                                            className="flex-fill text-center border-end py-2"><FontAwesomeIcon
+                                                            icon={faTv}/> {property.livingRoom} Living Room</small>
+                                                        <small
+                                                            className="flex-fill text-center border-end py-2"><FontAwesomeIcon
+                                                            icon={faBed}/> {property.bedroom} Bed</small>
+                                                        <small className="flex-fill text-center py-2"><FontAwesomeIcon
+                                                            icon={faBath}/> {property.bathroom} Bath</small>
+                                                    </div>
+                                                </Link>
+                                            </div>
                                         </div>
-                                    </div>
-                                    )
-                                ))}
+                                    ))
+                                }
+                                <div className="col-12 text-center">
+                                    <a className="btn btn-primary py-3 px-5" href="">Browse More Property</a>
+                                </div>
                             </div>
                         </div>
                     </div>
