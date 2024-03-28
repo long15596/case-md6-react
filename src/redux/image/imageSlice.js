@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addImages, getImages} from "../../services/image/imageService";
+import {addImages, getImages, getImagesByProperty} from "../../services/image/imageService";
 
 let initialState = {
     images: [],
@@ -13,6 +13,10 @@ let imagesSlice = createSlice({
             state.images = action.payload
         });
         builder.addCase(addImages.fulfilled, (state, action) =>{
+            console.log(action.payload)
+            state.images.push(action.payload)
+        });
+        builder.addCase(getImagesByProperty.fulfilled, (state, action) =>{
             console.log(action.payload)
             state.images.push(action.payload)
         })
