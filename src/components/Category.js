@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getCategories} from "../services/category/categoryService";
 import {Link} from "react-router-dom";
+import img from '../img/icon-house.png'
+
 import "./Category.css"
 function Category() {
     const propertyItems = [
@@ -35,7 +37,7 @@ function Category() {
                 <Link to={``} className="cat-item d-block bg-light text-center rounded p-3">
                     <div className="rounded p-4">
                         <div className="icon mb-3">
-                            <img className="img-fluid" src={``} alt="Icon"/>
+                            <img className="img-fluid" src={img} alt="Icon"/>
                         </div>
                         <h6>{category.name}</h6>
                         <span>10</span>

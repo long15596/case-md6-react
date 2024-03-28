@@ -16,6 +16,14 @@ export const addImages = createAsyncThunk(
         return values
     }
 )
+export const getImagesByProperty = createAsyncThunk(
+    `images/getImagesPro`,
+    async ({id}) => {
+        let res = await customAxios.get(`images?propertyId=${id}`)
+        return res.data
+    }
+)
+
 export const deleteImages = createAsyncThunk(
     `images/deleteImages`,
     async ({id}) => {

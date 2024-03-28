@@ -19,7 +19,6 @@ export default function Navbar() {
 
     useEffect(() => {
         dispatch(getAllUser())
-
         function handleScroll() {
             if (window.scrollY > 0) {
                 setIsSticky(true);
