@@ -42,6 +42,12 @@ const Login = () => {
                         hideMessage();
                         navigate(`/admin`);
                     }, 2000);
+                }  else if (userRoles.includes("ROLE_OWNER")) {
+                    showSuccess('Login successful');
+                    setTimeout(() => {
+                        hideMessage();
+                        navigate(`/owner`);
+                    }, 2000);
                 }
             }
         })

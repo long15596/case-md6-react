@@ -1,17 +1,41 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getProperties} from "../../services/property/propertyService";
+import {getByUserId, getProperties} from "../../services/property/propertyService";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBath, faBed, faMapLocationDot, faMountainCity, faTv} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 export default function ShowAllProperty() {
     const dispatch = useDispatch();
+    let currentUser = useSelector(state => {
+        return state.users.currentUser
+    })
+    let propertyByUser= useSelector(state => {
+        console.log(state)
+        return state.properties.propertiesUser
+    })
     let properties = useSelector(state => {
-        return state.properties.properties
+        if (propertyByUser && currentUser === null ){
+            console.log(3)
+            return state.properties.properties
+        }else   {
+            return propertyByUser
+        }
     });
+    console.log(properties)
     useEffect(() => {
-        dispatch(getProperties())
-    }, [])
+        if (currentUser !== null && currentUser.roles && currentUser.roles.length > 0) {
+            if (currentUser.roles[0].authority === "ROLE_OWNER") {
+                dispatch(getByUserId({ id: currentUser.id }))
+                console.log(1)
+            }
+        } else {
+            dispatch(getProperties()).then(x=>{
+                console.log(2)
+                console.log(x.payload)
+            })
+        }
+    }, [currentUser]);
+
     return (
         <>
             <div className="container-xxl py-5">
