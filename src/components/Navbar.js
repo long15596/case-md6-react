@@ -111,7 +111,6 @@ export default function Navbar() {
                                 <div className="dropdown-menu rounded-4 m-3 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
                                         <div>
-                                            <i><FontAwesomeIcon icon={faBell} /></i>
                                             Notication
                                         </div>
                                     </div>
@@ -121,13 +120,11 @@ export default function Navbar() {
                                                 <div onClick={() => {
                                                     navigate(`/admin/edit/${currentUser.id}`)
                                                 }}>
-                                                    <i><FontAwesomeIcon icon={faUserTie}/></i>
                                                     Profile
                                                 </div> :
                                                 <div onClick={() => {
                                                     navigate(`/user/edit/${currentUser.id}`)
                                                 }}>
-                                                    <i><FontAwesomeIcon icon={faUserTie}/></i>
                                                     Profile
                                                 </div>
                                         }
@@ -136,13 +133,11 @@ export default function Navbar() {
                                         <div onClick={() => {
                                             document.getElementById("idForm").style.display = "block"
                                         }}>
-                                            <i><FontAwesomeIcon icon={faKey}/></i>
                                             Password
                                         </div>
                                     </div>
                                     <div className="dropdown-item custom-dropdown-item">
                                         <div onClick={handleLogout}>
-                                            <i><FontAwesomeIcon icon={faArrowRightFromBracket} /></i>
                                             Logout
                                         </div>
                                     </div>
