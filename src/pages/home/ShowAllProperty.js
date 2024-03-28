@@ -1,30 +1,17 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {getProperties} from "../../services/property/propertyService";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBath, faBed, faMapLocationDot, faMountainCity, faTv} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
-import {getImagesByProperty} from "../../services/image/imageService";
-
 export default function ShowAllProperty() {
     const dispatch = useDispatch();
     let properties = useSelector(state => {
         return state.properties.properties
     });
-    // let images = useSelector(state => {
-    //     return state.images.images;
-    // });
     useEffect(() => {
         dispatch(getProperties())
     }, [])
-    // useEffect(() => {
-    //     if (properties) {
-    //         properties.forEach(property => {
-    //             dispatch(getImagesByProperty({id: property.id}))
-    //         });
-    //     }
-    // }, [properties]);
-
     return (
         <>
             <div className="container-xxl py-5">
