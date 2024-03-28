@@ -5,7 +5,7 @@ import {getAllUser, getUsers, logOut} from "../services/user/usersServices";
 import img from '../img/icon-deal.png'
 import '../css/style.css'
 import './Navbar.css'
-import {faKey, faRightFromBracket, faUserTie} from "@fortawesome/free-solid-svg-icons";
+import {faArrowRightFromBracket, faBell, faKey, faUserTie} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function Navbar() {
@@ -111,9 +111,9 @@ export default function Navbar() {
                                 <i className="bi bi-list"></i>
                                 <div className="dropdown-menu rounded-4 m-3 custom-dropdown-menu">
                                     <div className="dropdown-item custom-dropdown-item">
-                                        <div onClick={handleLogout}>
-                                            <i className="bi bi-box-arrow-in-left"></i>
-                                            Logout
+                                        <div>
+                                            <i><FontAwesomeIcon icon={faBell} /></i>
+                                            Notication
                                         </div>
                                     </div>
                                     <div className="dropdown-item custom-dropdown-item">
@@ -139,6 +139,12 @@ export default function Navbar() {
                                         }}>
                                             <i><FontAwesomeIcon icon={faKey}/></i>
                                             Password
+                                        </div>
+                                    </div>
+                                    <div className="dropdown-item custom-dropdown-item">
+                                        <div onClick={handleLogout}>
+                                            <i><FontAwesomeIcon icon={faArrowRightFromBracket} /></i>
+                                            Logout
                                         </div>
                                     </div>
                                 </div>
