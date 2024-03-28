@@ -16,6 +16,7 @@ import CreateForm from "./pages/property/CreateForm";
 import EditForm from "./pages/property/EditForm";
 import Owner from "./pages/owner/Owner";
 import ShowAllProperty from "./pages/home/ShowAllProperty";
+import Body from "./pages/user/Body";
 
 function App() {
     let currentUser = useSelector(state => {
@@ -36,16 +37,18 @@ function App() {
                                 <Route path={'edit/:id'} element={<UserDetail></UserDetail>}></Route>
 
                             </Route>
-                        ) : currentUser.roles[0].authority === "ROLE_USER" ? (
-                            <Route path={`user`} element={<User/>}>
-                                <Route path={''} element={<Home></Home>}></Route>
-                                <Route path={'edit/:id'} element={<UserDetail></UserDetail>}></Route>
-                            </Route>
-                        ) : currentUser.roles[0].authority === "ROLE_OWNER" ? (
+                        ) :  currentUser.roles[0].authority === "ROLE_OWNER" ? (
                             <Route path={`owner`} element={<Owner></Owner>}>
                                 <Route path={``} element={<ShowAllProperty></ShowAllProperty>}></Route>
                                 <Route path={`property-detail/:id`} element={<PropertyDetail/>}/>
+                                <Route path={`edit-property/:id`} element={<EditForm/>}/>
                                 <Route path={`create-form`} element={<CreateForm/>}/>
+                            </Route>
+                        ) :currentUser.roles[0].authority === "ROLE_USER" ? (
+                            <Route path={`user`} element={<User/>}>
+                                <Route path={''} element={<Body></Body>}></Route>
+                                <Route path={'edit/:id'} element={<UserDetail></UserDetail>}></Route>
+                                <Route path={`property-detail/:id`} element={<PropertyDetail/>}/>
                             </Route>
                         ) : (
                             <Route path={``} element={<Home/>}/>
@@ -57,6 +60,7 @@ function App() {
                 )}
 
                 <Route path={`edit-property/:id`} element={<EditForm/>}/>
+                <Route path={`property-detail/:id`} element={<PropertyDetail/>}/>
             </Routes>
         </>
     );

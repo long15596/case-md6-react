@@ -88,21 +88,17 @@ export default function Password() {
                                     <div className="card-body">
                                         <div id="mess" style={{display: "none"}}>
                                             {showWarning ? (
-                                                <form action="">
                                                     <div className="alert alert-danger" role="alert">
                                                         Current password is wrong.
                                                     </div>
-                                                </form>
+
                                             ) : (
-                                                <form action="">
                                                     <div className="alert alert-success" role="alert">
                                                         Change password is correct.Please login continue
                                                     </div>
-                                                </form>
+
                                             )}
-
                                         </div>
-
                                         <div className="row gx-3 mb-3">
                                             <div className="col-md-12">
                                                 <label className="small mb-1" htmlFor="inputFirstName"> Present

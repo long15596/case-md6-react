@@ -12,7 +12,6 @@ export const getByUserId = createAsyncThunk(
     `properties/getByUserID`,
     async ({id}) => {
         let res = await customAxios.get(`properties/owners/${id}`)
-        console.log(res)
         return res.data
     }
 )
